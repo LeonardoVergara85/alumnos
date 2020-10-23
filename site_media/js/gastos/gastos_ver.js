@@ -23,13 +23,18 @@
        "width": "10%"
  },{
       "targets": 3, // your case first column
-      "className": "text-left",
-       "width": "40%"
- },{
-      "targets": 4, // your case first column
       "className": "text-center",
        "width": "10%"
+ },{
+      "targets": 4, // your case first column
+      "className": "text-left",
+       "width": "35%"
  },
+ {
+  "targets": 5, // your case first column
+  "className": "text-center",
+   "width": "5%"
+},
  ],
  });
 
@@ -59,13 +64,18 @@
        "width": "10%"
  },{
       "targets": 3, // your case first column
-      "className": "text-left",
-       "width": "40%"
- },{
-      "targets": 4, // your case first column
       "className": "text-center",
        "width": "10%"
+ },{
+      "targets": 4, // your case first column
+      "className": "text-left",
+       "width": "35%"
  },
+ {
+  "targets": 5, // your case first column
+  "className": "text-center",
+   "width": "5%"
+}
  ],
  });
 
@@ -96,16 +106,21 @@
  },{
       "targets": 3, // your case first column
       "className": "text-left",
-       "width": "40%"
- },
+       "width": "10%"
+ },{
+  "targets": 4, // your case first column
+  "className": "text-left",
+   "width": "30%"
+},
  ],
  });
 
 $(document).ready(function(){
 
- verGastosHoy();
-
  buscarTipoGastos();
+ buscarTipoPagos()
+
+ verGastosHoy();
 
   $('#form-bucarfecha').validate({
         submitHandler: function (form) {
@@ -140,7 +155,8 @@ $(document).ready(function(){
             Tabla2.row.add( [
             	value.DESCRIPCION,
             	value.IMPORTE,
-            	value.FECHA,
+              value.FECHA,
+              value.tipo_pago,
             	value.OBS,
             	boton
             	]).draw();
@@ -223,6 +239,7 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
               value.DESCRIPCION,
               value.IMPORTE,
               value.FECHA,
+              value.tipo_pago,
               value.OBS
               ]).draw();
         });
@@ -456,6 +473,7 @@ function verGastosHoy(){
                 value.DESCRIPCION,
                 value.IMPORTE,
                 value.FECHA,
+                value.tipo_pago,
                 value.OBS,
                 boton
                 ]).draw();
@@ -493,5 +511,27 @@ function buscarTipoGastos(){
 
         }
       }); 
+}
+
+function buscarTipoPagos(){
+  $.ajax({
+      type: "POST",
+      url: "../../../app/routes.php",
+      dataType: 'json',
+      data: {
+        peticion : 'ver_tipo_pagos',
+      },
+      success: function (resp) {
+
+        var tipop = resp;
+
+        $.each( tipop, function( key, value ) {
+
+         $('#pagadopor_').append("<option value='"+value.id+"'>"+value.descripcion+"</option>"); 
+         
+    });
+
+      }
+    }); 
 }
 

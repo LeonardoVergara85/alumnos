@@ -1,11 +1,13 @@
 <?php
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/model/Gastos.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/model/TipoPago.php';
 
 
 Class GastosController extends Gastos{
 	
 	private $GastosModel;
+	private $TipoPagoModel;
 
 	/**
 	 * [__construct Inicializa el Controlador]
@@ -98,7 +100,9 @@ Class GastosController extends Gastos{
 
 			foreach ($gastosh as $gasto) {
 
-				array_push($lista, ['ID' => $gasto['ID'],'DESCRIPCION' => $gasto['DESCRIPCION'],'IMPORTE' => number_format($gasto['IMPORTE'],2,',','.'),'FECHA' => $gasto['FECHAGASTO_'],'OBS' => $gasto['OBSERVACIONES']]);
+				array_push($lista, ['ID' => $gasto['ID'],'DESCRIPCION' => $gasto['DESCRIPCION'],'IMPORTE' => number_format($gasto['IMPORTE'],2,',','.'),'FECHA' => $gasto['FECHAGASTO_']
+				,'OBS' => $gasto['OBSERVACIONES']
+				,'tipo_pago' => $gasto['tipo_de_pago']]);
 
 			}
 
@@ -125,7 +129,7 @@ Class GastosController extends Gastos{
 
 			foreach ($gastosh as $gasto) {
 
-				array_push($lista, ['ID' => $gasto['ID'],'DESCRIPCION' => $gasto['DESCRIPCION'],'IMPORTE' => number_format($gasto['IMPORTE'],2,',','.'),'FECHA' => $gasto['FECHAGASTO_'],'OBS' => $gasto['OBSERVACIONES']]);
+				array_push($lista, ['ID' => $gasto['ID'],'DESCRIPCION' => $gasto['DESCRIPCION'],'IMPORTE' => number_format($gasto['IMPORTE'],2,',','.'),'FECHA' => $gasto['FECHAGASTO_'],'OBS' => $gasto['OBSERVACIONES'],'tipo_pago' => $gasto['tipo_de_pago']]);
 
 			}
 
@@ -153,7 +157,7 @@ Class GastosController extends Gastos{
 
 			foreach ($gastostipo as $gasto) {
 
-				array_push($lista, ['ID' => $gasto['ID'],'DESCRIPCION' => $gasto['DESCRIPCION'],'IMPORTE' => number_format($gasto['IMPORTE'],2,',','.'),'FECHA' => $gasto['FECHAGASTO_'],'OBS' => $gasto['OBSERVACIONES']]);
+				array_push($lista, ['ID' => $gasto['ID'],'DESCRIPCION' => $gasto['DESCRIPCION'],'IMPORTE' => number_format($gasto['IMPORTE'],2,',','.'),'FECHA' => $gasto['FECHAGASTO_'],'OBS' => $gasto['OBSERVACIONES'],'tipo_pago' => $gasto['tipo_de_pago']]);
 
 			}
 
@@ -180,6 +184,33 @@ Class GastosController extends Gastos{
 			foreach ($gastosh as $gasto) {
 
 				array_push($lista, ['ID' => $gasto['ID'],'ID_TIPO_GASTO' => $gasto['ID_TIPO_GASTO'],'DESCRIPCION' => $gasto['DESCRIPCION'],'IMPORTE' => $gasto['IMPORTE'],'FECHA' => $gasto['FECHAGASTO_'],'OBS' => $gasto['OBSERVACIONES'],'PAGOPOR' => $gasto['PAGADO_POR']]);
+
+			}
+
+			echo json_encode($lista);
+
+		} catch (Exception $e) {
+			
+			print_r($e);
+
+		}
+
+	}
+
+	
+	public function verTipoPagos(){
+
+		try {
+
+			$this->TipoPagoModel = new TipoPago();
+			
+			$pagos = $this->TipoPagoModel->getTipoPagos();
+
+			$lista = array();
+
+			foreach ($pagos as $pagosa) {
+
+				array_push($lista, ['id' => $pagosa['id'],'descripcion' => $pagosa['descripcion']]);
 
 			}
 

@@ -222,6 +222,12 @@ class routes
 				new GastosController('modificarGasto');
 
 				break;	
+			
+			case 'ver_tipo_pagos':
+
+				new GastosController('verTipoPagos');
+
+				break;		
 
 			case 'ver_alumnos_curso':
 

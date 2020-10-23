@@ -55,9 +55,6 @@
               <div class="col-md-2 mb-2">
                 <label>Pagado por</label>
                 <select class="form-control" name="pagadopor" id="pagadopor">
-                  <option value="1">Caja chica</option>
-                  <option value="2">Graciela</option>
-                  <option value="3">Maria Emma</option>
                 </select>
               </div>
             </div>

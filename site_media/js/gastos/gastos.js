@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
   buscarTipoGastos();
+  buscarTipoPagos();
 
    //validar que el campo sea solo letas
  jQuery.validator.addMethod("lettersonly", function(value, element) {
@@ -135,4 +136,26 @@ function buscarTipoGastos(){
 
         }
       }); 
+}
+
+function buscarTipoPagos(){
+  $.ajax({
+      type: "POST",
+      url: "../../../app/routes.php",
+      dataType: 'json',
+      data: {
+        peticion : 'ver_tipo_pagos',
+      },
+      success: function (resp) {
+
+        var tipop = resp;
+
+        $.each( tipop, function( key, value ) {
+
+         $('#pagadopor').append("<option value='"+value.id+"'>"+value.descripcion+"</option>"); 
+         
+    });
+
+      }
+    }); 
 }
