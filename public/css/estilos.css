@@ -1,0 +1,17 @@
+
+.container_menu{
+    width: 20%;
+    background-color: #414956;
+    height: 100%;
+}
+
+.container_contenido{
+   width: 80%;
+   margin-left: 0px;
+}
+
+.container_row{
+    background-color: #414956;
+    height: 700px;
+ }
+ 

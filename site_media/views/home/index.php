@@ -1,0 +1,100 @@
+<?php  
+// $authC->ChequearAuth(); 
+// session_start();
+// var_dump($_SESSION);
+
+?>
+
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <?php include_once '../../../public/libs/include_libs_css.html'; ?>
+  
+  <title>Sistema de Gestión</title>
+
+</head>
+  
+<body>
+
+  <?php include_once '../navbar/navbar.php'; ?>
+
+  <div class="row container_row">
+
+      <div class="container_menu col-sm-2">
+        <?php include_once '../menu/menu_izquierdo.php'; ?>
+      </div> 
+
+      <div class="container_contenido col-sm-10" style="height: 500px;">
+         
+          <div class="row col-sm-12" style="margin-top:15px;">
+          <div class="card-deck">
+                    <div class="card">
+                      <div class="card-body text-center">
+                        <h5 class="card-title"><i class="fa fa-users"></i> Alumnos</h5>
+                        <p class="card-text">Acceso rápido para ver todos los alumnos y sus características.</p>
+                        <button class="btn btn-primary" id="btn-alu">Ir a la pantalla</button>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-body text-center">
+                        <h5 class="card-title"><i class="fas fa-book-open"></i> Cursos</h5>
+                        <p class="card-text">Acceso rápido para ver todos los cursos y sus características.</p>
+                        <button class="btn btn-primary" id="btn-cur">Ir a la pantalla</button>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-body text-center">
+                        <h5 class="card-title"><i class="fas fa-cash-register"></i> Gastos</h5>
+                        <p class="card-text">Acceso rápido para ver todos los tipos de gastos y analizarlos.</p>
+                        <button class="btn btn-primary" id="btn-gas">Ir a la pantalla</button>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-body text-center">
+                        <h5 class="card-title"><i class="fas fa-info-circle"></i> Cuotas</h5>
+                        <p class="card-text">Acceso rápido para ver las cuotas con sus características y personas asociadas.</p>
+                        <button class="btn btn-primary" id="btn-cuo">Ir a la pantalla</button>
+                    </div>
+                  </div>
+          </div>
+       
+      </div>
+
+   </div> 
+      <div class="modal fade" id="msj_respaldo" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content text-center">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4><font color="orange">IMPORTANTE!!!</font></h4>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+           <h4>Recuerde realizar los respaldo de información diariamente.</h4>
+           <br>
+           <h6>Ejecutar como administrador (clic derecho) <STRONG>"RESPALDO"</STRONG> ubicado en el escritorio</h6>
+
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btnclose" data-dismiss="modal">Cerrar</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>   
+
+  </body>
+
+  <?php include_once '../../../public/libs/include_libs_js.html'; ?>
+  <script src="../../js/home/home.js" type="text/javascript"></script>
+</html>
+
