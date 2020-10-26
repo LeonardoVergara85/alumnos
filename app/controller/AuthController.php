@@ -26,23 +26,40 @@ class AuthController extends Auth{
 
 				$this->AuthModel->_username = $_POST['user'];
 				$this->AuthModel->_password = $_POST['pass'];
+
 				$rdo = $this->AuthModel->getAccesSystem();
 
-				if( $rdo == 'ok' ){
+				if( $rdo != null ){
 
-					// $this->AuthModel->getFuncionesDePerfil();
+					$hashBase = $rdo[0]['pass'];
 
+                    // verificamos el hash con la constraseña ingresada
+                    $verifica = password_verify($_POST['pass'], $hashBase);
+					if($verifica){
+					/*
+					* Guardar en SESSION
+					*/
+					$this->sett_var('user_id', $rdo[0]['id']);
+					$this->sett_var('user', $rdo[0]['username']);
+					$this->sett_var('user_name', $rdo[0]['nombre']);
+					$this->sett_var('user_ape', $rdo[0]['apellido']);
+					$this->sett_var('dni', $rdo[0]['dni']);
+					
 					echo 'ok';
 
-				}else if($rdo == 'no-usu'){
+					}else{
+						
+						session_destroy();
+						echo 'pass';
 
-					session_destroy();
+					}
 					
+
+				}else{
+
+					
+					session_destroy();
 					echo 'usu';
-
-				}else if($rdo == 'no-pass'){
-
-					echo 'pass';
 
 				}
 

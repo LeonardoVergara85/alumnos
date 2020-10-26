@@ -30,7 +30,13 @@
       </div> 
 
       <div class="container_contenido col-sm-10" style="height: 500px;">
-         
+      <?php  
+            //$pass = 'leo1234';    
+            //$pass2 = 'leo1234';    
+            //$passHash = password_hash($pass, PASSWORD_BCRYPT);
+            //echo 'hash '.$passHash;
+            //var_dump(password_verify($pass2, $passHash));
+        ?>  
           <div class="row col-sm-12" style="margin-top:15px;">
           <div class="card-deck">
                     <div class="card">

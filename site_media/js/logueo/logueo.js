@@ -35,19 +35,15 @@ $(document).ready(function() {
                     }else if(resp == 'usu'){
 
                         toastr.error('El usuario es incorrecto');
+                        $('#ingresarLogueo').attr('disabled',false);
 
-                        setTimeout(function() { 
-                          window.location.reload();
-                            // $(location).attr('href', '../logueo/index.php');
-                        }, 2000);
+                        
                     }else if(resp == 'pass'){
                         
                          toastr.error('La contraseña es incorrecta');
+                         $('#ingresarLogueo').attr('disabled',false);
 
-                       setTimeout(function() { 
-                          window.location.reload();
-                          // $(location).attr('href', '../logueo/index.php');
-                      }, 2000);
+                      
                    }
 
               }

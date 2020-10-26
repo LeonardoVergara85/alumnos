@@ -36,34 +36,39 @@ class Auth
 			 * Buscar USUARIO
 			 */
 		   $usernme = $this->_username;
-		   $pass = $this->_password;
-		   $sql = "SELECT * FROM usuarios_vw WHERE username = ? AND pass = ?";	
+		  // $pass = $this->_password;
+
+		   $sql = "SELECT * FROM usuarios_vw WHERE username = ? ";	
 
 			$this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
 			
-		   $usuario = $this->DB->Execute($sql,array($usernme,$pass));
+		   $usuario = $this->DB->Execute($sql,array($usernme));
 
-		   
+		   $resultado = array();
+		   while ($r = $usuario->fetchRow())
+				$resultado[] = $r;
 
-		   if( empty($usuario->fields['username']) ){
+		   return $resultado;
 
-			   return 'no';
+		//    if( empty($usuario->fields['username']) ){
 
-		   }else{
+		// 	   return 'no';
 
-			   /*
-				* Guardar en SESSION
-				*/
-			   // $this->sett_var('user', $user);
-			   $this->sett_var('user_id', $usuario->fields['id']);
-			   $this->sett_var('user', $usuario->fields['username']);
-			   $this->sett_var('user_name', $usuario->fields['nombre']);
-			   $this->sett_var('user_ape', $usuario->fields['apellido']);
-			   $this->sett_var('dni', $usuario->fields['dni']);
+		//    }else{
 
-			   return 'ok';
+		// 	   /*
+		// 		* Guardar en SESSION
+		// 		*/
+		// 	   // $this->sett_var('user', $user);
+		// 	   $this->sett_var('user_id', $usuario->fields['id']);
+		// 	   $this->sett_var('user', $usuario->fields['username']);
+		// 	   $this->sett_var('user_name', $usuario->fields['nombre']);
+		// 	   $this->sett_var('user_ape', $usuario->fields['apellido']);
+		// 	   $this->sett_var('dni', $usuario->fields['dni']);
 
-		   }
+		// 	   return $usuario->fields['pass'];
+
+		//    }
 
 
 		   /*
