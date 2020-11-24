@@ -11,7 +11,7 @@ class Conexion{
         try {
 
             $this->db = NewADOConnection('mysql');
-            $this->db->Connect("localhost", "root", "", "skills");
+            $this->db->Connect("localhost", "root", "", "alumnos");
             
             if ( !isset($_SESSION) ) {
                 session_start();

@@ -232,7 +232,7 @@ include_once 'Personas.php';
 
  			$id = $this->_id;
 
- 			$sql = "SELECT * FROM alumno_curso_vw WHERE id_alumno = ? AND vigente = 'S' ";
+ 			$sql = "SELECT * FROM alumno_curso_vw WHERE id_alumno = ? AND vigente = 'S' ORDER BY anio desc ";
 
 			$this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
 

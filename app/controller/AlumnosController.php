@@ -51,6 +51,7 @@ Class AlumnosController extends Alumnos{
 				$this->PersonasModel->_domicilio = $_POST['dom'];
 				$this->PersonasModel->_telefono = $_POST['tel'];
 				$this->PersonasModel->_nacimiento = $_POST['nac'];
+				$this->PersonasModel->_celular = $_POST['cel'];
 				// insertamos en la tabla personas y recuperamos el último id cargado.
 				$idPer = $this->PersonasModel->store($conn);
 
@@ -84,7 +85,7 @@ Class AlumnosController extends Alumnos{
 
 			foreach ($alumnos as $alumno) {
 
-				array_push($lista, ['id' => $alumno['id'],'dni' => $alumno['dni'],'nombre' => $alumno['nombre'],'apellido' => $alumno['apellido'],'telefono' => $alumno['telefono'],'activo' => $alumno['activo']]);
+				array_push($lista, ['id' => $alumno['id'],'dni' => $alumno['dni'],'nombre' => $alumno['nombre'],'apellido' => $alumno['apellido'],'telefono' => $alumno['telefono'],'celular' => $alumno['celular'],'activo' => $alumno['activo']]);
 
 			}
 
@@ -110,7 +111,7 @@ Class AlumnosController extends Alumnos{
 
 			foreach ($alumnos as $alumno) {
 
-				array_push($lista, ['id' => $alumno['id'],'id_persona' => $alumno['id_persona'],'dni' => $alumno['dni'],'nombre' => $alumno['nombre'],'apellido' => $alumno['apellido'],'domicilio' => $alumno['domicilio'],'telefono' => $alumno['telefono'],'fecha_nac' => $alumno['fecha_nac'],'escuela' => $alumno['escuela'],'grado' => $alumno['grado'],'email' => $alumno['email'],'hermanos' => $alumno['hermanos']]);
+				array_push($lista, ['id' => $alumno['id'],'id_persona' => $alumno['id_persona'],'dni' => $alumno['dni'],'nombre' => $alumno['nombre'],'apellido' => $alumno['apellido'],'domicilio' => $alumno['domicilio'],'telefono' => $alumno['telefono'],'celular' => $alumno['celular'],'fecha_nac' => $alumno['fecha_nac'],'escuela' => $alumno['escuela'],'grado' => $alumno['grado'],'email' => $alumno['email'],'hermanos' => $alumno['hermanos']]);
 
 			}
 
@@ -189,6 +190,7 @@ Class AlumnosController extends Alumnos{
 				$this->PersonasModel->_apellido = $_POST['ape'];
 				$this->PersonasModel->_domicilio = $_POST['dom'];
 				$this->PersonasModel->_telefono = $_POST['tel'];
+				$this->PersonasModel->_celular = $_POST['cel'];
 				$this->PersonasModel->_nacimiento = $_POST['nac'];
 				$this->PersonasModel->modificar($conn);
 

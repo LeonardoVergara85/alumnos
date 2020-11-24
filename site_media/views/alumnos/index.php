@@ -36,32 +36,36 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/ProductosControl
 
               <form id="formulario_alumnos">
                 <div class="form-row">
-                 <div class="col-md-4 mb-3">
+                 <div class="col-md-3 mb-3">
                   <label>Documento</label>
                     <input type="text" class="form-control" name="documento" id="documento" placeholder="dni" maxlength="8">
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-3 mb-3">
                   <label>Nombre</label>
                   <input type="text" class="form-control" name="nombre" id="nombre" maxlength="25">
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-3 mb-3">
                   <label>Apellido</label>
                   <input type="text" class="form-control" name="apellido" id="apellido" maxlength="25">
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="validationCustom05">Nacimiento</label>
+                  <input type="date" class="form-control" name="nacimiento" id="nacimiento">
                 </div>
 
               </div>
               <div class="form-row">
                 <div class="col-md-6 mb-3">
                   <label for="validationCustom03">Domicilio</label>
-                  <input type="text" class="form-control" name="" ="domicilio" id="domicilio" maxlength="40">
+                  <input type="text" class="form-control" name="domicilio" id="domicilio" maxlength="40">
                 </div>
                 <div class="col-md-3 mb-3">
                   <label for="validationCustom04">Teléfono</label>
-                  <input type="text" class="form-control" name="telefono" id="telefono" maxlength="25">
+                  <input type="text" class="form-control" name="telefono" id="telefono" maxlength="25" value="">
                 </div>
                 <div class="col-md-3 mb-3">
-                  <label for="validationCustom05">Nacimiento</label>
-                  <input type="date" class="form-control" name="nacimiento" id="nacimiento">
+                  <label for="validationCustom05">Celular</label>
+                  <input type="text" class="form-control" name="celular" id="celular">
                 </div>
               </div>
               <div class="form-row">

@@ -19,6 +19,7 @@
  	 protected $_apellido;
  	 protected $_domicilio;
  	 protected $_telefono;
+ 	 protected $_celular;
  	 protected $_nacimiento;
 
  	 /***********************
@@ -117,11 +118,12 @@
  			$apellido = $this->_apellido;
  			$domicilio = $this->_domicilio;
  			$telefono = $this->_telefono;
+ 			$celu = $this->_celular;
  			$fechan = $this->_nacimiento;
 
- 			$sql = "INSERT INTO personas VALUES (?, ?, ?, ?, ?, ?, ?)";
+ 			$sql = "INSERT INTO personas VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        	$conn->db->Execute($sql,array($id,$dni,$nombre,$apellido,$domicilio,$telefono,$fechan));
+        	$conn->db->Execute($sql,array($id,$dni,$nombre,$apellido,$domicilio,$telefono,$celu,$fechan));
 
         	$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
 
@@ -152,11 +154,12 @@
  			$apellido = $this->_apellido;
  			$domicilio = $this->_domicilio;
  			$telefono = $this->_telefono;
+ 			$celular = $this->_celular;
  			$fechan = $this->_nacimiento;
 
- 			$sql = "UPDATE personas SET dni = ?, nombre= ?, apellido= ?, domicilio=?,telefono= ?,fecha_nac= ? WHERE id = ?";
+ 			$sql = "UPDATE personas SET dni = ?, nombre= ?, apellido= ?, domicilio=?,telefono= ?, celular = ?,fecha_nac= ? WHERE id = ?";
 
-        	$conn->db->Execute($sql,array($dni,$nombre,$apellido,$domicilio,$telefono,$fechan,$id));
+        	$conn->db->Execute($sql,array($dni,$nombre,$apellido,$domicilio,$telefono,$celular,$fechan,$id));
 
  		} catch (Exception $e) {
  			

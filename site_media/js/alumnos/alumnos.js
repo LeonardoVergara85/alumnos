@@ -49,6 +49,7 @@ $(document).ready(function() {
             var apellido = $('#apellido').val();
             var domicilio = $('#domicilio').val();
             var telefono = $('#telefono').val();
+            var celular = $('#celular').val();
             var nacimiento = $('#nacimiento').val();
             var escuela = $('#escuela').val();
             var grado_anio = $('#gradoanio').val();
@@ -92,6 +93,7 @@ $(document).ready(function() {
                         ape : apellido,
                         dom : domicilio,
                         tel : telefono,
+                        cel : celular,
                         nac : nacimiento,
                         esc : escuela,
                         grado : grado_anio,
@@ -142,6 +144,9 @@ $(document).ready(function() {
             telefono: {
                         minlength: 7,
             },
+            celular: {
+                minlength: 7,
+                },
             email: {
                 // required: true,
                 email: true,

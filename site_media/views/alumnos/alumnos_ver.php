@@ -74,15 +74,21 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
         <div class="modal-body">
           <form id="formulario_alumnos_mod">
                 <div class="form-row">
-                 <div class="col-md-4 mb-3">
+                 <div class="col-md-7 mb-3">
                   <label>Documento</label>
                     <input type="text" class="form-control" name="documento_" id="documento_" placeholder="dni">
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-5 mb-4">
+                  <label for="validationCustom05">Nacimiento</label>
+                  <input type="date" class="form-control" name="nacimiento_" id="nacimiento_">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6 mb-3">
                   <label>Nombre</label>
                   <input type="text" class="form-control" name="nombre_" id="nombre_">
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-6 mb-3">
                   <label>Apellido</label>
                   <input type="text" class="form-control" name="apellido_" id="apellido_">
                 </div>
@@ -90,19 +96,23 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
               </div>
               <div class="form-row">
                 <div class="col-md-6 mb-3">
-                  <label for="validationCustom03">Domicilio</label>
-                  <input type="text" class="form-control" name="domicilio_" id="domicilio_">
-                </div>
-                <div class="col-md-6 mb-3">
                   <label for="validationCustom04">Teléfono</label>
                   <input type="text" class="form-control" name="telefono_" id="telefono_">
                 </div>
+                <div class="col-md-5 mb-3">
+                  <label for="validationCustom04">Celular</label>
+                  <input type="text" class="form-control" name="celular_" id="celular_">
+                </div>
+                <div class="col-md-1 mb-3" id='div-wts' style="margin-top: 35px;">
+                
+                </div>
               </div>
               <div class="form-row">
-                <div class="col-md-5 mb-4">
-                  <label for="validationCustom05">Nacimiento</label>
-                  <input type="date" class="form-control" name="nacimiento_" id="nacimiento_">
+              <div class="col-md-12 mb-3">
+                  <label for="validationCustom03">Domicilio</label>
+                  <input type="text" class="form-control" name="domicilio_" id="domicilio_">
                 </div>
+                
               </div>
               <div class="form-row">
                 <div class="col-md-10 mb-3">

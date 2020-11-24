@@ -122,6 +122,7 @@ $(document).ready(function() {
             var apellido_ = $('#apellido_').val();
             var domicilio_ = $('#domicilio_').val();
             var telefono_ = $('#telefono_').val();
+            var celular_ = $('#celular_').val();
             var nacimiento_ = $('#nacimiento_').val();
             var escuela_ = $('#escuela_').val();
             var grado_anio_ = $('#gradoanio_').val();
@@ -141,6 +142,7 @@ $(document).ready(function() {
                       ape : apellido_,
                       dom : domicilio_,
                       tel : telefono_,
+                      cel : celular_,
                       nac : nacimiento_,
                       esc : escuela_,
                       grado : grado_anio_,
@@ -601,12 +603,12 @@ $(document).ready(function() {
             boton_pagar = "<button type='button' class='btn btn-primary btn-sm pagar' id='"+value.id+"'><i class='fas fa-dollar-sign'></i> Pagar</button>";
             if(value.fechap == '00/00/0000'){
 
-              $('#cuerpoTablaCuotas'+id_alu_cur).append("<tr><td><font size='2'>Cuota "+value.nro+"<font></td><td><font size='2'>"+value.fecha_v+"</font></td><td ><font size='2' id='imp"+value.id+"'>"+value.importe+"</font></td><td><input type='text' class='form-control descuento' id='desc"+value.id+"' value='"+value.descuento+"' placeholder='%' style='width: 43px;font-size:13px;' disabled=''></td><td><input type='text' id='int"+value.id+"' class='form-control interes' value='"+value.interes+"' placeholder='%' style='width: 43px;font-size:13px;' disabled=''></td><td><input class='form-control' type='text' id='total"+value.id+"' value='"+value.total+"' style='width: 70px;font-size:13px;' disabled=''/></td><td><select id='tipopago"+value.id+"' class='form-control' style='width:50px;' disabled><option value='0'>*</option><option value='1'>Contado / Efectivo</option><option value='2'>Débito</option><option value='3'>Crédito</option><option value='4'>MercadoPago</option><option value='5'>Transferencia</option><option value='5'>Otro</option></select></td><td><font size='2' id='fp"+value.id+"'>"+value.fechap+"</font></td><td>"+boton_pagar+' '+boton_pagar_conf+''+boton_pint2+''+cerrar+"</td></tr>");
+              $('#cuerpoTablaCuotas'+id_alu_cur).append("<tr><td><font size='2'>"+value.nro+"<font></td><td><font size='2'>"+value.fecha_v+"</font></td><td ><font size='2' id='imp"+value.id+"'>"+value.importe+"</font></td><td><input type='text' class='form-control descuento' id='desc"+value.id+"' value='"+value.descuento+"' placeholder='%' style='width: 43px;font-size:13px;' disabled=''></td><td><input type='text' id='int"+value.id+"' class='form-control interes' value='"+value.interes+"' placeholder='%' style='width: 43px;font-size:13px;' disabled=''></td><td><input class='form-control' type='text' id='total"+value.id+"' value='"+value.total+"' style='width: 70px;font-size:13px;' disabled=''/></td><td><select id='tipopago"+value.id+"' class='form-control' style='width:70px;' disabled><option value='0'>*</option><option value='1'>Contado / Efectivo</option><option value='2'>Débito</option><option value='3'>Crédito</option><option value='4'>MercadoPago</option><option value='5'>Transferencia</option><option value='5'>Otro</option></select></td><td><font size='2' id='fp"+value.id+"'>"+value.fechap+"</font></td><td>"+boton_pagar+' '+boton_pagar_conf+''+boton_pint2+''+cerrar+"</td></tr>");
                
 
             }else{
 
-              $('#cuerpoTablaCuotas'+id_alu_cur).append("<tr><td><font size='2'>Cuota "+value.nro+"<font></td><td><font size='2'>"+value.fecha_v+"</font></td><td ><font size='2' id='imp"+value.id+"'>"+value.importe+"</font></td><td><input type='text' class='form-control descuento' id='desc"+value.id+"' value='"+value.descuento+"' placeholder='%' style='width: 43px;font-size:13px;' disabled=''></td><td><input type='text' id='int"+value.id+"' class='form-control interes' value='"+value.interes+"' placeholder='%' style='width: 43px;font-size:13px;' disabled=''></td><td><input class='form-control' type='text' id='total"+value.id+"' value='"+value.total+"' style='width: 70px;font-size:13px;' disabled=''/></td><td><select id='tipopago"+value.id+"' class='form-control' style='width:50px;' disabled><option value='0'>*</option><option value='1'>Contado / Efectivo</option><option value='2'>Débito</option><option value='3'>Crédito</option><option value='4'>MercadoPago</option><option value='5'>Transferencia</option><option value='5'>Otro</option></select></td><td><font size='2' id='fp"+value.id+"'>"+value.fechap+"</font></td><td>"+boton_pint+"</td></tr>");
+              $('#cuerpoTablaCuotas'+id_alu_cur).append("<tr><td><font size='2'>"+value.nro+"<font></td><td><font size='2'>"+value.fecha_v+"</font></td><td ><font size='2' id='imp"+value.id+"'>"+value.importe+"</font></td><td><input type='text' class='form-control descuento' id='desc"+value.id+"' value='"+value.descuento+"' placeholder='%' style='width: 43px;font-size:13px;' disabled=''></td><td><input type='text' id='int"+value.id+"' class='form-control interes' value='"+value.interes+"' placeholder='%' style='width: 43px;font-size:13px;' disabled=''></td><td><input class='form-control' type='text' id='total"+value.id+"' value='"+value.total+"' style='width: 70px;font-size:13px;' disabled=''/></td><td><select id='tipopago"+value.id+"' class='form-control' style='width:70px;' disabled><option value='0'>*</option><option value='1'>Contado / Efectivo</option><option value='2'>Débito</option><option value='3'>Crédito</option><option value='4'>MercadoPago</option><option value='5'>Transferencia</option><option value='5'>Otro</option></select></td><td><font size='2' id='fp"+value.id+"'>"+value.fechap+"</font></td><td>"+boton_pint+"</td></tr>");
 
             }
 
@@ -679,8 +681,10 @@ function verAlumnos(){
             var boton2 = "<button class='btn btn-info btn-sm botonesdetailcurso' id='"+value.id+"' title='cursos'><i class='fa fa-users' aria-hidden='true'></i></button>"; 
             var boton3 = "<button class='btn btn-danger btn-sm eliminar' id='"+value.id+"' title='eliminar' value='"+value.apellido+', '+value.nombre+"'><i class='fa fa-minus' aria-hidden='true'></i></button>"; 
             var boton4 = "<button class='btn btn-warning btn-sm renovar' id='"+value.id+"' title='renovar' value='"+value.apellido+', '+value.nombre+"'><i class='fa fa-retweet' aria-hidden='true'></i></button>"; 
-            // var boton3 = "<button class='btn btn-info btn-sm botondecuotas' id='"+value.id+"' title='cuotas'><i class='fas fa-search-dollar'></i></button>"; 
+      
             var botonera = boton+' '+boton2+' '+boton3;
+           
+
             var alumno_activo = 'Activo';
             if(value.activo == 'N'){
               alumno_activo = 'Inactivo';
@@ -720,7 +724,7 @@ function verAlumno(idalu){
         },
         success: function (resp) {
 
-          console.log(resp);
+          //console.log(resp);
 
           $.each(resp, function(idx, val){
 
@@ -730,10 +734,18 @@ function verAlumno(idalu){
             $('#apellido_').val(val.apellido);
             $('#domicilio_').val(val.domicilio);
             $('#telefono_').val(val.telefono);
+            $('#celular_').val(val.celular);
             $('#nacimiento_').val(val.fecha_nac);
             $('#escuela_').val(val.escuela);
             $('#gradoanio_').val(val.grado);
             $('#email_').val(val.email);
+
+            if(val.celular != null){
+              $('#div-wts').html("<a href='https://web.whatsapp.com/send?phone=54"+val.celular+"&amp;text=Se+le+recuerda+que+mañana+tiene+turno&amp;source&amp;data&amp;app_absent' target='_blank'><font color='green'><i class='fab fa-whatsapp'></i></font></a>");
+            }else{
+              $('#div-wts').html("<a target='_blank'><font color='gray'><i class='fab fa-whatsapp' disabled></i></font></a>");
+            }
+           
              if(val.hermanos == 1){
               $('#hermanos_').prop('checked', true);
              }else{
@@ -765,6 +777,7 @@ function verCursos(idalu){
           idAlumno : idalu
         },
         success: function (resp) {
+
           var cont = 0;
 
           $.each(resp, function(idx, value){
@@ -777,8 +790,11 @@ function verCursos(idalu){
             $('#her').html('');
             $('#her').html('hermanos: '+value.hermanos);
             $('#card_body').append('<div class="card-header" id="heading'+cont+'"><h5 class="mb-0"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse'+cont+'"  ><b class="nombre_curso" id='+value.id+'>'+value.curso+' - Año lectivo ('+value.anio+')</b></button></h5></div>');
-            $('#card_body').append('<div id="collapse'+cont+'" class="collapse" aria-labelledby="heading'+cont+'" data-parent="#accordion"><div class="card-body"><table id="tabla_cuotas'+value.id+'" class="table table-striped table-hover compact" cellspacing="0" width="100%"><thead><th class="text-center" style="width: 25%;">Cuota</th><th class="text-center" style="width: 15%;">Vence</th><th class="text-center" style="width: 15%;">Importe</th><th class="text-center" style="width: 10%;">dto.</th><th class="text-center" style="width: 10%;">Int.s</th><th class="text-center" style="width: 20%;">Total</th><th class="text-center" style="width: 10%;">tipo</th><th class="text-center" style="width: 10%;">Pago</th><th style="width: 10%;"></th></thead><tbody id="cuerpoTablaCuotas'+value.id+'"></tbody></table></div></div>');
-
+            $('#card_body').append('<div id="collapse'+cont+'" class="collapse" aria-labelledby="heading'+cont+'" data-parent="#accordion"><div class="card-body"><table id="tabla_cuotas'+value.id+'" class="table table-striped table-hover compact" cellspacing="0" width="100%"><thead><th class="text-center" style="width: 10%;">#</th><th class="text-center" style="width: 15%;">Vence</th><th class="text-center" style="width: 15%;">Importe</th><th class="text-center" style="width: 10%;">% dto.</th><th class="text-center" style="width: 10%;">% Int.s</th><th class="text-center" style="width: 20%;">Total</th><th class="text-center" style="width: 25%;">tipo</th><th class="text-center" style="width: 10%;">Pago</th><th style="width: 10%;"></th></thead><tbody id="cuerpoTablaCuotas'+value.id+'"></tbody></table></div></div>');
+            
+            if(cont == 1){
+              $('#card_body').append("<br><br>");
+            }
                           
                        
               // TablaCursos.row.add( [
