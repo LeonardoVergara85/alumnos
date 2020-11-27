@@ -28,7 +28,8 @@
  	 protected $_observaciones;
  	 protected $_numero;
 
- 
+	 protected $_mes_inicio;
+	 protected $_dia_vencimiento;
 
 
 	/***********************
@@ -74,7 +75,34 @@
 
  		}
 
- 	}
+	 }
+	 
+	 public function guardarConfig($conn){
+
+		try {
+
+			  $mesi = $this->_mes_inicio;
+			  $diav = $this->_dia_vencimiento;
+
+			  // desactivamos la configuración que está activa
+			  $sql_ = "UPDATE cuotas_set SET activo = 'N' WHERE activo = 'S'";
+
+			  $conn->db->Execute($sql_);
+			  
+			  // guardamos la nueva configuración de cuotas		
+			  $sql = "INSERT INTO `cuotas_set` VALUES (NULL, ?, ?, NOW(),'S')";
+
+		      $conn->db->Execute($sql,array($mesi,$diav));
+
+
+		   } catch (Exception $e) {
+			
+			print_r('MODEL: ' . $e);
+
+		}
+
+	}
+
  	public function cambiarCosto($conn,$idcur,$idimp){
 
  		try {

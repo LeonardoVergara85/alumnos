@@ -3,6 +3,12 @@
             <div class="jquery-accordion-menu-header">Panel de Acciones</div>
             <ul>
               <li class="active"><a href="../home"><i class="fa fa-home"></i>Inicio </a></li>
+              <li><a href="#"><i class="fas fa-cog"></i>Configuraciones </a>
+                <ul class="submenu">
+                  <li><a href="../cuotas">Configurar Cuotas </a></li>
+                  <li><a href="../cursos/anio_lectivo.php">Año lectivo </a></li>
+                </ul>
+              </li>
           <!--     <li><a href="#"><i class="fa fa-glass"></i>Cursos </a></li>
               <li><a href="../gastos"><i class="fa fa-glass"></i>Gastos </a></li> -->
               <!-- <li><a href="#"><i class="fa fa-file-image-o"></i>Gallery </a><span class="jquery-accordion-menu-label">12 </span></li> -->
@@ -33,11 +39,7 @@
                   <li><a href="../cursos/asociar_alumnos.php"><i class="fas fa-user-plus"></i>Inscribir alumnos</a></li>
                 </ul>
               </li>
-              <li><a href="#"><i class="fas fa-cog"></i>Cuotas </a>
-                <ul class="submenu">
-                  <li><a href="../cuotas">Configurar Cuotas </a></li>
-                </ul>
-              </li>
+             
               <li><a href="#"><i class="fas fa-cash-register"></i>Gastos </a>
                 <ul class="submenu">
                   <li><a href="../gastos">Registrar gasto </a></li>

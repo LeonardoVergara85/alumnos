@@ -24,14 +24,15 @@
 
       <div class="container_contenido col-sm-10">
         <div class="card">
-          <div class="card-header">Cuotas</div>
+          <div class="card-header">Configuración de Cuotas</div>
           <div class="card-body">
 
             <form id="formulario_cuotas">
               <div class="form-row">
               <div class="col-md-4 mb-2">
                 <label for="validationGradoanio">Mes inicio</label>
-                <select  class="form-control" id="mesescurso" name="mesescurso">
+                <select  class="form-control" id="mes_inicio" name="mes_inicio">
+                <option value="default" selected>Seleccionar..</option>
                   <option value="1">Enero</option>
                   <option value="2">febrero</option>
                   <option value="3">Marzo</option>
@@ -49,6 +50,7 @@
               <div class="col-md-2 mb-2">
                 <label for="validationGradoanio">Dia de vecimiento</label>
                 <select  class="form-control" id="dia_vencimiento" name="dia_vencimiento">
+                  <option value="default" selected>Seleccionar..</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -61,15 +63,39 @@
                   <option value="10">10</option>
                   <option value="11">11</option>
                   <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option>
                 </select>
               </div>
-              <div class="col-md-2 mb-2">
-                <label for="validationGradoanio">Costo</label>
-                  <input type="text" class="form-control" name="costo" id="costo" placeholder="$" maxlength="45">
+              <div class="col-md-2 mb-2" style="margin-top:30px;">
+                <button class="btn btn-primary" type="submit" name="guardarcuotas" id="guardarcuotas">Guardar</button>
               </div>
             </div>
-            <button class="btn btn-primary" type="submit" name="guardarcurso" id="guardarcurso">Guardar</button>
+            
           </form>
+          <div class="form-row">
+          <div class="alert alert-info" role="alert">
+            <b>¡Atención!</b> La cantidad de meses se carga en cada Curso. Se pueden generar cuotas hasta el mes 12 de cada año.
+          </div>
+            
+          </div>
           <br>
           <table id="table_cuotas" class="table table-striped table-bordered table-hover compact" cellspacing="0" width="100%">
               <thead>

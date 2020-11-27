@@ -32,7 +32,88 @@ $(document).ready(function() {
 
     verSetCuotas();
 
+   //validar que el campo sea solo letas
+
+  // validar los select //
+  $.validator.addMethod("valueNotEquals", function(value, element, arg){
+  return arg !== value;
+  }, "Value must not equal arg.");
+ $('#formulario_cuotas').validate({
+        submitHandler: function (form) {
+        	// cuando va bien
+
+            var mesinicio = parseInt($('#mes_inicio').val());
+            var diavencimiento = parseInt($('#dia_vencimiento').val());
+
+            $('#guardarcuotas').attr('disabled','disabled');
+
+            $.ajax({
+            	type: "POST",
+            	url: "../../../app/routes.php",
+            	dataType: 'text',
+            	data: {
+
+            		peticion : 'guardar_conf_cuotas',
+                    mes : mesinicio,
+                    dia : diavencimiento
+
+            	},
+            	success: function (resp) {
+
+            		if(resp == 'ok'){
+        
+                        toastr.success('Se ha guardado la configuración exitosamente');
+
+                         setTimeout(function() { 
+                            $(location).attr('href', '../cuotas/index.php');
+                        }, 1500);
+
+                    }else{
+
+                        toastr.error('Ha ocurrido un error!!!');
+
+                        return false;
+                    }
+
+            	}
+            });	
+           
+        },
+        rules: {    
+            mes_inicio: {
+                   valueNotEquals: "default" ,
+                        },  
+            dia_vencimiento: {
+                    valueNotEquals: "default" ,
+              },  
+        },
+        
+        messages: {
+
+          mes_inicio: {
+              valueNotEquals: "debe seleccionar!" ,
+            }, 
+          dia_vencimiento: {
+              valueNotEquals: "debe seleccionar!" ,
+            },      
+           
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        },
+        invalidHandler: function (event, validator) {
+            toastr.error('Compruebe los campos');
+        },
+    });
+
 });
+
+
 
 function verSetCuotas(){
 

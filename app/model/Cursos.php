@@ -134,7 +134,26 @@ include_once 'CursoImporte.php';
 
  		}
 
- 	}
+	 }
+	 
+	 public function renovarAnio($conn){
+
+		try {
+
+			$id = $this->_id;
+	
+			$sql = "UPDATE cursos SET fecha_inicio = NOW() WHERE vigente = 'S' ";
+
+		   $conn->db->Execute($sql,array($id));
+
+
+		} catch (Exception $e) {
+			
+			print_r('MODEL: ' . $e);
+
+		}
+
+	}
 
 
  	public function getCursos(){
@@ -246,7 +265,35 @@ include_once 'CursoImporte.php';
 
  		}
 
- 	}
+	 }
+	 
+	 public function getFecha(){
+
+		try {
+
+
+			$sql = "SELECT count(*) AS CANT FROM cursos
+				   WHERE DATE_FORMAT(fecha_inicio,'%Y') = DATE_FORMAT(NOW(),'%Y')";
+
+		   $this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
+
+			
+			$filas = $this->DB->Execute($sql);
+
+		   if($filas->fields['CANT'] != 0){
+			   return "NO";
+		   }else{
+			   return "SI";
+		   }
+
+
+		} catch (Exception $e) {
+			
+			print_r('MODEL: ' . $e);
+
+		}
+
+	}
 
 
  }

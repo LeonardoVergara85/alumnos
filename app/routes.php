@@ -180,6 +180,12 @@ class routes
 				new CursosController('renovarCurso');
 
 				break;
+			case 'renovar_cursos':
+
+			new CursosController('renovarCursos');
+
+			break;	
+					
 
 			case 'ver_historico':
 
@@ -288,6 +294,11 @@ class routes
 				new CuotasController('showCuotasInforme'); 
 
 				break;	
+			case 'guardar_conf_cuotas':
+
+			new CuotasController('guardarConfCuotas'); 
+
+			break;		
 
 			
 			default:

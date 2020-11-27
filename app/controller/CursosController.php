@@ -218,6 +218,39 @@ Class CursosController extends Cursos{
 
 	}
 
+	public function renovarCursos(){
+
+		try {
+
+			$conn = new Conexion();
+			
+			$conn->db->startTrans();
+
+			$rta = $this->CursosModel->getFecha();
+
+			if($rta == 'NO'){
+
+				echo "no_renovar";
+				return;
+
+			}else{
+
+				$this->CursosModel->renovarAnio($conn);
+
+			}
+
+			$conn->db->completeTrans();
+
+			echo 'ok';
+
+		} catch (Exception $e) {
+			
+			print_r($e);
+
+		}
+
+	}
+
 
 	public function show(){
 

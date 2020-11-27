@@ -95,6 +95,33 @@ Class CuotasController extends Cuotas{
 
 	}
 
+	
+	public function guardarConfCuotas(){
+
+		try {
+		
+			 $conn = new Conexion();
+			
+			  $conn->db->startTrans();
+	
+				$this->CuotasModel->_mes_inicio = $_POST['mes'];
+				$this->CuotasModel->_dia_vencimiento = $_POST['dia'];
+
+				$this->CuotasModel->guardarConfig($conn);
+
+
+			 $conn->db->completeTrans();
+
+			echo 'ok';
+
+		} catch (Exception $e) {
+			
+			print_r($e);
+
+		}
+
+	}
+
 
 
 	public function showCuotas(){
