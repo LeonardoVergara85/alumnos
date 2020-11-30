@@ -28,8 +28,7 @@
             <div class="card-header">Configuraciones del año lectivo</div>
             <div class="card-body">
             <div class="form-row">
-                <div class="alert alert-info" role="alert">
-                    <b>¡Atención!</b> El año lectivo es <b>2020</b>
+                <div class="alert alert-info" role="alert" id="mensaje-anio">
                 </div>
             </div>
             <div class="form-row">
@@ -53,7 +52,7 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title danger">Renovar año lectivo</h4>
+          <h4 class="modal-title danger"><i class="fas fa-retweet"></i> Renovar año lectivo</h4>
         </div>
         
         <!-- Modal body -->

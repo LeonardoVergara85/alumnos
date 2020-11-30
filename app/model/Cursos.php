@@ -140,11 +140,9 @@ include_once 'CursoImporte.php';
 
 		try {
 
-			$id = $this->_id;
-	
-			$sql = "UPDATE cursos SET fecha_inicio = NOW() WHERE vigente = 'S' ";
+			$sql = "UPDATE cursos SET fecha_inicio = NOW() WHERE vigente = 'S'";
 
-		   $conn->db->Execute($sql,array($id));
+		    $conn->db->Execute($sql);
 
 
 		} catch (Exception $e) {
@@ -207,7 +205,32 @@ include_once 'CursoImporte.php';
 
  		}
 
- 	}
+	 }
+	 
+
+	 public function getAniosCurso(){
+
+		try {
+
+			$id = $this->_id;
+
+			$sql = "SELECT DISTINCT (anio) FROM alumno_curso_vw WHERE id_curso = ?";
+
+		   $this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
+
+			
+		   $filas = $this->DB->Execute($sql,array($id));
+
+		   return $filas;
+
+
+		} catch (Exception $e) {
+			
+			print_r('MODEL: ' . $e);
+
+		}
+
+	}
 
  	public function getCursoAsociado(){
 
@@ -285,6 +308,29 @@ include_once 'CursoImporte.php';
 		   }else{
 			   return "SI";
 		   }
+
+
+		} catch (Exception $e) {
+			
+			print_r('MODEL: ' . $e);
+
+		}
+
+	}
+
+	public function getAnioLectivo(){
+
+		try {
+
+
+			$sql = "SELECT DISTINCT (DATE_FORMAT(fecha_inicio,'%Y')) AS ANIO from cursos WHERE vigente = 'S' ";
+
+		    $this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
+
+			
+			$filas = $this->DB->Execute($sql);
+
+		    return $filas->fields['ANIO'];
 
 
 		} catch (Exception $e) {

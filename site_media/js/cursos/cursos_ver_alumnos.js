@@ -1,38 +1,55 @@
+var f = new Date(); // fecha para mostrar en los archivos de export 
+var cursoo = $('#text-curso').val();
 var Tabla = $('#table_alumnos').DataTable( {
   dom: 'Bfrtip',
-        buttons: [
-            'excel', 'pdf', 'print'
-        ],
-  
-  "order": [[ 1, "desc" ]],
+
+    buttons: [
+        {
+            extend:    'pdfHtml5',
+            text:      '<i class="fa fa-file-pdf"></i>',
+            titleAttr: 'PDF',
+            message: 'Listado de Alumnos. Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+            download: 'open',
+            title: 'Alumnos',
+            
+        },
+        {
+            extend: 'print',
+            text:      '<i class="fa fa-print" ></i>',
+            titleAttr: 'Imprimir',
+            message: 'Listado de productos. Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+            messageBottom: null,
+            title: 'Alumnos',
+        }
+    ],
 
  "language": {
         "url": "../../../public/libs/DataTables-1.10.12/extensions/table-spanish.json"
     },
 
-      'columnDefs': [
-  {
-      "targets": 0, // your case first column
-      "className": "text-center",
-       "width": "20%",
- },{
-      "targets": 1, // your case first column
-      "className": "text-center",
-       "width": "30%"
- },{
-      "targets": 2, // your case first column
-      "className": "text-center",
-       "width": "30%"
- },{
-      "targets": 3, // your case first column
-      "className": "text-center",
-       "width": "10%"
- },{
-      "targets": 4, // your case first column
-      "className": "text-center",
-       "width": "10%"
- },
- ],
+        'columnDefs': [
+          {
+            "targets": 0, // your case first column
+            "visible": false,
+        },
+        {
+            "targets": 1, // your case first column
+            "className": "text-center",
+              "width": "20%",
+        },{
+            "targets": 2, // your case first column
+            "className": "text-center",
+              "width": "60%"
+        },{
+            "targets": 3, // your case first column
+            "className": "text-center",
+              "width": "10%"
+        },{
+            "targets": 4, // your case first column
+            "className": "text-center",
+              "width": "10%"
+        },
+    ],
  });
 
 
@@ -43,29 +60,61 @@ $(document).ready(function(){
 	$(document).on("change", "#cursos", function () {
 
 		if(this.value != 0){
-		 	$('#buscar_alumnos').attr('disabled',false);
+
+      $('#anio_lectivo').empty();
+
+          $.ajax({
+            type: "POST",
+            url: "../../../app/routes.php",
+            dataType: 'json',
+            data: {
+              idcurso: $('#cursos').val(),
+              peticion : 'ver_anios',
+            },
+            success: function (resp) {
+
+              var anios = resp;
+
+              $('#anio_lectivo').append("<option value='0'>Seleccionar..</option>");
+                $.each( anios, function( key, value ) {
+
+                  $('#anio_lectivo').append("<option value='"+value.anio+"'>"+value.anio+"</option>");
+
+                });
+
+            }
+          }); 
       		// getAlumnosCurso(this.value);
   			}else{
+
   	      	$('#buscar_alumnos').attr('disabled','disabled');
          }
 
       });
+
+      $(document).on("change", "#anio_lectivo", function () {
+
+        if(this.value != 0){
+    
+           $('#buscar_alumnos').attr('disabled',false);
+  
+              // getAlumnosCurso(this.value);
+            }else{
+    
+                $('#buscar_alumnos').attr('disabled','disabled');
+             }
+    
+          });
     //////////////////////////////////////////////////
     //////////////////////////////////////////////////
     //////////////////////////////////////////////////
 	$(document).on("click", "#buscar_alumnos", function () {
 
     var id_curso = $('#cursos').val();
+    var text_curso = $('#cursos option:selected').text();
 		var anio_lectivo = $('#anio_lectivo').val();
-    // alert(anio_lectivo);
-    // return;
-    if((anio_lectivo == '') || (anio_lectivo.length < 4) || (anio_lectivo < '1900') || (anio_lectivo > '2030')){
-      alert('debe ingresar el año lectivo correcto!');
-      return false;
-    }
 
-
-		getCursoAlumnos(id_curso,anio_lectivo);
+		getCursoAlumnos(id_curso,anio_lectivo,text_curso);
 		
 
       });
@@ -98,9 +147,11 @@ function getCursos(){
       }); 
 };
 
-function getCursoAlumnos(id_curso,anio_lectivo){
+function getCursoAlumnos(id_curso,anio_lectivo,text_curso){
 
 	Tabla.clear().draw();
+ 
+  $('#text-curso').val(text_curso);
 
 	$.ajax({
         type: "POST",
@@ -121,9 +172,9 @@ function getCursoAlumnos(id_curso,anio_lectivo){
              if(value.alu_activo == 'S'){
 
               Tabla.row.add( [
+                value.descripcion,
                 value.dni,
-                value.nombre,
-                value.apellido,
+                value.apellido+' '+value.nombre,
                 value.fecha,
                 value.anio
                 ]).draw();

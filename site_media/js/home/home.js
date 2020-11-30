@@ -2,6 +2,13 @@ $(document).ready(function(){
 
    
 //	$('#msj_respaldo').modal('show');
+
+$(document).on("click", "#btn-alu-in", function () {
+
+  window.location.href = '../cursos/asociar_alumnos.php';
+});
+
+
 $(document).on("click", "#btn-alu", function () {
 
     window.location.href = '../alumnos/alumnos_ver.php';

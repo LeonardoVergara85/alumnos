@@ -41,15 +41,19 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
                  <div class="col-md-7 mb-3">
                   <label>Cursos</label>
                     <select class="form-control" name="cursos" id="cursos">
-                      <option value="0">Seleccionar..</option>}
+                      <option value="0">Seleccionar..</option>
                       option
                     </select>
                 </div>
-                <div class="col-md-1 mb-3">
+                <input type="hidden" name="text-curso" id="text-curso"/>
+                <div class="col-md-2 mb-3">
                   <label>Año</label>
-                    <input type="text" class="form-control" id="anio_lectivo" name="anio_lectivo" maxlength="4">
+                  <select class="form-control" name="anio_lectivo" id="anio_lectivo">
+                      <option value="0">Seleccionar..</option>
+                      option
+                    </select>
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-3 mb-3">
                   <button class="btn btn-primary asociarmodal" type="button" style="margin-top: 30px;" name="buscar_alumnos" id="buscar_alumnos" disabled=""><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
                 </div>
               </div>
@@ -58,11 +62,11 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
                   <table id="table_alumnos" class="table table-striped table-bordered table-hover compact" cellspacing="0" width="100%">
                     <thead>
                       <tr>
+                        <th>Curso</th>
                         <th>Documento</th>
                         <th>Nombre</th>
-                        <th>Apellido</th>
                         <th>Insc.</th>
-                        <th>Año</th>
+                        <th>Año lectivo</th>
                       </tr>
                     </thead>
                     <tbody id="cuerpoTablaHistorico">

@@ -180,9 +180,22 @@ class routes
 				new CursosController('renovarCurso');
 
 				break;
+
 			case 'renovar_cursos':
 
 			new CursosController('renovarCursos');
+
+			break;	
+			
+			case 'ver_anios':
+
+			new CursosController('verAnios');
+
+			break;
+
+			case 'anio_lectivo':
+
+			new CursosController('anioLectivoActual');
 
 			break;	
 					

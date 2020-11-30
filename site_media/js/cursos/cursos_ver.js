@@ -443,15 +443,6 @@ function verCursos(){
           
 
           $.each( cursos, function( key, value ) {
-
-            if(value.anio <= '2020'){
-
-              var boton_renovar = "<button class='btn btn-warning btn-sm botonesrenovar' id='"+value.id+"' title='Renovar año lectivo'>R</button>"; 
-              // var boton_renovar = "<button class='btn btn-default btn-sm' id='"+value.id+"' title='Renovar año lectivo' disabled>R</button>"; 
-            }else{
-              var boton_renovar = "<button class='btn btn-default btn-sm' id='"+value.id+"' title='Renovar año lectivo' disabled>R</button>"; 
-              
-            }
             
             var boton = "<button class='btn btn-info btn-sm botonesdetailcurso' id='"+value.id+"' title='detalle del curso'><i class='fa fa-info-circle' aria-hidden='true'></i></button>"; 
             var botonx = "<button class='btn btn-danger btn-sm botoneseliminarcurso' id='"+value.id+"' title='eliminar curso'><i class='fa fa-trash' aria-hidden='true'></i></button>"; 
@@ -461,7 +452,7 @@ function verCursos(){
                 value.descripcion,
                 value.meses,
                 value.importe,
-                value.anio+' '+boton_renovar,
+                value.anio,
                 boton+' '+botonmc+' '+botonx
                 ]).draw();
       });

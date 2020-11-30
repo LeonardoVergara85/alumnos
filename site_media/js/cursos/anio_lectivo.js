@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    anioLectivo();
+
     $(document).on("click", "#renovar_anio_lectivo", function () {
 
         $('#modalRenovarAnio').modal('show');
@@ -49,3 +51,30 @@ $(document).ready(function() {
 
 
 });
+
+
+function anioLectivo(){
+
+    $.ajax({
+        type: "POST",
+        url: "../../../app/routes.php",
+        dataType: 'text',
+        data: {
+            peticion : 'anio_lectivo',
+        },
+        success: function (resp) {
+
+
+         if(resp != null){
+
+            $("#mensaje-anio").html("<b>¡Atención!</b> El año lectivo es <b>"+resp+"</b>");
+
+         }else{
+
+            $("#mensaje-anio").html("<b>¡Atención!</b> Se debe crear un curso");
+
+         }
+
+        }
+    });
+}

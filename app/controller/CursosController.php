@@ -218,6 +218,54 @@ Class CursosController extends Cursos{
 
 	}
 
+	public function anioLectivoActual(){
+
+		try {
+
+			$conn = new Conexion();
+
+			$rta = $this->CursosModel->getAnioLectivo();
+
+			echo $rta;
+
+		} catch (Exception $e) {
+			
+			print_r($e);
+
+		}
+
+	}
+	
+	public function verAnios(){
+
+		try {
+
+			$conn = new Conexion();
+
+			$this->CursosModel->_id = $_POST['idcurso'];
+
+			$anios = $this->CursosModel->getAniosCurso();
+
+			$lista = array();
+
+			foreach ($anios as $curso) {
+
+				array_push($lista, ['anio' => $curso['anio']]);
+
+			}
+
+			echo json_encode($lista);
+
+			
+
+		} catch (Exception $e) {
+			
+			print_r($e);
+
+		}
+
+	}
+
 	public function renovarCursos(){
 
 		try {

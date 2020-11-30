@@ -159,6 +159,13 @@ $(document).ready(function(){
               });
 
               $('#div-spinner').hide();
+              
+              var total = 0;
+              $('#table_gastos_fecha').DataTable().rows().data().each(function(el, index){
+                //Asumiendo que es la columna 5 de cada fila la que quieres agregar a la sumatoria
+                total += el[3];
+              });
+              console.log(total);
              }
             }); 
            
@@ -191,6 +198,7 @@ $(document).ready(function(){
         },
     });
 
+   
 });
 
 function buscarBalanceDiario(){

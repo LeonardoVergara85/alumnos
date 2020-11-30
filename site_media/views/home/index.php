@@ -39,6 +39,13 @@
         ?>  
           <div class="row col-sm-12" style="margin-top:15px;">
           <div class="card-deck">
+              <div class="card">
+                      <div class="card-body text-center">
+                        <h5 class="card-title"><i class="fas fa-user-plus"></i> Inscribir Alumno</h5>
+                        <p class="card-text">Inscribir un alumno a un nuevo curso.</p>
+                        <button class="btn btn-primary" id="btn-alu-in">Ir a la pantalla</button>
+                    </div>
+                  </div>
                     <div class="card">
                       <div class="card-body text-center">
                         <h5 class="card-title"><i class="fa fa-users"></i> Alumnos</h5>
