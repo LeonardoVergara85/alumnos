@@ -341,5 +341,28 @@ include_once 'CursoImporte.php';
 
 	}
 
+	public function getAnio(){
+
+		try {
+
+
+			$sql = "SELECT DATE_FORMAT(NOW(),'%Y') AS ANIO ";
+
+		    $this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
+
+			
+			$filas = $this->DB->Execute($sql);
+
+		    return $filas->fields['ANIO'];
+
+
+		} catch (Exception $e) {
+			
+			print_r('MODEL: ' . $e);
+
+		}
+
+	}
+
 
  }

@@ -198,6 +198,12 @@ class routes
 			new CursosController('anioLectivoActual');
 
 			break;	
+
+			case 'anio_lectivo_':
+
+			new CursosController('anioLectivoActual_');
+
+			break;
 					
 
 			case 'ver_historico':

@@ -77,10 +77,14 @@
           </div>
        
       </div>
-
+      <br>
+      <div class="form-row" id="div-msj-error">
+      </div>
+    
    </div> 
-      <div class="modal fade" id="msj_respaldo" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-xl">
+   
+    <div class="modal fade" id="msj_anio" data-backdrop="static" data-keyboard="false">
+     <div class="modal-dialog modal-xl">
       <div class="modal-content text-center">
       
         <!-- Modal Header -->
@@ -90,9 +94,9 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-           <h4>Recuerde realizar los respaldo de información diariamente.</h4>
+           <h4>El sistema ha detectado que su año lectivo no está actualizado.</h4>
            <br>
-           <h6>Ejecutar como administrador (clic derecho) <STRONG>"RESPALDO"</STRONG> ubicado en el escritorio</h6>
+           <h6>Vaya a la pestaña <STRONG>Configiraciones / Año lectivo</STRONG> para actualizarlo.</h6>
 
         </div>
         

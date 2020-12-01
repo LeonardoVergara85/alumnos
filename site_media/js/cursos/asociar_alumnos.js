@@ -62,6 +62,8 @@
 
 $(document).ready(function(){
 
+verSetCuotas();  
+
 getCursos();
 
 
@@ -165,6 +167,36 @@ function getCursos(){
         }
       }); 
 };
+
+
+function verSetCuotas(){
+
+	$.ajax({
+        type: "POST",
+        url: "../../../app/routes.php",
+        dataType: 'json',
+        data: {
+          peticion : 'ver_set_cuotas',
+        },
+        success: function (resp) {
+
+          var setcuotas = resp;
+          if(setcuotas.length == 0){
+
+            $('#div-msj-error').show();
+            $('#cursos').attr('disabled',true);
+
+          }else{
+
+            $('#div-msj-error').hide();
+            $('#cursos').attr('disabled',false);
+
+          }
+
+        }
+
+      }); 
+} 
 
 function getAlumnosSA(){
 

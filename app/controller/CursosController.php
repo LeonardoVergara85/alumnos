@@ -235,6 +235,31 @@ Class CursosController extends Cursos{
 		}
 
 	}
+
+	public function anioLectivoActual_(){
+
+		try {
+
+			$conn = new Conexion();
+
+			$rta = $this->CursosModel->getAnioLectivo();
+			$rta2 = $this->CursosModel->getAnio();
+
+			if($rta == $rta2){
+				echo 'actualizado';
+			}else if($rta < $rta2){
+				{echo 'noactualizado';}
+			}else{
+				{echo 'error';}
+			}
+
+		} catch (Exception $e) {
+			
+			print_r($e);
+
+		}
+
+	}
 	
 	public function verAnios(){
 
