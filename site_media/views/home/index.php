@@ -80,6 +80,11 @@
       <br>
       <div class="form-row" id="div-msj-error">
       </div>
+      <div class="form-row" id="div-msj-error-cuotaset" style="display:none;">
+              <div class="alert alert-warning" role="alert">
+              <i class="fas fa-exclamation-triangle"></i> No se puede crear cuotas ya que no hay configuración de cuotas. Vaya a <b>Configuraciones / Configurar cuotas</b>
+              </div>
+            </div>
     
    </div> 
    

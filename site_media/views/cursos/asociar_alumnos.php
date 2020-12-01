@@ -39,7 +39,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
             <div class="card-body">
             <div class="form-row" id="div-msj-error" style="display:none;">
               <div class="alert alert-warning" role="alert">
-              <i class="fas fa-exclamation-triangle"></i> No se puede inscribir alumnos ya que no hay configuración de cuotas. Vaya a <b>Configuraciones / configuración de cuotas</b>
+              <i class="fas fa-exclamation-triangle"></i> No se puede inscribir alumnos ya que no hay configuración de cuotas. Vaya a <b>Configuraciones / Configurar cuotas</b>
               </div>
             </div>
               <form action="">

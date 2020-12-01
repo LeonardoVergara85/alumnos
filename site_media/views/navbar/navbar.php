@@ -13,7 +13,7 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item active">
-       <h4 style="font-family:forte;color:#5591f3">DUES</h4>
+       <h4 style="font-family:forte;color:#5591f3">Students</h4>
         <!-- <img src="../../../public/img/skills_logo2.png" width="200" height="60" alt=""></h4> -->
       </li>
     </ul>

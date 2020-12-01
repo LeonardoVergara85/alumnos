@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
   anioLectivo();
+  verSetCuotas();
 //	$('#msj_respaldo').modal('show');
 
 $(document).on("click", "#btn-alu-in", function () {
@@ -58,3 +59,30 @@ function anioLectivo(){
       }
   });
 }
+
+function verSetCuotas(){
+
+	$.ajax({
+        type: "POST",
+        url: "../../../app/routes.php",
+        dataType: 'json',
+        data: {
+          peticion : 'ver_set_cuotas',
+        },
+        success: function (resp) {
+
+          var setcuotas = resp;
+          if(setcuotas.length == 0){
+
+            $('#div-msj-error-cuotaset').show();
+
+          }else{
+
+            $('#div-msj-error-cuotaset').hide();
+
+          }
+
+        }
+
+      }); 
+} 

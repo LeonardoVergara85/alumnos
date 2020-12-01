@@ -50,7 +50,7 @@
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
-     DUES Gestión
+    Students Gestión
     </div>
 
   </div>
