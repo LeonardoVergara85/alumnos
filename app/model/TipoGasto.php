@@ -108,7 +108,7 @@
 
  		try {
 
- 			$sql = "SELECT * FROM `skills`.`tipo_gasto` ORDER BY descripcion ASC";
+ 			$sql = "SELECT * FROM tipo_gasto ORDER BY descripcion ASC";
 
 			$this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
 

@@ -15,7 +15,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
 
   <?php include_once '../../../public/libs/include_libs_css.html'; ?>
   
-  <title>Sistema Skills</title>
+  <title>Sistema Gestión</title>
 
 </head>
   
