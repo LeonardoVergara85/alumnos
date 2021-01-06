@@ -87,14 +87,14 @@
 
 $(document).ready(function(){
 
-  $('#buscando').hide();
+  $('#div-spinner').hide();
 
 	buscarBalanceDiario();
 
     $('#form-bucar_fecha_balance').validate({
         submitHandler: function (form) {
           // cuando va bien
-          $('#buscando').show();
+          $('#div-spinner').show();
             var fechadesde = $('#fechadesde_').val();
             var fechahasta = $('#fechahasta_').val();
             var efectivo = $('#solo_efectivo').is(':checked') ? 1 : 0;
@@ -158,7 +158,7 @@ $(document).ready(function(){
                   ]).draw();
               });
 
-              $('#buscando').hide();
+              $('#div-spinner').hide();
              }
             }); 
            

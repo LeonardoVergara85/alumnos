@@ -69,8 +69,6 @@ $(document).on("click", ".asociarmodal", function () {
 
     getAlumnosSA();
 
-    $('#modalAsociar').modal('show');
-
 });
 
 $(document).on("change", "#cursos", function () {
@@ -89,11 +87,13 @@ $(document).on("change", "#cursos", function () {
 
  $(document).on("click", "#asociarAlumno", function () {
   
- 	  var curso = $('#cursos').val();
+     var curso = $('#cursos').val();
+     
     curso = curso.split('-');
     curso_id = curso[0];
     meses = curso[1];
     idimporte = curso[2];
+    anioc = curso[3];
 
     var arreglo = []; // declaramos el arreglo
      // pusheamos dentro del arreglo los alumnos seleccionados o checkeados
@@ -111,6 +111,7 @@ $(document).on("change", "#cursos", function () {
               peticion : 'asociar_alumnos',
                idcurso : curso_id,
                  meses : meses,
+                 anio : anioc,
                 id_imp : idimporte,
                alumnos : arreglo
             },
@@ -156,7 +157,7 @@ function getCursos(){
 
           $.each( cursos, function( key, value ) {
 
-            $('#cursos').append("<option value='"+value.id+"-"+value.meses+"-"+value.id_importe+"'>"+value.descripcion+"</option>");
+            $('#cursos').append("<option value='"+value.id+"-"+value.meses+"-"+value.id_importe+"-"+value.anio+"'><b>"+value.descripcion+"</b> ("+value.anio+")</option>");
 
            
       });
@@ -167,11 +168,17 @@ function getCursos(){
 
 function getAlumnosSA(){
 
-  Tabla.clear().draw();
-  // Tabla.DataTable();
+  $('#div-spinner').show();
+  
 
+  Tabla.clear();
+  // Tabla.DataTable();
+ 
+  
   var idcurso = $('#cursos').val();
 
+  
+  
 	$.ajax({
         type: "POST",
         url: "../../../app/routes.php",
@@ -184,28 +191,30 @@ function getAlumnosSA(){
 
           var alus = resp;
 
-          
+         
 
           $.each( alus, function( key, value ) {
 
             var check = "<input type='checkbox' class='alumnosasoc' value='"+value.id+"' id='alumnosasoc' name='alumnosasoc'>";
-             if(value.alu_activo == 'S'){
-
+          
               Tabla.row.add( [
                 check,
                 value.dni,
                 value.apellido+', '+value.nombre,
                 ]).draw();
-                
-             } 
-             
+                 
+        });
 
-          	// $('#alumnos').append("<option value='"+value.id+"'>"+value.apellido+', '+value.nombre+"</option>");
-            
-      });
+        $('#div-spinner').hide();
+        $('#modalAsociar').modal('show');
+      }
+  }); 
 
-        }
-      }); 
+  //$('#div-spinner').hide();
+
+  //$('#modalAsociar').modal('show');
+  
+
 }
 
 function getAlumnosCurso(id){

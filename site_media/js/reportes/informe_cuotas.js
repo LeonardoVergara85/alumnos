@@ -37,7 +37,7 @@
 
 $(document).ready(function(){
 
-    $('#buscando').hide();
+    $('#div-spinner').hide();
 
 		$.validator.addMethod("valueNotEquals", function(value, element, arg){
 			return arg !== value;
@@ -46,7 +46,7 @@ $(document).ready(function(){
 	 $('#form-bucar_cuotas').validate({
         submitHandler: function (form) {
           // cuando va bien
-            $('#buscando').show();
+            $('#div-spinner').show();
 
             var desde = $('#fechadesde_cuota').val();
             var hasta = $('#fechahasta_cuota').val();
@@ -94,7 +94,7 @@ $(document).ready(function(){
 
         		});
 
-                $('#buscando').hide();
+                $('#div-spinner').hide();
 
 
               }

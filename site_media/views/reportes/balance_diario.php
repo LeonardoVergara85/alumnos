@@ -32,7 +32,10 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
       <div class="container_contenido col-sm-10">
        
           <div class="card">
-            <div class="card-header">Balance Diario <p class="text_right" id="buscando" style="margin-left:400px;margin-top:-27px;">Buscando ...</p></div>
+            <div class="card-header">Balance Diario</div>
+            <div id="div-spinner" style="display:none; position: absolute;margin-left: 450px;margin-top: 0px;background-color: darkseagreen;padding: 10px;/*! margin: 0; */margin-top: 150px;z-index: 100;">
+              <p class="primary">Buscando <i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></p>
+            </div>
             <div class="card-body">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">

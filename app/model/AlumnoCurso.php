@@ -199,10 +199,10 @@ include_once 'Cuotas.php';
 
  			$id = $this->_id_curso;
 
- 			$sql = "SELECT * FROM alumnos_vw t1
+ 			$sql = "SELECT id,dni,apellido,nombre,alu_activo FROM alumnos_vw t1
                     WHERE NOT EXISTS (SELECT t2.id_alumno
                     FROM alumno_curso_vw t2
-                    WHERE t2.id_alumno = t1.id AND t2.id_curso = ? AND t2.anio=t2.anio_curso)";
+                    WHERE t2.id_alumno = t1.id AND t2.id_curso = ? AND t2.anio=t2.anio_curso) AND alu_activo = 'S'";
 
 			$this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
 

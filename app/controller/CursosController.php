@@ -242,6 +242,30 @@ Class CursosController extends Cursos{
 		}
 
 	}
+	
+	public function showSetCuotas(){
+
+		try {
+			
+			$cursos = $this->CuotaModel->getSetCuotas();
+
+			$lista = array();
+
+			foreach ($cursos as $curso) {
+
+				array_push($lista, ['id' => $curso['id'],'mes' => $curso['mes_inicio'],'dia' => $curso['dia_vence'],'fecha' => $curso['fecha']]);
+
+			}
+
+			echo json_encode($lista);
+
+		} catch (Exception $e) {
+			
+			print_r($e);
+
+		}
+
+	}
 
 	public function showCurso(){
 

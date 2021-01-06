@@ -35,8 +35,8 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
               Alumnos
             </div>
 
-            <div id="div-spinner" style="display:none; position: absolute;margin-left: 500px;margin-top: 60px;">
-              <p style="z-index:100%;" class="primary">buscando <i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></p>
+            <div id="div-spinner" style="display:none; position: absolute;margin-left: 450px;margin-top: 0px;background-color: darkseagreen;padding: 10px;/*! margin: 0; */margin-top: 150px;z-index: 100;">
+              <p class="primary">Cargando <i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></p>
             </div>
             
             <div class="card-body">

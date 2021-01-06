@@ -29,28 +29,31 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
       <div class="container_menu col-sm-2">
         <?php include_once '../menu/menu_izquierdo.php'; ?>
       </div> 
-
+      
       <div class="container_contenido col-sm-10">
           <div class="card">
             <div class="card-header">Cursos - Alumnos</div>
+            <div id="div-spinner" style="display:none; position: absolute;margin-left: 450px;margin-top: 0px;background-color: darkseagreen;padding: 10px;/*! margin: 0; */margin-top: 150px;z-index: 100;">
+              <p class="primary">buscando <i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></p>
+            </div>
             <div class="card-body">
+            
               <form action="">
+              
                 <div class="form-row">
-                 <div class="col-md-7 mb-3">
+                 <div class="col-md-7">
                   <label>Cursos</label>
                     <select class="form-control" name="cursos" id="cursos">
                       <option value="0">Seleccionar..</option>}
                       option
                     </select>
                 </div>
-                <div class="col-md-5 mb-3">
-                  <button class="btn btn-primary asociarmodal" type="button" style="margin-top: 30px;" name="asociar" id="asociar" disabled=""><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar alumno</button>
-                  <!-- <label>Alumnos</label>
-                  <select class="form-control" name="alumnos" id="alumnos">
-                      
-                  </select> -->
-                </div>
               </div>
+              <div class="form-row">  
+                <div class="col-md-5">
+                    <button class="btn btn-primary asociarmodal" type="button" style="margin-top: 30px;" name="asociar" id="asociar" disabled=""><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar alumno</button>
+                  </div>
+              </div>   
               <br>
               <div class="form-row">
                 <div class="col-md-12 mb-2">

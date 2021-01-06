@@ -113,10 +113,23 @@ Class AlumnoCursoController extends AlumnoCurso{
 
 			 $this->AlumnoCursoModel->_id_curso = $_POST['idcurso'];
 
-			 $lista = array();
+			 $setcuotas = $this->CuotasModel->getSetCuotas();
+			
+			 $mesSet = '';	
+			 $diaSet = '';	
 
-			 $lista = $_POST['alumnos'];		
+			 foreach ($setcuotas as $set) {
+				$mesSet = $set['mes_inicio'];
+				$diaSet = $set['dia_vence'];
+			}
+
+			 $mesSet = ($mesSet-1);
+			 $lista = array(); // declaramos un arreglo
+
+			 $lista = $_POST['alumnos']; // ponemos los alumnos dentro del arreglo
+			 		
 			 $mesescurso = $_POST['meses'];
+			 $anio = $_POST['anio'];
 			 $id_importe = $_POST['id_imp'];
 
 			///////////////////////////////////////////////////////////////
@@ -127,15 +140,23 @@ Class AlumnoCursoController extends AlumnoCurso{
 				$id_alu_cur = $this->AlumnoCursoModel->guardar($conn);
 				
 				for($i = 1; $i <= $mesescurso; $i++){
-					$mes = 2+$i;
+
+					$mes = $mesSet+$i;
+					//verificamos que no se pase del mes de diciembre
+					if($mes <= 12){
+
 					$this->CuotasModel->_id_alumno_curso = $id_alu_cur[0];
 					$this->CuotasModel->_tipo_pago = 1;
 					// modificar año correspondiente y dia si es necesario
-					$this->CuotasModel->_fecha_vencimiento = '2020-'.$mes.'-15';
+					$this->CuotasModel->_fecha_vencimiento = $anio.'-'.$mes.'-'.$diaSet;
 					$this->CuotasModel->_observaciones = '';
 					$this->CuotasModel->_numero = $i;
 					$this->CuotasModel->_id_importe = $id_importe;
 					$this->CuotasModel->guardar($conn);
+
+					}
+					
+
 				}				
 				
 

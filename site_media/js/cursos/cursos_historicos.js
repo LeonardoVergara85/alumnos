@@ -3,8 +3,8 @@
         buttons: [
             'excel', 'pdf', 'print'
         ],
-  
-  "order": [[ 1, "desc" ]],
+    
+        "aaSorting": [],
 
  "language": {
         "url": "../../../public/libs/DataTables-1.10.12/extensions/table-spanish.json"

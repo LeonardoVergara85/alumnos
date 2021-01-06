@@ -125,7 +125,7 @@ $(document).ready(function(){
   $('#form-bucarfecha').validate({
         submitHandler: function (form) {
           // cuando va bien
-
+          $('#div-spinner').show();
             var fechadesde = $('#fechadesde').val();
             var fechahasta = $('#fechahasta').val();
             
@@ -162,10 +162,10 @@ $(document).ready(function(){
             	]).draw();
         });
 
+        $('#div-spinner').hide();
 
-
-              }
-            }); 
+        }
+      }); 
            
         },
         rules: {
@@ -206,6 +206,7 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
   $('#form-bucartipo').validate({
         submitHandler: function (form) {
           // cuando va bien
+          $('#div-spinner').show();
 
             var fechadesde = $('#fechadesde_tipo').val();
             var fechahasta = $('#fechahasta_tipo').val();
@@ -244,7 +245,7 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
               ]).draw();
         });
 
-
+        $('#div-spinner').hide();
 
             }
           }); 

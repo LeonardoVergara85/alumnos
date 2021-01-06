@@ -28,9 +28,14 @@
                   <li><a href="../cursos">Registrar curso </a></li>
                   <!-- <li><a href="../cursos/cursos_ver.php">Ver cursos </a><span class="jquery-accordion-menu-label">10 </span></li> -->
                   <li><a href="../cursos/cursos_ver.php">Ver cursos </a></li>
-                  <li><a href="../cursos/cursos_ver_alumnos.php">Ver alumnos </a></li>
-                  <li><a href="../cursos/cursos_historico.php">Precio histórico</a></li>
-                  <li><a href="../cursos/asociar_alumnos.php">Inscribir alumnos</a></li>
+                  <li><a href="../cursos/cursos_ver_alumnos.php">Ver alumnos de cursos</a></li>
+                  <li><a href="../cursos/cursos_historico.php">Precios históricos</a></li>
+                  <li><a href="../cursos/asociar_alumnos.php"><i class="fas fa-user-plus"></i>Inscribir alumnos</a></li>
+                </ul>
+              </li>
+              <li><a href="#"><i class="fas fa-cog"></i>Cuotas </a>
+                <ul class="submenu">
+                  <li><a href="../cuotas">Configurar Cuotas </a></li>
                 </ul>
               </li>
               <li><a href="#"><i class="fas fa-cash-register"></i>Gastos </a>

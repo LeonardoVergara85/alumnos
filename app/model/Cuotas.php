@@ -359,7 +359,30 @@
 
  		}
 
- 	}
+	 }
+	 
+
+	 public function getSetCuotas(){
+
+		try {	
+			
+			$sql = " SELECT id,mes_inicio,dia_vence,date_format(fecha,'%d/%m/%Y') AS fecha FROM cuotas_set WHERE activo = 'S' ";
+
+		   $this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
+			
+		   $filas = $this->DB->Execute($sql);
+
+		   return $filas;
+
+
+		} catch (Exception $e) {
+			
+			print_r('MODEL: ' . $e);
+
+		}
+
+	}
+
 
 
  }

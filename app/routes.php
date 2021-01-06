@@ -144,6 +144,12 @@ class routes
 				new CursosController('show');
 
 				break;
+			
+			case 'ver_set_cuotas':
+
+			new CursosController('showSetCuotas');
+
+			break;
 
 			case 'ver_curso':
 
