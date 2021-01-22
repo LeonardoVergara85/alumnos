@@ -20,6 +20,7 @@ class Auth
 	 protected $_id;
  	 protected $_username;
  	 protected $_password;
+ 	 protected $_token;
 	
 	function __construct()
 	{
@@ -87,6 +88,52 @@ class Auth
 
  	}
 
+	 function SaveApiToken(){
+
+		try {
+
+		    $token = $this->_token;
+		    $idu = $this->_id;
+
+		    $sql = " UPDATE usuarios SET api_token = ?, fecha_mod = NOW() WHERE usuarios.id = ?";	
+
+		    $this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
+			
+		    $usuario = $this->DB->Execute($sql,array($token,$idu));
+
+		   
+	   } catch (Exception $e) {
+
+		   echo 'inApiToken';
+		   
+		   print_r($e);
+
+	   }
+
+	 }
+	 
+	 function DeleteApiToken(){
+
+		try {
+			
+		    $idu = $this->_id;
+
+		    $sql = " UPDATE usuarios SET api_token = NULL, fecha_mod = NOW() WHERE usuarios.id = ?";	
+
+		    $this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
+			
+		    $usuario = $this->DB->Execute($sql,array($idu));
+
+		   
+	   } catch (Exception $e) {
+
+		   echo 'DeleteApiToken';
+		   
+		   print_r($e);
+
+	   }
+
+ 	}
 
  	// function getFuncionesDePerfil(){
 

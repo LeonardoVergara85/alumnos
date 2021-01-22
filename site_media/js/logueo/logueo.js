@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  
+  //pruebaBackend();
 
   document.getElementById('formulario_acceso').setAttribute( 'autocomplete', 'off' );   
 
@@ -106,6 +108,25 @@ function logueo(){
 			});
 
 			
+
+		}
+
+  	});
+}
+
+function pruebaBackend(){
+
+  $.ajax({
+
+		type: "GET",
+		url: "http://localhost/sistema/public/categorias",
+		dataType: 'json',
+		data: {	
+		},
+		success: function (resp) {
+     
+     // console.log(resp[0].nombre);
+      alert(resp[0].nombre);
 
 		}
 

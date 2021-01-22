@@ -151,7 +151,7 @@
 
  	}
 
- 	public function pagar($conn){
+ 	public function pagarCuota($conn){
 
  		try {
 

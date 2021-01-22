@@ -115,7 +115,7 @@ include_once 'Personas.php';
 
 	 }
 	 
-	 public function eliminar($conn){
+	 public function eliminarAlumno($conn){
 
 		try {
 

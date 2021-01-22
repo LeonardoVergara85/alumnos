@@ -10,7 +10,7 @@ class Conexion{
     function __construct() {
         try {
 
-            $this->db = NewADOConnection('mysql');
+            $this->db = NewADOConnection('mysqli');
             $this->db->Connect("localhost", "root", "", "alumnos");
             
             if ( !isset($_SESSION) ) {

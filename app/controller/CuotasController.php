@@ -80,7 +80,7 @@ Class CuotasController extends Cuotas{
 				$this->CuotasModel->_interes = $_POST['int'];
 				$this->CuotasModel->_tipo_pago = $_POST['tipopago'];
 
-				$now = $this->CuotasModel->pagar($conn);
+				$now = $this->CuotasModel->pagarCuota($conn);
 
 
 			 $conn->db->completeTrans();

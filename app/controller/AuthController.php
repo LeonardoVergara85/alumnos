@@ -34,18 +34,28 @@ class AuthController extends Auth{
 					$hashBase = $rdo[0]['pass'];
 
                     // verificamos el hash con la constraseña ingresada
-                    $verifica = password_verify($_POST['pass'], $hashBase);
-					if($verifica){
-					/*
-					* Guardar en SESSION
-					*/
-					$this->sett_var('user_id', $rdo[0]['id']);
-					$this->sett_var('user', $rdo[0]['username']);
-					$this->sett_var('user_name', $rdo[0]['nombre']);
-					$this->sett_var('user_ape', $rdo[0]['apellido']);
-					$this->sett_var('dni', $rdo[0]['dni']);
+					$verifica = password_verify($_POST['pass'], $hashBase);
 					
-					echo 'ok';
+					if($verifica){
+
+						$pass = 'skills123456';    
+						$passHash = password_hash($pass, PASSWORD_BCRYPT);
+
+						$this->AuthModel->_token = $passHash;
+						$this->AuthModel->_id = $rdo[0]['id'];
+						$this->AuthModel->SaveApiToken();
+
+						/*
+						* Guardar en SESSION
+						*/
+						$this->sett_var('user_id', $rdo[0]['id']);
+						$this->sett_var('user', $rdo[0]['username']);
+						$this->sett_var('user_name', $rdo[0]['nombre']);
+						$this->sett_var('user_ape', $rdo[0]['apellido']);
+						$this->sett_var('dni', $rdo[0]['dni']);
+						$this->sett_var('api_token', $passHash);
+						
+						echo 'ok';
 
 					}else{
 						
@@ -75,6 +85,10 @@ class AuthController extends Auth{
 
 
 	function logout(){
+
+
+		$this->AuthModel->_id = $_SESSION['user_id'];
+		$rdo = $this->AuthModel->DeleteApiToken();
 
 		session_destroy();
 

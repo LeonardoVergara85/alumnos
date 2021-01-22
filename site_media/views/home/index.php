@@ -36,6 +36,7 @@
             //$passHash = password_hash($pass, PASSWORD_BCRYPT);
             //echo 'hash '.$passHash;
             //var_dump(password_verify($pass2, $passHash));
+            //var_dump($_SESSION);
         ?>  
           <div class="row col-sm-12" style="margin-top:15px;">
           <div class="card-deck">
