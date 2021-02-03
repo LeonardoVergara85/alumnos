@@ -46,6 +46,7 @@ Class GastosController extends Gastos{
 				$this->GastosModel->_importe = $_POST['importe'];
 				$this->GastosModel->_observaciones = $_POST['obs'];
 				$this->GastosModel->_pagado_por = $_POST['pagado'];
+				$this->GastosModel->_forma_pago = $_POST['formapago'];
 				$this->GastosModel->_id_usuario = 1;
 	
 				$idPer = $this->GastosModel->guardar($conn);
@@ -75,6 +76,7 @@ Class GastosController extends Gastos{
 				$this->GastosModel->_importe = $_POST['importe'];
 				$this->GastosModel->_observaciones = $_POST['obs'];
 				$this->GastosModel->_pagado_por = $_POST['pagado'];
+				$this->GastosModel->_forma_pago = $_POST['formapago'];
 	
 				$idPer = $this->GastosModel->modificar($conn);
 
@@ -102,7 +104,7 @@ Class GastosController extends Gastos{
 
 				array_push($lista, ['ID' => $gasto['ID'],'DESCRIPCION' => $gasto['DESCRIPCION'],'IMPORTE' => number_format($gasto['IMPORTE'],2,',','.'),'FECHA' => $gasto['FECHAGASTO_']
 				,'OBS' => $gasto['OBSERVACIONES']
-				,'tipo_pago' => $gasto['tipo_de_pago']]);
+				,'FORMA_PAGO' => $gasto['FORMA_PAGO'],'PAGADO_POR' => $gasto['PAGADO_POR']]);
 
 			}
 
@@ -129,7 +131,7 @@ Class GastosController extends Gastos{
 
 			foreach ($gastosh as $gasto) {
 
-				array_push($lista, ['ID' => $gasto['ID'],'DESCRIPCION' => $gasto['DESCRIPCION'],'IMPORTE' => number_format($gasto['IMPORTE'],2,',','.'),'FECHA' => $gasto['FECHAGASTO_'],'OBS' => $gasto['OBSERVACIONES'],'tipo_pago' => $gasto['tipo_de_pago']]);
+				array_push($lista, ['ID' => $gasto['ID'],'DESCRIPCION' => $gasto['DESCRIPCION'],'IMPORTE' => number_format($gasto['IMPORTE'],2,',','.'),'FECHA' => $gasto['FECHAGASTO_'],'OBS' => $gasto['OBSERVACIONES'],'PAGADO_POR' => $gasto['PAGADO_POR'],'FORMA_PAGO' => $gasto['FORMA_PAGO']]);
 
 			}
 
@@ -157,7 +159,7 @@ Class GastosController extends Gastos{
 
 			foreach ($gastostipo as $gasto) {
 
-				array_push($lista, ['ID' => $gasto['ID'],'DESCRIPCION' => $gasto['DESCRIPCION'],'IMPORTE' => number_format($gasto['IMPORTE'],2,',','.'),'FECHA' => $gasto['FECHAGASTO_'],'OBS' => $gasto['OBSERVACIONES'],'tipo_pago' => $gasto['tipo_de_pago']]);
+				array_push($lista, ['ID' => $gasto['ID'],'DESCRIPCION' => $gasto['DESCRIPCION'],'IMPORTE' => number_format($gasto['IMPORTE'],2,',','.'),'FECHA' => $gasto['FECHAGASTO_'],'OBS' => $gasto['OBSERVACIONES'],'PAGADO_POR' => $gasto['PAGADO_POR'],'FORMA_PAGO' => $gasto['FORMA_PAGO']]);
 
 			}
 
@@ -183,7 +185,7 @@ Class GastosController extends Gastos{
 
 			foreach ($gastosh as $gasto) {
 
-				array_push($lista, ['ID' => $gasto['ID'],'ID_TIPO_GASTO' => $gasto['ID_TIPO_GASTO'],'DESCRIPCION' => $gasto['DESCRIPCION'],'IMPORTE' => $gasto['IMPORTE'],'FECHA' => $gasto['FECHAGASTO_'],'OBS' => $gasto['OBSERVACIONES'],'PAGOPOR' => $gasto['PAGADO_POR']]);
+				array_push($lista, ['ID' => $gasto['ID'],'ID_TIPO_GASTO' => $gasto['ID_TIPO_GASTO'],'DESCRIPCION' => $gasto['DESCRIPCION'],'IMPORTE' => $gasto['IMPORTE'],'FECHA' => $gasto['FECHAGASTO_'],'OBS' => $gasto['OBSERVACIONES'],'PAGOPOR' => $gasto['PAGADO_POR'],'FORMA_PAGO_ID' => $gasto['FORMA_PAGO_ID']]);
 
 			}
 

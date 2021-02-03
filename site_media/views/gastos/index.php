@@ -48,13 +48,21 @@
               </div>
             </div>
             <div class="form-row">
-              <div class="col-md-10 mb-2">
+              <div class="col-md-8 mb-2">
                 <label>Observaciones</label>
                 <input class="form-control" type="text" name="observaciones" id="observaciones">
               </div>
               <div class="col-md-2 mb-2">
+                <label>Forma de pago</label>
+                <select class="form-control" name="formapago" id="formapago">
+                </select>
+              </div>
+              <div class="col-md-2 mb-2">
                 <label>Pagado por</label>
                 <select class="form-control" name="pagadopor" id="pagadopor">
+                  <option value="1">Caja chica</option>
+                  <option value="2">Graciela</option>
+                  <option value="3">Maria Emma</option>
                 </select>
               </div>
             </div>

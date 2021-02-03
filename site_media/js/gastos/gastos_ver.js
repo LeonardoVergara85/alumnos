@@ -15,7 +15,7 @@
        "width": "30%",
  },{
       "targets": 1, // your case first column
-      "className": "text-right",
+      "className": "text-center",
        "width": "10%"
  },{
       "targets": 2, // your case first column
@@ -23,18 +23,21 @@
        "width": "10%"
  },{
       "targets": 3, // your case first column
-      "className": "text-center",
+      "className": "text-left",
        "width": "10%"
  },{
       "targets": 4, // your case first column
       "className": "text-left",
-       "width": "35%"
- },
- {
+       "width": "10%"
+ },{
   "targets": 5, // your case first column
+  "className": "text-left",
+   "width": "25%"
+},{
+  "targets": 6, // your case first column
   "className": "text-center",
    "width": "5%"
-},
+}
  ],
  });
 
@@ -50,32 +53,35 @@
     },
 
       'columnDefs': [
-  {
-      "targets": 0, // your case first column
+        {
+          "targets": 0, // your case first column
+          "className": "text-left",
+           "width": "30%",
+     },{
+          "targets": 1, // your case first column
+          "className": "text-center",
+           "width": "10%"
+     },{
+          "targets": 2, // your case first column
+          "className": "text-center",
+           "width": "10%"
+     },{
+          "targets": 3, // your case first column
+          "className": "text-left",
+           "width": "10%"
+     },{
+          "targets": 4, // your case first column
+          "className": "text-left",
+           "width": "10%"
+     },{
+      "targets": 5, // your case first column
       "className": "text-left",
-       "width": "30%",
- },{
-      "targets": 1, // your case first column
-      "className": "text-right",
-       "width": "10%"
- },{
-      "targets": 2, // your case first column
+       "width": "25%"
+    },{
+      "targets": 6, // your case first column
       "className": "text-center",
-       "width": "10%"
- },{
-      "targets": 3, // your case first column
-      "className": "text-center",
-       "width": "10%"
- },{
-      "targets": 4, // your case first column
-      "className": "text-left",
-       "width": "35%"
- },
- {
-  "targets": 5, // your case first column
-  "className": "text-center",
-   "width": "5%"
-}
+       "width": "5%"
+    }
  ],
  });
 
@@ -91,27 +97,31 @@
     },
 
       'columnDefs': [
-  {
-      "targets": 0, // your case first column
+        {
+          "targets": 0, // your case first column
+          "className": "text-left",
+           "width": "20%",
+     },{
+          "targets": 1, // your case first column
+          "className": "text-center",
+           "width": "5%"
+     },{
+          "targets": 2, // your case first column
+          "className": "text-center",
+           "width": "5%"
+     },{
+          "targets": 3, // your case first column
+          "className": "text-left",
+           "width": "20%"
+     },{
+          "targets": 4, // your case first column
+          "className": "text-left",
+           "width": "20%"
+     },{
+      "targets": 5, // your case first column
       "className": "text-left",
-       "width": "30%",
- },{
-      "targets": 1, // your case first column
-      "className": "text-right",
-       "width": "10%"
- },{
-      "targets": 2, // your case first column
-      "className": "text-center",
-       "width": "10%"
- },{
-      "targets": 3, // your case first column
-      "className": "text-left",
-       "width": "10%"
- },{
-  "targets": 4, // your case first column
-  "className": "text-left",
-   "width": "30%"
-},
+       "width": "30%"
+    }
  ],
  });
 
@@ -149,6 +159,15 @@ $(document).ready(function(){
 
               	$.each( gastos, function( key, value ) {
 
+                  var pagadopor = '';
+                  if(value.PAGADO_POR == 1){
+                    pagadopor = 'Caja Chica';
+                  }else if(value.PAGADO_POR == 2){
+                    pagadopor = 'Graciela';
+                  }else{
+                    pagadopor = 'Maria Emma';
+                  }
+
               		var boton = "<button class='btn btn-info btn-sm botonesdetailgastofecha' id='"+value.ID+"' title='detalle del gasto'><i class='fa fa-info-circle' aria-hidden='true'></i></button>"; 
             // var botonx = "<button class='btn btn-danger btn-sm botoneseliminarcurso' id='"+value.id+"' title='eliminar curso'><i class='fa fa-trash' aria-hidden='true'></i></button>"; 
 
@@ -156,7 +175,8 @@ $(document).ready(function(){
             	value.DESCRIPCION,
             	value.IMPORTE,
               value.FECHA,
-              value.tipo_pago,
+              value.FORMA_PAGO,
+              pagadopor,
             	value.OBS,
             	boton
             	]).draw();
@@ -233,6 +253,15 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 
               $.each( gastos, function( key, value ) {
 
+                var pagadopor = '';
+                  if(value.PAGADO_POR == 1){
+                    pagadopor = 'Caja Chica';
+                  }else if(value.PAGADO_POR == 2){
+                    pagadopor = 'Graciela';
+                  }else{
+                    pagadopor = 'Maria Emma';
+                  }
+
               // var boton = "<button class='btn btn-info btn-sm botonesdetailgastofecha' id='"+value.ID+"' title='detalle del gasto'><i class='fa fa-info-circle' aria-hidden='true'></i></button>"; 
               // var botonx = "<button class='btn btn-danger btn-sm botoneseliminarcurso' id='"+value.id+"' title='eliminar curso'><i class='fa fa-trash' aria-hidden='true'></i></button>"; 
 
@@ -240,7 +269,8 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
               value.DESCRIPCION,
               value.IMPORTE,
               value.FECHA,
-              value.tipo_pago,
+              value.FORMA_PAGO,
+              pagadopor,
               value.OBS
               ]).draw();
         });
@@ -301,6 +331,7 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
             var importe = $('#importe_').val();
             var observaciones = $('#observaciones_').val();
             var pagadopor = $('#pagadopor_').val();
+            var formap = $('#formapago_').val();
             var idg = $('#modificargasto').val();
             
 
@@ -317,7 +348,8 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
                  tipog : tipo_gasto,
                    importe : importe,
                      obs : observaciones,
-                     pagado : pagadopor
+                     pagado : pagadopor,
+                     formapago : formap
 
               },
               success: function (resp) {
@@ -405,6 +437,7 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
                 $('#importe_').val(value.IMPORTE);
                 $('#observaciones_').val(value.OBS);
                 $('#pagadopor_').val(value.PAGOPOR);
+                $('#formapago_').val(value.FORMA_PAGO_ID);
 
                 $('#modificargasto').val(value.ID);
               });
@@ -437,6 +470,7 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
                 $('#importe_').val(value.IMPORTE);
                 $('#observaciones_').val(value.OBS);
                 $('#pagadopor_').val(value.PAGOPOR);
+                $('#formapago_').val(value.FORMA_PAGO_ID);
 
                 $('#modificargasto').val(value.ID);
               });
@@ -466,6 +500,14 @@ function verGastosHoy(){
 
             var imp = value.IMPORTE.replace('.','');
             var imp = imp.replace(',','.');
+            var pagadopor = '';
+            if(value.PAGADO_POR == 1){
+              pagadopor = 'Caja Chica';
+            }else if(value.PAGADO_POR == 2){
+              pagadopor = 'Graciela';
+            }else{
+              pagadopor = 'Maria Emma';
+            }
 
             var boton = "<button class='btn btn-info btn-sm botonesdetailgasto' id='"+value.ID+"' title='detalle del gasto'><i class='fa fa-info-circle' aria-hidden='true'></i></button>"; 
             // var botonx = "<button class='btn btn-danger btn-sm botoneseliminarcurso' id='"+value.id+"' title='eliminar curso'><i class='fa fa-trash' aria-hidden='true'></i></button>"; 
@@ -474,7 +516,8 @@ function verGastosHoy(){
                 value.DESCRIPCION,
                 value.IMPORTE,
                 value.FECHA,
-                value.tipo_pago,
+                value.FORMA_PAGO,
+                pagadopor,
                 value.OBS,
                 boton
                 ]).draw();
@@ -528,7 +571,7 @@ function buscarTipoPagos(){
 
         $.each( tipop, function( key, value ) {
 
-         $('#pagadopor_').append("<option value='"+value.id+"'>"+value.descripcion+"</option>"); 
+         $('#formapago_').append("<option value='"+value.id+"'>"+value.descripcion+"</option>"); 
          
     });
 

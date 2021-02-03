@@ -283,9 +283,7 @@
 
  			$sql = "SELECT * FROM balance_diario_vw 
 					WHERE fech BETWEEN CAST(? AS DATE) AND CAST(? AS DATE)
-					AND pagadopor <> 'débito'
-					AND pagadopor <> 'transferencia bancaria'
-					AND pagadopor <> 'otro'
+					AND (pagadopor = 'Contado' OR forma_pago = 'Contado')
 					ORDER BY fech";
 
 			$this->DB->SetFetchMode(ADODB_FETCH_ASSOC);

@@ -81,7 +81,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
                     <button class="btn btn-info btn-sm" type="submit" style="margin-top: 35px;"><i class="fas fa-search"></i> Buscar</button>
                   </div>
                   <div class="col-md-2 mb-2">
-                    Solo efectivo <input type="checkbox" class="form-control" id="solo_efectivo" name="solo_efectivo">
+                    Solo Contado <input type="checkbox" class="form-control" id="solo_efectivo" name="solo_efectivo">
                   </div>
                 </div>
               </form>

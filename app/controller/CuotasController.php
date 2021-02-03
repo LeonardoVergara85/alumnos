@@ -197,7 +197,7 @@ Class CuotasController extends Cuotas{
 					$debe = number_format($value['debe'],2,',','.');
 				}
 
-				array_push($lista, ['fecha' => $value['fecha'],'denominacion' => $value['denominacion'],'detalle' => $value['detalle'],'debe' => $debe,'haber' => $haber,'saldo' => $value['saldo'],'pagadopor' => $value['pagadopor']]);
+				array_push($lista, ['fecha' => $value['fecha'],'denominacion' => $value['denominacion'],'detalle' => $value['detalle'],'debe' => $debe,'haber' => $haber,'saldo' => $value['saldo'],'pagadopor' => $value['pagadopor'],'forma_pago' => $value['forma_pago']]);
 
 			}
 
@@ -245,7 +245,7 @@ Class CuotasController extends Cuotas{
 					$debe = number_format($value['debe'],2,',','.');
 				}
 
-				array_push($lista, ['fecha' => $value['fecha'],'denominacion' => $value['denominacion'],'detalle' => $value['detalle'],'debe' => $debe,'haber' => $haber,'saldo' => $value['saldo'],'pagadopor' => $value['pagadopor']]);
+				array_push($lista, ['fecha' => $value['fecha'],'denominacion' => $value['denominacion'],'detalle' => $value['detalle'],'debe' => $debe,'haber' => $haber,'saldo' => $value['saldo'],'pagadopor' => $value['pagadopor'],'forma_pago' => $value['forma_pago']]);
 
 			}
 

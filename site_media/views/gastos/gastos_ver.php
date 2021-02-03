@@ -60,6 +60,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
                     <th>Importe</th>
                     <th>Fecha</th>
                     <th>Tipo pago</th>
+                    <th>Pagado</th>
                     <th>Observaciones</th>
                     <th></th>
                   </tr>
@@ -92,6 +93,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
                     <th>Importe</th>
                     <th>Fecha</th>
                     <th>Tipo pago</th>
+                    <th>Pagado por</th>
                     <th>Observaciones</th>
                     <th></th>
                   </tr>
@@ -130,6 +132,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
                     <th>Importe</th>
                     <th>Fecha</th>
                     <th>Tipo pago</th>
+                    <th>Pagado por</th>
                     <th>Observaciones</th>
                   </tr>
                 </thead>
@@ -180,9 +183,17 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
               </div>
             </div>
             <div class="form-row">
-            <div class="col-md-8 mb-2">
+            <div class="col-md-6 mb-2">
+                <label>Forma de pago</label>
+                <select class="form-control" name="formapago_" id="formapago_">
+                </select>
+            </div>
+            <div class="col-md-6 mb-2">
                 <label>Pagado por</label>
                 <select class="form-control" name="pagadopor_" id="pagadopor_">
+                  <option value="1">Caja chica</option>
+                  <option value="2">Graciela</option>
+                  <option value="3">Maria Emma</option>
                 </select>
             </div>
           </div>

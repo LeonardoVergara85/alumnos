@@ -1,8 +1,36 @@
+var f = new Date(); // fecha para mostrar en los archivos de export 
  var Tabla = $('#table_balance_diario').DataTable( {
   dom: 'Bfrtip',
         buttons: [
             'excel', 'pdf', 'print'
         ],
+        buttons: [
+          {
+              
+              extend:    'pdfHtml5',
+              text:      '<i class="fa fa-file-pdf"></i>',
+              titleAttr: 'PDF',
+              message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+              download: 'open',
+              title: 'Balance Diario - Skills'
+          },
+          {
+              extend: 'excel',
+              text:'<i class="far fa-file-excel"></i>',
+              titleAttr: 'Excel',
+              message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+              messageBottom: null,
+              title: 'Balance Diario - Skills' 
+          },
+          {
+            extend: 'print',
+            text:      '<i class="fa fa-print" ></i>',
+            titleAttr: 'Imprimir',
+            message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+            messageBottom: null,
+            title: 'Balance Diario - Skills'
+        }
+      ],
 
  "language": {
         "url": "../../../public/libs/DataTables-1.10.12/extensions/table-spanish.json"
@@ -47,6 +75,33 @@
         buttons: [
             'excel', 'pdf', 'print'
         ],
+        buttons: [
+          {
+              
+              extend:    'pdfHtml5',
+              text:      '<i class="fa fa-file-pdf"></i>',
+              titleAttr: 'PDF',
+              message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+              download: 'open',
+              title: 'Balance por fecha - Skills'
+          },
+          {
+              extend: 'excel',
+              text:'<i class="far fa-file-excel"></i>',
+              titleAttr: 'Excel',
+              message: 'Fecha de generación ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+              messageBottom: null,
+              title: 'Balance por fecha - Skills'
+          },
+          {
+            extend: 'print',
+            text:      '<i class="fa fa-print" ></i>',
+            titleAttr: 'Imprimir',
+            message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+            messageBottom: null,
+            title: 'Balance por fecha - Skills'
+        }
+      ],
 
  "language": {
         "url": "../../../public/libs/DataTables-1.10.12/extensions/table-spanish.json"
@@ -143,6 +198,8 @@ $(document).ready(function(){
                 var pagadopor;
                 if(value.pagadopor == ''){
                   pagadopor = '-'
+                }else if((value.forma_pago != '')&&(value.forma_pago != null)){
+                  pagadopor = value.pagadopor+' | '+value.forma_pago;
                 }else{
                   pagadopor = value.pagadopor;
                 }
@@ -241,7 +298,7 @@ function buscarBalanceDiario(){
             if(value.pagadopor == ''){
               pagadopor = '-'
             }else{
-              pagadopor = value.pagadopor;
+              pagadopor = value.pagadopor+'|'+value.forma_pago;
             }
 
             Tabla.row.add( [

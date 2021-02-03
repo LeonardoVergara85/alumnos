@@ -21,6 +21,7 @@
  	 protected $_fecha;
  	 protected $_observaciones;
  	 protected $_pagado_por;
+ 	 protected $_forma_pago;
 
 
 	/***********************
@@ -78,12 +79,13 @@
  			$obs = $this->_observaciones;
  			$idusuario = $this->_id_usuario;
  			$pagadopor = $this->_pagado_por;
+ 			$formap = $this->_forma_pago;
  			// $email = $this->_email;
  			// $her = $this->_hermanos;
 
- 			$sql = "INSERT INTO gastos VALUES (?, ?, ?, ?, NOW(), ?, ?)";
+ 			$sql = "INSERT INTO gastos VALUES (?, ?, ?, ?, NOW(), ?, ?, ?)";
 
-        	$conn->db->Execute($sql,array($id,$idtg,$idusuario,$importe,$obs,$pagadopor));
+        	$conn->db->Execute($sql,array($id,$idtg,$idusuario,$importe,$obs,$pagadopor,$formap));
 
 
  		} catch (Exception $e) {
@@ -103,11 +105,12 @@
  			$importe = $this->_importe;
  			$obs = $this->_observaciones;
  			$pagadopor = $this->_pagado_por;
+ 			$formap = $this->_forma_pago;
  
- 			$sql = "UPDATE gastos SET id_tipo_gasto = ?, importe= ?, observaciones= ?, pagado_por= ?
+ 			$sql = "UPDATE gastos SET id_tipo_gasto = ?, importe= ?, observaciones= ?, pagado_por= ?, forma_pago= ?
 					WHERE id = ?";
 
-        	$conn->db->Execute($sql,array($idtg,$importe,$obs,$pagadopor,$id));
+        	$conn->db->Execute($sql,array($idtg,$importe,$obs,$pagadopor,$formap,$id));
 
 
  		} catch (Exception $e) {

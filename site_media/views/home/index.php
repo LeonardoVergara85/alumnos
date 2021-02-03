@@ -37,6 +37,21 @@
             //echo 'hash '.$passHash;
             //var_dump(password_verify($pass2, $passHash));
             //var_dump($_SESSION);
+
+            // Maria Emma
+            //  $pass = 'Maria3mm4';     
+            //  $passHash = password_hash($pass, PASSWORD_BCRYPT);
+            //  echo 'hash '.$passHash;
+
+            // Graciela Marchetto
+            //  $pass = 'GraM4rch3tt0';     
+            //  $passHash = password_hash($pass, PASSWORD_BCRYPT);
+            //  echo 'hash '.$passHash;
+
+            // Zulema Alud
+            //  $pass = 'Zul34lud';     
+            //  $passHash = password_hash($pass, PASSWORD_BCRYPT);
+            //  echo 'hash '.$passHash;
         ?>  
           <div class="row col-sm-12" style="margin-top:15px;">
           <div class="card-deck">

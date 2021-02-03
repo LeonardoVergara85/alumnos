@@ -16,7 +16,8 @@ $(document).ready(function(){
             var importe = $('#importe').val();
             var observaciones = $('#observaciones').val();
             var pagadopor = $('#pagadopor').val();
-
+            var formap = $('#formapago').val();
+            
             var aux = importe.split('$');
             importe = aux[1];
 
@@ -37,7 +38,8 @@ $(document).ready(function(){
                  tipog : tipo_gasto,
                    importe : importe,
                      obs : observaciones,
-                     pagado : pagadopor
+                     pagado : pagadopor,
+                     formapago : formap
 
               },
               success: function (resp) {
@@ -152,7 +154,7 @@ function buscarTipoPagos(){
 
         $.each( tipop, function( key, value ) {
 
-         $('#pagadopor').append("<option value='"+value.id+"'>"+value.descripcion+"</option>"); 
+         $('#formapago').append("<option value='"+value.id+"'>"+value.descripcion+"</option>"); 
          
     });
 
