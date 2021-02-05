@@ -259,3 +259,18 @@ input[type=text]:placeholder,input[type=password]:placeholder {
 #icon {
   width:60%;
 }
+
+.btn-boton-ingreso{
+  background-color: #56baed;
+  width: inherit;
+  
+}
+.btn-boton-ingreso:hover{
+  background-color: #59aadc;
+  color: white; 
+  width: inherit;
+}
+
+.input-text-captcha{
+  width: 300px;
+}

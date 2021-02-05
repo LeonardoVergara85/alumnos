@@ -18,14 +18,19 @@
   "order": [[ 2, "asc" ]],
    dom: 'Bfrtip',
           buttons: [
-        {
-          extend: 'pdfHtml5',
-          title: 'Alumnos',
-          className: 'btn',
-          text: "Pdf",
-          pageSize: 'A4',
-          // orientation: 'landscape' 
-        }
+            {
+              extend: 'excel',
+              titleAttr: 'Excel',
+              message: 'Listado de Alumnos',
+              title: 'Alumnos - Skills' 
+          },
+          {
+            extend: 'pdfHtml5',
+            title: 'Alumnos - Skills',
+            text: "PDF",
+            pageSize: 'A4',
+          }
+        
         
     ],
 
@@ -685,7 +690,7 @@ function verAlumnos(){
             var botonera = boton+' '+boton2+' '+boton3;
            
 
-            var alumno_activo = 'Activo';
+            var alumno_activo = 'Activos';
             if(value.activo == 'N'){
               alumno_activo = 'Inactivo';
               botonera = boton4;

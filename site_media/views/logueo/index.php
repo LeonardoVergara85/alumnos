@@ -45,9 +45,19 @@
       <div class="col-md-12 mb-3">
         <input type="password" id="password" name="password" class="fadeIn third form-control" placeholder="contraseña" maxlength="20" style="height: 60px;">
       </div>
-      <input type="submit" class="fadeIn fourth" value="Ingresar" id="ingresarLogueo">
-    </form>
-
+      <div class="" style="">
+        <div class="">
+          <div class="mb-3">
+            <input class="jCaptcha fadeIn form-control input-text-captcha" id="inp_captcha" name="inp_captcha" type="text" placeholder="Ingrese el captcha" style="width: 300px;">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 mb-3 text-center">
+              <button type="submit" id="ingreso_captcha" class="btn btn-boton-ingreso">
+                <b>Ingresar</b>
+              </button>
+          </div>
+          </form>
     <!-- Remind Passowrd -->
     <div id="formFooter">
     Students Gestión

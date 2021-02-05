@@ -18,21 +18,21 @@ class PDF extends FPDF {
 
         global $nro_recibo;
 
-       // $this->SetMargins(20, 10);
+        $this->SetMargins(20, 10);
 
-        // $this->Image('../../../public/img/skills_logo_recibo.png',30,8,50);
+        $this->Image('../../../public/img/skills_logo_recibo.png',30,8,50);
 
-        //$this->Cell(10,5,utf8_decode(''),0,0,'C');
+        $this->Cell(10,5,utf8_decode(''),0,0,'C');
 
-        // $this->Image('../../../public/img/skills_logo_recibo.png',130,8,50);
+        $this->Image('../../../public/img/skills_logo_recibo.png',130,8,50);
 
-        //$this->SetMargins(40, 10);
+        $this->SetMargins(40, 10);
 
         // $this->Image('../../../public/img/skills_logo.png',10,8,50);
 
-      //  $this->SetMargins(10, 10);
+        $this->SetMargins(10, 10);
 
-      //  $this->Ln(18);
+        $this->Ln(18);
 
         $this->SetFont('Arial','I',8);
 
