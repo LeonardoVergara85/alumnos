@@ -745,8 +745,8 @@ function verAlumno(idalu){
             $('#gradoanio_').val(val.grado);
             $('#email_').val(val.email);
 
-            if(val.celular != null){
-              $('#div-wts').html("<a href='https://web.whatsapp.com/send?phone=54"+val.celular+"&amp;text=Se+le+recuerda+que+mañana+tiene+turno&amp;source&amp;data&amp;app_absent' target='_blank'><font color='green'><i class='fab fa-whatsapp'></i></font></a>");
+            if((val.celular != null)&&(val.celular != '')){
+              $('#div-wts').html("<a href='https://web.whatsapp.com/send?phone=54"+val.celular+"&amp;text=El+instituto+de+inglés+Skills,+informa+que&amp;source&amp;data&amp;app_absent' target='_blank'><font color='green'><i class='fab fa-whatsapp'></i></font></a>");
             }else{
               $('#div-wts').html("<a target='_blank'><font color='gray'><i class='fab fa-whatsapp' disabled></i></font></a>");
             }

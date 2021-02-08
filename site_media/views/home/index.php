@@ -52,6 +52,11 @@
             //  $pass = 'Zul34lud';     
             //  $passHash = password_hash($pass, PASSWORD_BCRYPT);
             //  echo 'hash '.$passHash;
+
+            // Miguel Escales
+            //  $pass = 'M1gu3l3sc';     
+            //  $passHash = password_hash($pass, PASSWORD_BCRYPT);
+            //  echo 'hash '.$passHash;
         ?>  
           <div class="row col-sm-12" style="margin-top:15px;">
           <div class="card-deck">
