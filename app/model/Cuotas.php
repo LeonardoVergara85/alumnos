@@ -257,11 +257,14 @@
  		try {	
 
 
- 			$sql = "SELECT * 
-					FROM balance_diario_vw 
+ 			// $sql = "SELECT * 
+			// 		FROM balance_diario_vw 
+			// 		WHERE fech BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) order by fech";
+			$sql = "SELECT b.fecha, b.fech, b.denominacion, b.detalle, b.debe, b.haber, b.saldo, b.pagadopor, b.forma_pago
+					FROM balance_diario_vw b
 					WHERE fech BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) order by fech";
 
-			$this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
+					$this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
  			
 			$filas = $this->DB->Execute($sql,array($desde,$hasta));
 
@@ -281,7 +284,7 @@
  		try {	
 
 
- 			$sql = "SELECT * FROM balance_diario_vw 
+ 			$sql = "SELECT b.fecha, b.fech, b.denominacion, b.detalle, b.debe, b.haber, b.saldo, b.pagadopor, b.forma_pago FROM balance_diario_vw b 
 					WHERE fech BETWEEN CAST(? AS DATE) AND CAST(? AS DATE)
 					AND (pagadopor = 'Efectivo' OR forma_pago = 'Efectivo')
 					ORDER BY fech";
@@ -308,7 +311,7 @@
  		try {	
 
 
- 			$sql = "SELECT * FROM balance_diario_vw WHERE fech = DATE_FORMAT(NOW(),'%Y-%m-%d')";
+ 			$sql = "SELECT b.fecha, b.fech, b.denominacion, b.detalle, b.debe, b.haber, b.saldo, b.pagadopor, b.forma_pago FROM balance_diario_vw b WHERE fech = DATE_FORMAT(NOW(),'%Y-%m-%d')";
 
 			$this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
  			

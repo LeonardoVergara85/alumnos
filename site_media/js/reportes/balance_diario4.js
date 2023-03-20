@@ -142,7 +142,15 @@ var f = new Date(); // fecha para mostrar en los archivos de export
 
 $(document).ready(function(){
 
+  const hoy = new Date(); // crea un objeto Date con la fecha actual
+  const dia = hoy.getDate().toString().padStart(2, '0'); // obtiene el día del mes con dos cifras (del 01 al 31)
+  const mes = (hoy.getMonth() + 1).toString().padStart(2, '0'); // obtiene el mes con dos cifras (del 01 al 12)
+  const anio = hoy.getFullYear(); // obtiene el año con 4 dígitos
+  
+  const fechaHoy = `${anio}-${mes}-${dia}`; // crea una cadena con la fecha de hoy en formato aaaa-mm-dd
+ 
   $('#div-spinner').hide();
+  $('#fechahasta_').val(fechaHoy);
 
 	buscarBalanceDiario();
 
