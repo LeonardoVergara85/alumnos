@@ -709,7 +709,6 @@ function verAlumnos(){
         success: function (resp) {
 
           var alus = resp;
-
           $.each( alus, function( key, value ) {
 
             var boton = "<button class='btn btn-info btn-sm botonesdetailalu' id='"+value.id+"' title='detalle'><i class='fa fa-info-circle' aria-hidden='true'></i></button>"; 
@@ -730,8 +729,11 @@ function verAlumnos(){
             }
 
             if(value.activo == 'N'){
-
-              alumno_activo = '<span class="badge badge-danger">Inactivo</span>';
+              if(value.fecha_baja){ 
+                alumno_activo = '<span class="badge badge-danger">Inactivo desde '+value.fecha_baja+'</span>';
+              }else{
+                alumno_activo = '<span class="badge badge-danger">Inactivo</span>';
+              }
               botonera = boton4;
               //$('#table_alumnos').children('td,th').css('background-color','#000');
               //$('#table_alumnos').tr.addClass('danger');

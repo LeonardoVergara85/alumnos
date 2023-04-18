@@ -2,12 +2,15 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/model/Personas.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/model/Alumnos.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/model/Cuotas.php';
 
 Class AlumnosController extends Alumnos{
 	
 	private $PersonasModel;
 
 	private $AlumnosModel;
+
+	private $CuotasModel;
 
 	/**
 	 * [__construct Inicializa el Controlador]
@@ -26,6 +29,8 @@ Class AlumnosController extends Alumnos{
 		$this->PersonasModel = new Personas();
 
 		$this->AlumnosModel = new Alumnos();
+
+		$this->CuotasModel = new Cuotas();
 
 		
 
@@ -94,6 +99,7 @@ Class AlumnosController extends Alumnos{
 				'celular' => $alumno['celular'],
 				'activo' => $alumno['activo'],
 				'fecha_nacimiento' => $alumno['fecha_nacimiento'],
+				'fecha_baja' => $alumno['fecha_baja'],
 				]);
 
 			}
@@ -234,7 +240,9 @@ Class AlumnosController extends Alumnos{
 			  $conn->db->startTrans();
 
 				$this->AlumnosModel->_id = $_POST['id_alumno'];
+				//$this->CuotasModel->_id_alumno = $_POST['id_alumno'];
 				$this->AlumnosModel->eliminarAlumno($conn);
+				//$this->CuotasModel->eliminarCuotas($conn);
 
 			 $conn->db->completeTrans();
 

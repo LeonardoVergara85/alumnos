@@ -412,6 +412,28 @@
 
 	}
 
+	public function eliminarCuotas($conn){
+
+		try {	
+			$id_alu = $this->_id_alumno;
+			
+			$sql = " DELETE c FROM cuota c INNER JOIN alumno_curso ac ON (c.id_alumno_curso = ac.id) WHERE c.fecha_pago = '0000-00-00' AND c.fecha_vencimiento > NOW() AND ac.id_alumno = ?  ";
+
+		   $this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
+			
+		   $filas = $this->DB->Execute($sql, array($id_alu));
+
+		   return $filas;
 
 
+		} catch (Exception $e) {
+			
+			print_r('MODEL: ' . $e);
+
+		}
+
+	}
+
+
+ // fin del modelo
  }

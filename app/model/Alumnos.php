@@ -121,10 +121,14 @@ include_once 'Personas.php';
 
 			$id_alu = $this->_id;
 
-			$sql = "UPDATE alumnos SET ACTIVO = 'N' WHERE ID = ? ";
+			$sql = "UPDATE alumnos SET ACTIVO = 'N', FECHA_BAJA = NOW() WHERE ID = ? ";
 
-		   $conn->db->Execute($sql,array($id_alu));
+		    $sentencia = $conn->db->Execute($sql,array($id_alu));
 
+			$sql2 = "DELETE c FROM cuota c INNER JOIN alumno_curso ac ON (c.id_alumno_curso = ac.id) WHERE c.fecha_pago = '0000-00-00' AND c.fecha_vencimiento > NOW() AND ac.id_alumno = ?";
+
+		    $sentencia2 = $conn->db->Execute($sql2,array($id_alu));
+		
 
 		} catch (Exception $e) {
 			
@@ -140,7 +144,7 @@ include_once 'Personas.php';
 
 			$id_alu = $this->_id;
 
-			$sql = "UPDATE alumnos SET ACTIVO = 'S' WHERE ID = ? ";
+			$sql = "UPDATE alumnos SET ACTIVO = 'S', FECHA_BAJA = '' WHERE ID = ? ";
 
 		   $conn->db->Execute($sql,array($id_alu));
 
@@ -158,7 +162,7 @@ include_once 'Personas.php';
 
  		try {
 
- 			$sql = "SELECT id, dni, nombre, apellido, telefono, celular, fecha_nacimiento, activo FROM alumnos_vw ORDER BY apellido";
+ 			$sql = "SELECT id, dni, nombre, apellido, telefono, celular, fecha_nacimiento, activo, fecha_baja FROM alumnos_vw ORDER BY apellido";
 
 			$this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
 

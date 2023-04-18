@@ -53,6 +53,11 @@
             //  $passHash = password_hash($pass, PASSWORD_BCRYPT);
             //  echo 'hash '.$passHash;
 
+            // Mariano Javier Salas
+            //  $pass = 'M4rS4l';     
+            //  $passHash = password_hash($pass, PASSWORD_BCRYPT);
+            //  echo 'hash '.$passHash;
+
             // SISTEMA VENTAS - JENZO
             // Virginia Pelizzari - 33271337
             //  $pass = 'V1r2022';     
