@@ -8,7 +8,6 @@ var myCaptcha = new jCaptcha({
 			$captchaInputElement[0].classList.remove('captcha-error'); 
 			$captchaInputElement[0].classList.add('captcha-success'); 
 			$captchaInputElement[0].placeholder = 'ok!'; 
-
 			Login();
 		} 
 
@@ -36,16 +35,23 @@ $(document).ready(function() {
  $('#formulario_acceso').validate({
         submitHandler: function (form) {
           // cuando va bien
+           ////// reCAPTCHA DE SEGURIDAD Google ////////////////
+          // verificamos el reCaptcha de google
+          let response = grecaptcha.getResponse();
+          if(response.length == 0){
+            toastr.error('Presione en "No soy un robot"');
+            return;
+  }
           myCaptcha.validate();    
-           
+              
         },
         rules: {
             usuario: {required:true,
                         },
             password: {required:true,
                         },
-            inp_captcha: {required:true,
-                        },            
+            // inp_captcha: {required:true,
+            //             },            
            },
         messages: {
             usuario: {
@@ -54,9 +60,9 @@ $(document).ready(function() {
             password: {
                         required: 'Ingresar contraseña',
             },
-            inp_captcha: {
-              required: '!',
-            },
+            // inp_captcha: {
+            //   required: '!',
+            // },
  
         },
         errorElement: 'span',
@@ -130,6 +136,7 @@ function Login(){
 
   var user = $('#usuario').val();
   var pass = $('#password').val();
+  var recaptcha = grecaptcha.getResponse();
   
 
   $('#ingresarLogueo').attr('disabled','disabled');
@@ -142,7 +149,8 @@ function Login(){
 
       peticion : 'AuthLogin',
        user : user,
-       pass : pass
+       pass : pass,
+       recaptcha: recaptcha
 
     },
     success: function (resp) {
@@ -179,9 +187,17 @@ function Login(){
                $('#inp_captcha').val('');
                $('#inp_captcha').attr('placeholder','Ingrese el captcha');
                
-
-            
-         }
+         }else if(resp == 'recaptcha'){
+              
+          toastr.error('No cumple con la seguridad de reCaptcha');
+          $('#ingresarLogueo').attr('disabled',false);
+          myCaptcha.reset();
+          $('#inp_captcha').removeClass('captcha-ok');
+          $('#inp_captcha').removeClass('captcha-error');
+          $('#inp_captcha').val('');
+          $('#inp_captcha').attr('placeholder','Ingrese el captcha');
+          
+    }
 
     }
   }); 

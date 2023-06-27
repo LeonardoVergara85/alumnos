@@ -45,6 +45,15 @@
       <div class="col-md-12 mb-3">
         <input type="password" id="password" name="password" class="fadeIn third form-control" placeholder="contraseña" maxlength="20" style="height: 60px;">
       </div>
+      <div class="text-center" >
+        <div class="col-md-12 mb-3" style="margin-left: 12%">
+          <div
+              class="g-recaptcha"
+              data-sitekey="6LdPx9YmAAAAAGiCJT1vd7nP5QyXvqQFaIAIN-3f"
+              >
+          </div>
+        </div>
+      </div>
       <div class="" style="">
         <div class="">
           <div class="mb-3">
@@ -52,6 +61,7 @@
           </div>
         </div>
       </div>
+          
       <div class="col-md-12 mb-3 text-center">
               <button type="submit" id="ingreso_captcha" class="btn btn-boton-ingreso">
                 <b>Ingresar</b>
@@ -72,4 +82,5 @@
     <script src="../../../public/libs/DataTables-1.10.12/js/dataTables.min.js" type="text/javascript"></script>
 <!--   <script src="../../../public/libs/DataTables-1.10.12/extensions/FixedColumns/js/dataTables.fixedColumns.min.js" type="text/javascript"></script> -->
   <script src="../../js/logueo/logueo2.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </html>
