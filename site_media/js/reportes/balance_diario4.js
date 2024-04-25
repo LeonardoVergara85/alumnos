@@ -12,7 +12,8 @@ var f = new Date(); // fecha para mostrar en los archivos de export
               titleAttr: 'PDF',
               message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
               download: 'open',
-              title: 'Balance Diario - Skills'
+              title: 'Balance Diario - Skills',
+              footer: true
           },
           {
               extend: 'excel',
@@ -20,7 +21,8 @@ var f = new Date(); // fecha para mostrar en los archivos de export
               titleAttr: 'Excel',
               message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
               messageBottom: null,
-              title: 'Balance Diario - Skills' 
+              title: 'Balance Diario - Skills',
+              footer: true
           },
           {
             extend: 'print',
@@ -28,7 +30,8 @@ var f = new Date(); // fecha para mostrar en los archivos de export
             titleAttr: 'Imprimir',
             message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
             messageBottom: null,
-            title: 'Balance Diario - Skills'
+            title: 'Balance Diario - Skills',
+            footer: true
         }
       ],
 
@@ -83,7 +86,8 @@ var f = new Date(); // fecha para mostrar en los archivos de export
               titleAttr: 'PDF',
               message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
               download: 'open',
-              title: 'Balance por fecha - Skills'
+              title: 'Balance por fecha - Skills',
+              footer: true
           },
           {
               extend: 'excel',
@@ -91,7 +95,8 @@ var f = new Date(); // fecha para mostrar en los archivos de export
               titleAttr: 'Excel',
               message: 'Fecha de generación ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
               messageBottom: null,
-              title: 'Balance por fecha - Skills'
+              title: 'Balance por fecha - Skills',
+              footer: true
           },
           {
             extend: 'print',
@@ -99,7 +104,8 @@ var f = new Date(); // fecha para mostrar en los archivos de export
             titleAttr: 'Imprimir',
             message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
             messageBottom: null,
-            title: 'Balance por fecha - Skills'
+            title: 'Balance por fecha - Skills',
+            footer: true
         }
       ],
 

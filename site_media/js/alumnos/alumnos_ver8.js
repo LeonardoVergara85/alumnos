@@ -85,6 +85,92 @@
  
  });
 
+
+ var TablaInactivos = $('#table_alumnos_inactivos').DataTable( {
+  'rowCallback': function(row, data, index){
+    if(data[6] == 'Inactivo'){
+        $(row).find('td:eq(0)').css('background', '#ee9d9d');
+        $(row).find('td:eq(1)').css('background', '#ee9d9d');
+        $(row).find('td:eq(2)').css('background', '#ee9d9d');
+        $(row).find('td:eq(3)').css('background', '#ee9d9d');
+        $(row).find('td:eq(4)').css('background', '#ee9d9d');
+        $(row).find('td:eq(5)').css('background', '#ee9d9d');
+        $(row).find('td:eq(6)').css('background', '#ee9d9d');
+    }
+    // if(data[2].toUpperCase() == 'EE'){
+    //     $(row).find('td:eq(2)').css('color', 'blue');
+    // }
+   // $(row).addClass('redClass');
+  },
+  "order": [[ 2, "asc" ]],
+   dom: 'Bfrtip',
+          buttons: [
+            {
+              extend: 'excel',
+              titleAttr: 'Excel',
+              message: 'Listado de Alumnos',
+              title: 'Alumnos - Skills',
+              exportOptions: {
+                columns: [ 1, 2, 3, 4, 5, 6 ]
+            }
+          },
+          {
+            extend: 'pdfHtml5',
+            title: 'Alumnos - Skills',
+            text: "PDF",
+            pageSize: 'A4',
+            exportOptions: {
+              columns: [ 1, 2, 3, 4, 5, 6 ]
+          }
+            
+          }
+        
+        
+    ],
+
+ "language": {
+        "url": "../../../public/libs/DataTables-1.10.12/extensions/table-spanish.json"
+    },
+
+      'columnDefs': [
+  {
+      "targets": 0, // your case first column
+      "className": "text-left",
+       "width": "20%",
+        "visible": false
+ },{
+      "targets": 1, // your case first column
+      "className": "text-center",
+       "width": "10%"
+ },{
+      "targets": 2, // your case first column
+      "className": "text-left",
+       "width": "20%"
+ },{
+      "targets": 3, // your case first column
+      "className": "text-left",
+       "width": "20%"
+ },{
+      "targets": 4, // your case first column
+      "className": "text-center",
+       "width": "13%"
+ },{
+      "targets": 5, // your case first column
+      "className": "text-center",
+       "width": "13%"
+ },{
+  "targets": 6, // your case first column
+  "className": "text-center",
+   "width": "10%"
+},{
+  "targets": 7, // your case first column
+  "className": "text-center",
+   "width": "14%"
+}
+ ],
+ 
+ });
+
   var TablaCursos = $('#table_cursos_asociados').DataTable( {
 
  "language": {
@@ -120,6 +206,75 @@ $(document).ready(function() {
 
   verAlumnos(); // listamos los alumnos cuando carga la pantalla.
   buscarTipoPagos(); // listamos los tipos de pagos
+
+  $(document).on("click", "#ver_inactivos", function () {
+
+    $('#div-spinner').show();
+    
+    TablaInactivos.clear();
+  
+        $.ajax({
+          type: "POST",
+          url: "../../../app/routes.php",
+          dataType: 'json',
+          data: {
+            peticion : 'ver_alumnos',
+            tipo: 'N'
+          },
+          success: function (resp) {
+              
+          var alus = resp;
+            $.each( alus, function( key, value ) {
+  
+              var boton = "<button class='btn btn-info btn-sm botonesdetailalu' id='"+value.id+"' title='detalle'><i class='fa fa-info-circle' aria-hidden='true'></i></button>"; 
+              var boton2 = "<button class='btn btn-info btn-sm botonesdetailcurso' id='"+value.id+"' title='cursos'><i class='fa fa-users' aria-hidden='true'></i></button>"; 
+              var boton3 = "<button class='btn btn-danger btn-sm eliminar' id='"+value.id+"' title='eliminar' value='"+value.apellido+', '+value.nombre+"'><i class='fa fa-minus' aria-hidden='true'></i></button>"; 
+              var boton4 = "<button class='btn btn-warning btn-sm renovar' id='"+value.id+"' title='renovar' value='"+value.apellido+', '+value.nombre+"'><i class='fa fa-retweet' aria-hidden='true'></i></button>"; 
+        
+              var botonera = boton+' '+boton2+' '+boton3;
+             
+  
+              var alumno_activo = '<span class="badge badge-success">Activos</span>';
+              var tel = '';
+  
+              if(value.telefono != null && value.telefono != ''){
+                tel = value.telefono;
+              }else if(value.celular != null && value.celular != ''){
+                tel = value.celular;
+              }
+  
+              if(value.activo == 'N'){
+                if(value.fecha_baja){ 
+                  alumno_activo = '<span class="badge badge-danger">Inactivo desde '+value.fecha_baja+'</span>';
+                }else{
+                  alumno_activo = '<span class="badge badge-danger">Inactivo</span>';
+                }
+                botonera = boton4;
+                //$('#table_alumnos').children('td,th').css('background-color','#000');
+                //$('#table_alumnos').tr.addClass('danger');
+              }
+              
+              TablaInactivos.row.add( [
+                  '<td style="display: none;">'+value.id+'</td>',
+                  //value.dni,
+                  value.apellido,
+                  value.nombre,
+                  value.fecha_nacimiento,
+                  tel,
+                  alumno_activo,
+                  botonera
+                  ]).draw();
+        });
+  
+        $('#div-spinner').hide();
+  
+          
+  
+        }
+      });
+      
+    });
+  
 
    $(document).on("click", "#modificaralu", function () {
       var ida = this.value;
@@ -705,6 +860,7 @@ function verAlumnos(){
         dataType: 'json',
         data: {
           peticion : 'ver_alumnos',
+          tipo: 'S'
         },
         success: function (resp) {
 

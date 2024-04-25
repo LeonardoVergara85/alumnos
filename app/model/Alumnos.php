@@ -20,6 +20,8 @@ include_once 'Personas.php';
  	 protected $_grado_anio;
  	 protected $_email;
  	 protected $_hermanos;
+	 protected $_tipo;
+
 
 
 	/***********************
@@ -78,7 +80,7 @@ include_once 'Personas.php';
  			$email = $this->_email;
  			$her = $this->_hermanos;
 
- 			$sql = "INSERT INTO alumnos VALUES (?, ?, ?, ?, ?, ?, 'S')";
+ 			$sql = "INSERT INTO alumnos VALUES (?, ?, ?, ?, ?, ?, 'S', NULL)";
 
         	$conn->db->Execute($sql,array($id,$idper,$esc,$g_a,$email,$her));
 
@@ -161,14 +163,13 @@ include_once 'Personas.php';
  	public function getAlumnos(){
 
  		try {
-
- 			$sql = "SELECT id, dni, nombre, apellido, telefono, celular, fecha_nacimiento, activo, fecha_baja FROM alumnos_vw ORDER BY apellido";
-
+			$tipo = $this->_tipo;
+ 			$sql = "SELECT id, dni, nombre, apellido, telefono, celular, fecha_nacimiento, activo, fecha_baja FROM alumnos_vw WHERE activo = ? ORDER BY apellido";		
 			$this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
 
- 			$stmt = $this->DB->Prepare($sql);
+ 			//$stmt = $this->DB->Prepare($sql);
  			
-			$filas = $this->DB->Execute($stmt);
+			 $filas = $this->DB->Execute($sql,array($tipo));
 
 			return $filas;
 

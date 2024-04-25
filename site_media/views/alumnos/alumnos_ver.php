@@ -40,7 +40,24 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
             </div>
             
             <div class="card-body">
-            <table id="table_alumnos" class="table dtr-inline table-hover compact" cellspacing="0" width="100%">
+
+
+            <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#activos" id="ver_activos">Alumnos activos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#inactivos" id="ver_inactivos">Alumnos Inactivos</a>
+            </li>
+          </ul>
+          <div class="spinner-border text-primary"></div>
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div id="activos" class="container tab-pane active">
+			      <br>
+              <!-- Tabla -->
+              <table id="table_alumnos" class="table dtr-inline table-hover compact" cellspacing="0" width="100%">
               <thead>
                   <tr>
                       <th></th>
@@ -56,6 +73,30 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
               <tbody id="cuerpoTablaAlu">
               </tbody>
             </table>
+            </div>
+            <div id="inactivos" class="container tab-pane fade"><br>
+              <!-- La tabla de Inactivos -->
+              <table id="table_alumnos_inactivos" class="table dtr-inline table-hover compact" cellspacing="0" width="100%">
+              <thead>
+                  <tr>
+                      <th></th>
+                      <th class="text-center">Dni</th>
+                      <th class="text-center">Apellido</th>
+                      <th class="text-center">Nombre</th>
+                      <th class="text-center">Nacimiento</th>
+                      <th class="text-center">Telefono</th>
+                      <th class="text-center">Estado</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody id="cuerpoTablaAluInactivos">
+              </tbody>
+            </table>
+            </div>
+		  </div>	    
+            
+      </div> 
+            
           </div> 
           <!-- <div class="card-footer">Footer</div> -->
         </div>

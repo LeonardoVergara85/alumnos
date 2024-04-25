@@ -83,7 +83,7 @@ Class AlumnosController extends Alumnos{
 	public function show(){
 
 		try {
-			
+			$this->AlumnosModel->_tipo = $_POST['tipo'];
 			$alumnos = $this->AlumnosModel->getAlumnos();
 
 			$lista = array();
