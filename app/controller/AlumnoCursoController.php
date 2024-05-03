@@ -175,8 +175,30 @@ Class AlumnoCursoController extends AlumnoCurso{
 	}
 
  
+	
+	public function bonificar(){
 
+		try {
 
+			 $conn = new Conexion();
+			
+			 $conn->db->startTrans();
+
+			 $this->CuotasModel->_id_alumno_curso = $_POST['id_alumno_curso'];
+
+			 $this->CuotasModel->bonificarCuotas($conn);
+
+			 $conn->db->completeTrans();
+
+			echo 'ok';
+
+		} catch (Exception $e) {
+			
+			print_r($e);
+
+		}
+
+	}
 
 
 

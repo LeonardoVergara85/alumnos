@@ -336,6 +336,9 @@ class routes
 				new ActivosController('showActivo'); 
 			break;
 			
+			case 'bonificar_alumno_curso':
+				new AlumnoCursoController('bonificar'); 
+			break;
 
 			
 			default:

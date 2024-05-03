@@ -256,7 +256,7 @@ $(document).ready(function() {
               
               TablaInactivos.row.add( [
                   '<td style="display: none;">'+value.id+'</td>',
-                  //value.dni,
+                  value.dni,
                   value.apellido,
                   value.nombre,
                   value.fecha_nacimiento,
@@ -484,6 +484,22 @@ $(document).ready(function() {
 
   });
 
+  $( document ).on( 'click', '#bonificar', function(){
+    var idalucurso = this.value;
+    $('#btnbonificarAlu').val(idalucurso);
+    $('#bonificarAlu').modal('show');
+    
+    let val = $(this).val();
+      //Revisa en que status está el checkbox y controlalo según lo //desees
+      if( $( this ).is( ':checked' ) ){
+        console.log( 'Guardando información de '+ val +'...' );
+      }
+      
+      else{
+        console.log( 'Desguardando información de ' + val + '...' );
+      }
+    });
+
   $(document).on("click", ".cerrar", function () {
   
     var idcuota = this.id;
@@ -641,10 +657,61 @@ $(document).ready(function() {
  
   });
 
+  
+  $(document).on("click", "#btnbonificarAlu", function () {
+  
+    // extraemos los datos
+    var idalumnocurso = this.value;
+
+    $.ajax({
+      type: "POST",
+      url: "../../../app/routes.php",
+      dataType: 'text',
+      data: {
+        peticion : 'bonificar_alumno_curso',
+        id_alumno_curso : idalumnocurso
+      },
+      success: function (resp) {
+
+        if(resp == 'ok'){
+        
+          toastr.success('Se ha bonificado el curso con éxito.');
+
+           setTimeout(function() { 
+              $(location).attr('href', '../alumnos/alumnos_ver.php');
+          }, 1500);
+
+      }else{
+
+          toastr.error('Ha ocurrido un error!!!');
+
+          return false;
+      }
+        
+
+      }
+
+    }); 
+
+    // seteamos los datos en el modal
+    // $(".eliminar").attr('disabled','disabled');
+    // $('#msj-eliminar').html('Realmente desea eliminar a <strong>'+nom+'</strong> ?');
+    // $('#btneliminarAlu').val(idalumno);
+    // $('#eliminarAlu').modal('show');
+ 
+  });
+
   $(document).on("click", ".btnclosealu", function () {
 
       $(".eliminar").attr('disabled',false);
       
+  }); 
+
+  $(document).on("click", ".btnclosebonificaralu", function () {
+
+    $('#bonificar').prop('checked', false);
+    $('#modalCursosAlu').modal('hide');
+    $(".botonesdetailcurso").attr('disabled',false);
   }); 
 
 
@@ -778,7 +845,7 @@ $(document).ready(function() {
 
         var cuotas = resp;
 
-        $.each( cuotas, function( key, value ) {
+                $.each( cuotas, function( key, value ) {
 
           cerrar = "<a href='#' class='badge badge-danger cerrar' id='cerrar-"+value.id+"' style='display:none'>cancelar <i class='fas fa-window-close'></i></a>";
           // cerrar = "<span class='badge badge-pill badge-danger' id='cerrar"+value.id+"' style='display:none'><i class='fas fa-window-close'></i></span>";
@@ -787,6 +854,7 @@ $(document).ready(function() {
           boton_pint2 = "<button type='button' class='btn btn-warning btn-sm print_cuota_' id='print"+value.id+"' style='display:none'><i class='fas fa-print'></i></button>";
           boton_pagar_conf = "<button type='button' class='confirmapago btn btn-success btn-sm' id='confirmar"+value.id+"' value='"+value.id+"' style='display: none;'>Confirmar</button>";
           boton_pagar = "<button type='button' class='btn btn-primary btn-sm pagar' id='"+value.id+"'><i class='fas fa-dollar-sign'></i> Pagar</button>";
+          //boton_bonificar = "<button type='button' class='btn btn-info btn-sm bonificar' id='"+value.id+"'><i class='fas fa-dollar-sign'></i> Bonificar</button>";
           if(value.fechap == '00/00/0000'){
 
             $('#cuerpoTablaCuotas'+id_alu_cur).append("<tr><td><font size='2'>"+value.nro+"<font></td><td><font size='2'>"+value.fecha_v+"</font></td><td ><font size='2' id='imp"+value.id+"'>"+value.importe+"</font></td><td><input type='text' class='form-control descuento' id='desc"+value.id+"' value='"+value.descuento+"' placeholder='%' style='width: 43px;font-size:13px;' disabled=''></td><td><input type='text' id='int"+value.id+"' class='form-control interes' value='"+value.interes+"' placeholder='%' style='width: 43px;font-size:13px;' disabled=''></td><td><input class='form-control' type='text' id='total"+value.id+"' value='"+value.total+"' style='width: 70px;font-size:13px;' disabled=''/></td><td><select id='tipopago"+value.id+"' class='form-control' style='width:70px;' disabled><option value='0'>*</option><option value='1'>Contado / Efectivo</option><option value='2'>Débito</option><option value='3'>Crédito</option><option value='4'>MercadoPago</option><option value='5'>Transferencia</option><option value='5'>Otro</option></select></td><td><font size='2' id='fp"+value.id+"'>"+value.fechap+"</font></td><td>"+boton_pagar+' '+boton_pagar_conf+''+boton_pint2+''+cerrar+"</td></tr>");
@@ -1002,13 +1070,14 @@ function verCursos(idalu){
             cont++;
 
             var boton_cuota = "<button class='btn btn-info btn-sm botonesdecuotas' id='"+value.id+"' title='cuotas'><i class='fas fa-search-dollar'></i></button>"; 
+  
             $('#titulo-modal').html('');
             $('#titulo-modal').html(value.apellido+', '+value.nombre+' - Cursos');
             $('#her').html('');
             $('#her').html('hermanos: '+value.hermanos);
             if(cont == 1){
               $('#card_body').append('<div class="card-header" id="heading'+cont+'"><h5 class="mb-0"><button type="button" id="btn-cur" class="btn btn-link" data-toggle="collapse" data-target="#collapse'+cont+'"  ><b class="nombre_curso" id='+value.id+'>'+value.curso+' - Año lectivo ('+value.anio+')</b></button></h5></div>');
-              $('#card_body').append('<div id="collapse'+cont+'" class="collapse" aria-labelledby="heading'+cont+'" data-parent="#accordion"><div class="card-body"><table id="tabla_cuotas'+value.id+'" class="table table-striped table-hover compact" cellspacing="0" width="100%"><thead><th class="text-center" style="width: 5%;">#</th><th class="text-center" style="width: 10%;">Vto.</th><th class="text-center" style="width: 15%;">Importe</th><th class="text-center" style="width: 10%;">% dto.</th><th class="text-center" style="width: 10%;">% Int.s</th><th class="text-center" style="width: 20%;">Total</th><th class="text-center" style="width: 35%;">tipo</th><th class="text-center" style="width: 10%;">Pago</th><th style="width: 10%;"></th></thead><tbody id="cuerpoTablaCuotas'+value.id+'"></tbody></table></div></div>');
+              $('#card_body').append('<div id="collapse'+cont+'" class="collapse" aria-labelledby="heading'+cont+'" data-parent="#accordion"><div class="card-body"><div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" value="'+value.id+'" id="bonificar"><label class="form-check-label" for="inlineCheckbox1">Bonificar curso</label></div></div><table id="tabla_cuotas'+value.id+'" class="table table-striped table-hover compact" cellspacing="0" width="100%"><thead><th class="text-center" style="width: 5%;">#</th><th class="text-center" style="width: 10%;">Vto.</th><th class="text-center" style="width: 15%;">Importe</th><th class="text-center" style="width: 10%;">% dto.</th><th class="text-center" style="width: 10%;">% Int.s</th><th class="text-center" style="width: 20%;">Total</th><th class="text-center" style="width: 35%;">tipo</th><th class="text-center" style="width: 10%;">Pago</th><th style="width: 10%;"></th></thead><tbody id="cuerpoTablaCuotas'+value.id+'"></tbody></table></div></div>');
             }else{
               $('#card_body').append('<div class="card-header" id="heading'+cont+'" style="background-color: darkgrey;"><h5 class="mb-0"><button type="button" id="btn-cur" class="btn btn-link" data-toggle="collapse" data-target="#collapse'+cont+'"  ><b class="nombre_curso" id='+value.id+'>'+value.curso+' - Año lectivo ('+value.anio+')</b></button></h5></div>');
               $('#card_body').append('<div id="collapse'+cont+'" class="collapse" aria-labelledby="heading'+cont+'" data-parent="#accordion"><div class="card-body"><table id="tabla_cuotas'+value.id+'" class="table table-striped table-hover compact" cellspacing="0" width="100%"><thead><th class="text-center" style="width: 5%;">#</th><th class="text-center" style="width: 10%;">Vto.</th><th class="text-center" style="width: 15%;">Importe</th><th class="text-center" style="width: 10%;">% dto.</th><th class="text-center" style="width: 10%;">% Int.s</th><th class="text-center" style="width: 20%;">Total</th><th class="text-center" style="width: 35%;">tipo</th><th class="text-center" style="width: 10%;">Pago</th><th style="width: 10%;"></th></thead><tbody id="cuerpoTablaCuotas'+value.id+'"></tbody></table></div></div>');

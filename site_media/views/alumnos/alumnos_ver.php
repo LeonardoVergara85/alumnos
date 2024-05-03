@@ -250,6 +250,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
     </div>
   </div> 
 
+  v
   <!-- The Modal -->
   <div class="modal fade" id="modalCuotas" >
     <div class="modal-dialog modal-lg" style="width: 1300px;margin-left: -300px;" role="document">
@@ -316,8 +317,33 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
     </div>
   </div> 
 
-             <!-- The Modal -->
-             <div class="modal fade" id="renovarAlu" data-backdrop="static" data-keyboard="false">
+    <!-- The Modal -->
+    <div class="modal fade" id="bonificarAlu" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title danger">Bonificar Alumno</h4>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <p id="msj-bonificar">¿Realmente quiere bonificar el curso?</p>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-primary btnbonificarAlu" name="btnbonificarAlu" id="btnbonificarAlu">Aceptar</button>
+          <button type="button" class="btn btn-secondary btnclosebonificaralu" data-dismiss="modal">Cancelar</button>
+        </div>
+        
+      </div>
+    </div>
+  </div> 
+
+  <!-- The Modal -->
+  <div class="modal fade" id="renovarAlu" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
       

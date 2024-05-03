@@ -434,6 +434,29 @@
 
 	}
 
+	public function bonificarCuotas($conn){
+
+		try {	
+			$id_alu_cur = $this->_id_alumno_curso;
+			
+			$sql = "UPDATE `cuota` SET `id_tipo_pago`= 7,`fecha_pago`=`fecha_vencimiento`,`observaciones`='Cuota bonificada',`id_importe`=27 WHERE id_alumno_curso = ? ";
+
+		   $this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
+			
+		   $filas = $this->DB->Execute($sql, array($id_alu_cur));
+
+		   return $filas;
+
+
+		} catch (Exception $e) {
+			
+			print_r('MODEL: ' . $e);
+
+		}
+
+	}
+	
+
 
  // fin del modelo
  }
