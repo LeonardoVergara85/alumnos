@@ -108,7 +108,7 @@
 
  		try {
 
- 			$sql = "SELECT * FROM tipo_pago";
+ 			$sql = "SELECT * FROM tipo_pago WHERE activo = 'S' ";
 
 			$this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
 

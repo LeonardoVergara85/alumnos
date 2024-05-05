@@ -247,7 +247,18 @@ include_once 'Personas.php';
  			
 			$filas = $this->DB->Execute($sql,array($id));
 
-			return $filas;
+			$a = array();
+
+			foreach ($filas as $curso) {
+
+				$sql_ = "SELECT c.id_tipo_pago FROM cuota c WHERE c.id_alumno_curso = ? LIMIT 1";
+
+				$this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
+				$filas_ = $this->DB->Execute($sql_,array($curso["id"]));
+				array_push($a,['id' => $curso['id'],'fecha' => $curso['fechaac'],'curso' => $curso['descripcion'],'meses' => $curso['meses'],'nombre' => $curso['nombre'],'apellido' => $curso['apellido'],'hermanos' => $curso['hermanos'],'anio' => $curso['anio'],'tipo_pago' => $filas_->fields['id_tipo_pago']] );
+			}
+
+			return $a;
 
 
  		} catch (Exception $e) {
@@ -257,6 +268,7 @@ include_once 'Personas.php';
  		}
 
  	}
+	
 
 
  }

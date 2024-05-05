@@ -173,15 +173,15 @@ Class AlumnosController extends Alumnos{
 
 			$cursos = $this->AlumnosModel->getCursosAlumno();
 
-			$lista = array();
+			// $lista = array();
 
-			foreach ($cursos as $curso) {
+			// foreach ($cursos as $curso) {
 
-				array_push($lista, ['id' => $curso['id'],'fecha' => $curso['fechaac'],'curso' => $curso['descripcion'],'meses' => $curso['meses'],'nombre' => $curso['nombre'],'apellido' => $curso['apellido'],'hermanos' => $curso['hermanos'],'anio' => $curso['anio']]);
+			// 	array_push($lista, ['id' => $curso['id'],'fecha' => $curso['fechaac'],'curso' => $curso['descripcion'],'meses' => $curso['meses'],'nombre' => $curso['nombre'],'apellido' => $curso['apellido'],'hermanos' => $curso['hermanos'],'anio' => $curso['anio']]);
 
-			}
+			// }
 
-			echo json_encode($lista);
+			echo json_encode($cursos);
 
 		} catch (Exception $e) {
 			

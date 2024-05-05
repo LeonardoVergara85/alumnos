@@ -678,7 +678,9 @@ $(document).ready(function() {
           toastr.success('Se ha bonificado el curso con éxito.');
 
            setTimeout(function() { 
-              $(location).attr('href', '../alumnos/alumnos_ver.php');
+              $('#bonificarAlu').modal('hide');
+              $('#modalCursosAlu').modal('hide');
+              $(".botonesdetailcurso").attr('disabled',false);
           }, 1500);
 
       }else{
@@ -1075,9 +1077,16 @@ function verCursos(idalu){
             $('#titulo-modal').html(value.apellido+', '+value.nombre+' - Cursos');
             $('#her').html('');
             $('#her').html('hermanos: '+value.hermanos);
+            let boton_bonificar= '';
+            if(value.tipo_pago == 7){
+              boton_bonificar = '<div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" value="" id="" checked disabled><label class="form-check-label" for="inlineCheckbox1">Curso bonificado</label></div></div>';
+            }else{
+              boton_bonificar = '<div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" value="'+value.id+'" id="bonificar"><label class="form-check-label" for="inlineCheckbox1">Bonificar curso</label></div></div>';
+            }
+            
             if(cont == 1){
               $('#card_body').append('<div class="card-header" id="heading'+cont+'"><h5 class="mb-0"><button type="button" id="btn-cur" class="btn btn-link" data-toggle="collapse" data-target="#collapse'+cont+'"  ><b class="nombre_curso" id='+value.id+'>'+value.curso+' - Año lectivo ('+value.anio+')</b></button></h5></div>');
-              $('#card_body').append('<div id="collapse'+cont+'" class="collapse" aria-labelledby="heading'+cont+'" data-parent="#accordion"><div class="card-body"><div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" value="'+value.id+'" id="bonificar"><label class="form-check-label" for="inlineCheckbox1">Bonificar curso</label></div></div><table id="tabla_cuotas'+value.id+'" class="table table-striped table-hover compact" cellspacing="0" width="100%"><thead><th class="text-center" style="width: 5%;">#</th><th class="text-center" style="width: 10%;">Vto.</th><th class="text-center" style="width: 15%;">Importe</th><th class="text-center" style="width: 10%;">% dto.</th><th class="text-center" style="width: 10%;">% Int.s</th><th class="text-center" style="width: 20%;">Total</th><th class="text-center" style="width: 35%;">tipo</th><th class="text-center" style="width: 10%;">Pago</th><th style="width: 10%;"></th></thead><tbody id="cuerpoTablaCuotas'+value.id+'"></tbody></table></div></div>');
+              $('#card_body').append('<div id="collapse'+cont+'" class="collapse" aria-labelledby="heading'+cont+'" data-parent="#accordion"><div class="card-body">'+boton_bonificar+'<table id="tabla_cuotas'+value.id+'" class="table table-striped table-hover compact" cellspacing="0" width="100%"><thead><th class="text-center" style="width: 5%;">#</th><th class="text-center" style="width: 10%;">Vto.</th><th class="text-center" style="width: 15%;">Importe</th><th class="text-center" style="width: 10%;">% dto.</th><th class="text-center" style="width: 10%;">% Int.s</th><th class="text-center" style="width: 20%;">Total</th><th class="text-center" style="width: 35%;">tipo</th><th class="text-center" style="width: 10%;">Pago</th><th style="width: 10%;"></th></thead><tbody id="cuerpoTablaCuotas'+value.id+'"></tbody></table></div></div>');
             }else{
               $('#card_body').append('<div class="card-header" id="heading'+cont+'" style="background-color: darkgrey;"><h5 class="mb-0"><button type="button" id="btn-cur" class="btn btn-link" data-toggle="collapse" data-target="#collapse'+cont+'"  ><b class="nombre_curso" id='+value.id+'>'+value.curso+' - Año lectivo ('+value.anio+')</b></button></h5></div>');
               $('#card_body').append('<div id="collapse'+cont+'" class="collapse" aria-labelledby="heading'+cont+'" data-parent="#accordion"><div class="card-body"><table id="tabla_cuotas'+value.id+'" class="table table-striped table-hover compact" cellspacing="0" width="100%"><thead><th class="text-center" style="width: 5%;">#</th><th class="text-center" style="width: 10%;">Vto.</th><th class="text-center" style="width: 15%;">Importe</th><th class="text-center" style="width: 10%;">% dto.</th><th class="text-center" style="width: 10%;">% Int.s</th><th class="text-center" style="width: 20%;">Total</th><th class="text-center" style="width: 35%;">tipo</th><th class="text-center" style="width: 10%;">Pago</th><th style="width: 10%;"></th></thead><tbody id="cuerpoTablaCuotas'+value.id+'"></tbody></table></div></div>');
