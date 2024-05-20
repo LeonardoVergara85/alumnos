@@ -52,9 +52,9 @@ class PDF extends FPDF {
 
         $this->Ln(5);
 
-        $this->Cell(90,5,utf8_decode('Avda. de las Américas 2650 - Tel.: 4352026'),0,0,'C');
+        $this->Cell(90,5,utf8_decode('Avda. de las Américas 2677 - Cel.: 3434050888'),0,0,'C');
         $this->Cell(10,5,utf8_decode(''),0,0,'C');
-        $this->Cell(90,5,utf8_decode('Avda. de las Américas 2650 - Tel.: 4352026'),0,0,'C');
+        $this->Cell(90,5,utf8_decode('Avda. de las Américas 2677 - Cel.: 3434050888'),0,0,'C');
 
         $this->Ln(5);
 
