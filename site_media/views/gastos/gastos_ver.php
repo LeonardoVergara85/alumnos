@@ -1,8 +1,9 @@
 <?php  
 include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosController.php';
 // $authC = new AuthController();
-// $authC->ChequearAuth(); 
-
+// $authC->ChequearAuth();
+//session_start();
+//var_dump($_SESSION)
 ?>
 
 <!doctype html>
@@ -197,10 +198,11 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
                 </select>
             </div>
           </div>
+             <?php
+               if($_SESSION['usuario_tipo_id'] === "1"){
+               ?><button class="btn btn-primary" type="submit" name="modificargasto" id="modificargasto">Modificar</button><?php 
+             } ?>
             
-            <button class="btn btn-primary" type="submit" name="modificargasto" id="modificargasto">
-              Modificar
-            </button>
           </form>
         </div>
         

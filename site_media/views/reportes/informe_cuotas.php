@@ -182,6 +182,6 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
 
   <?php include_once '../../../public/libs/include_libs_js.html'; ?>
 
-  <script src="../../js/reportes/informe_cuotas.js" type="text/javascript"></script>
+  <script src="../../js/reportes/informe_cuotas2.js" type="text/javascript"></script>
 
 </html>

@@ -39,6 +39,7 @@ $(document).ready(function() {
 
  getUsuarios();
 
+ getBackup();
 });
 
 
@@ -78,6 +79,28 @@ function getUsuarios(){
 			});
 
 			
+
+		}
+
+  	});
+}
+
+function getBackup(){
+
+
+	$.ajax({
+
+		type: "POST",
+		url: "../../../app/routes.php",
+		dataType: 'json',
+		data: {
+			peticion: 'backup'	
+		},
+		success: function (resp) {
+
+			// console.log(resp);
+
+		//	var usus = resp;
 
 		}
 

@@ -1,8 +1,8 @@
 <?php  
 // $authC->ChequearAuth(); 
-// session_start();
-// var_dump($_SESSION);
-
+ //session_start();
+ //var_dump($_SESSION);
+//$usuario = $_SESSION['usuario_tipo_id'];
 ?>
 
 <!doctype html>
@@ -52,37 +52,20 @@
             //  $pass = 'Zul34lud';     
             //  $passHash = password_hash($pass, PASSWORD_BCRYPT);
             //  echo 'hash '.$passHash;
-
-            // Mariano Javier Salas
-            //  $pass = 'M4rS4l';     
-            //  $passHash = password_hash($pass, PASSWORD_BCRYPT);
-            //  echo 'hash '.$passHash;
-
-            // SISTEMA VENTAS - JENZO
-            // Virginia Pelizzari - 33271337
-            //  $pass = 'V1r2022';     
-            //  $passHash = password_hash($pass, PASSWORD_BCRYPT);
-            //  echo 'hash '.$passHash;
-
-            // Lorena Fernández - 37921943
-            //  $pass = 'L0r32022';     
-            //  $passHash = password_hash($pass, PASSWORD_BCRYPT);
-            //  echo 'hash '.$passHash;
-
-            // Melisa Bianchi - 39265588
-            //  $pass = 'M3l12022';     
-            //  $passHash = password_hash($pass, PASSWORD_BCRYPT);
-            //  echo 'hash '.$passHash;
         ?>  
           <div class="row col-sm-12" style="margin-top:15px;">
           <div class="card-deck">
-              <div class="card">
+               <?php
+                   if($usuario === "1"){
+                   ?><div class="card">
                       <div class="card-body text-center">
                         <h5 class="card-title"><i class="fas fa-user-plus"></i> Inscribir Alumno</h5>
                         <p class="card-text">Inscribir un alumno a un nuevo curso.</p>
                         <button class="btn btn-primary" id="btn-alu-in">Ir a la pantalla</button>
                     </div>
-                  </div>
+                  </div><?php 
+                } ?>
+              
                     <div class="card">
                       <div class="card-body text-center">
                         <h5 class="card-title"><i class="fa fa-users"></i> Alumnos</h5>

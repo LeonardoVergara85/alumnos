@@ -8,7 +8,7 @@ $usuario = "root";
 $passwd = "";
 $host = "localhost";
 
-$bd = "skills"; // nombre de la base de datos
+$bd = "alumnos"; // nombre de la base de datos
 $fecha = date('d-m-Y');
 $nombre = "backup" . $fecha . ".sql"; //Este es el nombre del archivo a generar
 /* Determina si la tabla será vaciada (si existe) cuando  restauremos la tabla. */

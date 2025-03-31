@@ -47,7 +47,7 @@ Class GastosController extends Gastos{
 				$this->GastosModel->_observaciones = $_POST['obs'];
 				$this->GastosModel->_pagado_por = $_POST['pagado'];
 				$this->GastosModel->_forma_pago = $_POST['formapago'];
-				$this->GastosModel->_id_usuario = 1;
+				$this->GastosModel->_id_usuario = $_POST['usu'];
 	
 				$idPer = $this->GastosModel->guardar($conn);
 

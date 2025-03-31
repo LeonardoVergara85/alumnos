@@ -30,7 +30,7 @@ class Auth
 
 
     function getAccesSystem(){
-		
+
 		try {
 
 			/*
@@ -39,14 +39,14 @@ class Auth
 		   $usernme = $this->_username;
 		  // $pass = $this->_password;
 
-		   $sql = "SELECT * FROM usuarios_vw WHERE username = ? AND vigente = '0000-00-00'";	
+		   //$sql = "SELECT * FROM usuarios_vw WHERE username = ? AND vigente = '0000-00-00' AND DAYOFWEEK(NOW()) BETWEEN 2 AND 5 AND TIME(NOW()) BETWEEN '16:00:00' AND '21:00:00'";	
 
+            $sql = "SELECT * FROM usuarios_vw WHERE username = ? AND vigente = '0000-00-00'";
 			$this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
-		
-		   $usuario = $this->DB->Execute($sql,$usernme);
-		 
-		   $resultado = array();
+			
+		   $usuario = $this->DB->Execute($sql,array($usernme));
 
+		   $resultado = array();
 		   while ($r = $usuario->fetchRow())
 				$resultado[] = $r;
 

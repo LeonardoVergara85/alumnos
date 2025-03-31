@@ -15,6 +15,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/config/Conexion.php';
  include_once 'controller/AlumnoCursoController.php';
  include_once 'controller/CuotasController.php';
  include_once 'controller/ActivosController.php';
+ include_once 'controller/RespaldosController.php';
 
 
 new routes();
@@ -340,6 +341,9 @@ class routes
 				new AlumnoCursoController('bonificar'); 
 			break;
 
+            case 'backup_db':
+				new RespaldosController('backupBase'); 
+			break;
 			
 			default:
 				# code...

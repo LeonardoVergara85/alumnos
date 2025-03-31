@@ -4,6 +4,7 @@
 // $authC->ChequearAuth(); 
 //session_start();
 //var_dump($_SESSION['user_id']);
+//$usuario=$_SESSION['user_id'];
 ?>
 
 <!doctype html>
@@ -35,11 +36,16 @@
         <div class="card">
           <div class="card-header">Nuevo Activo</div>
           <div class="card-body">
-          <div class="form-row">
-            <button class="btn btn-primary" type="button" id="btn-nuevoactivo">
-              <i class="fa fa-plus" aria-hidden="true"></i> Nuevo
-            </button>
-          </div>
+          <?php
+               if($_SESSION['usuario_tipo_id'] === "1"){
+               ?><div class="form-row">
+                <button class="btn btn-primary" type="button" id="btn-nuevoactivo">
+                  <i class="fa fa-plus" aria-hidden="true"></i> Nuevo
+                </button>
+              </div>
+             <?php 
+            } ?>    
+          
           <br>
           <div class="">
           <table id="table_activos" class="table table-bordered table-hover compact"  style="width: 100%">
@@ -105,7 +111,11 @@
             <input type="hidden" name="id_activo" id="id_activo" value="">
             <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="submit" id = "guardarActivo" class="btn btn-primary">Guardar</button>
+        <?php
+           if($_SESSION['usuario_tipo_id'] === "1"){
+           ?><button type="submit" id = "guardarActivo" class="btn btn-primary">Guardar</button><?php 
+        } ?>
+        
       </div>
           </form>
       </div>

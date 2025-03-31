@@ -24,7 +24,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
   <?php include_once '../navbar/navbar.php'; ?>
 
   <div class="row container_row">
-
+    <input type="hidden" name="usuario_id_tipo" id="usuario_id_tipo" value="<?php echo $_SESSION['usuario_tipo_id'];?>">
       <div class="container_menu col-sm-2">
         <?php include_once '../menu/menu_izquierdo.php'; ?>
       </div> 
@@ -192,7 +192,11 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
             </div>
               </div>
               <input type="hidden" id="id_persona_" value="">
-              <button class="btn btn-primary botonmodificaralumno" type="submit" name="modificaralu" id="modificaralu">Modificar</button>
+              <?php
+              if($_SESSION['usuario_tipo_id'] === "1"){
+                ?><button class="btn btn-primary botonmodificaralumno" type="submit" name="modificaralu" id="modificaralu">Modificar</button><?php   
+              }
+              ?>
             </form>
         </div>
         
@@ -373,6 +377,6 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
 
   <?php include_once '../../../public/libs/include_libs_js.html'; ?>
 
-  <script src="../../js/alumnos/alumnos_ver8.js" type="text/javascript"></script>
+  <script src="../../js/alumnos/alumnos_ver9.js" type="text/javascript"></script>
 
 </html>

@@ -17,7 +17,7 @@ $(document).ready(function(){
             var observaciones = $('#observaciones').val();
             var pagadopor = $('#pagadopor').val();
             var formap = $('#formapago').val();
-            
+            var usuario = $('#usuario_id').val();
             var aux = importe.split('$');
             importe = aux[1];
 
@@ -39,7 +39,8 @@ $(document).ready(function(){
                    importe : importe,
                      obs : observaciones,
                      pagado : pagadopor,
-                     formapago : formap
+                     formapago : formap,
+                     usu : usuario
 
               },
               success: function (resp) {

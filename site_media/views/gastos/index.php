@@ -24,7 +24,7 @@
   <?php include_once '../navbar/navbar.php'; ?>
 
   <div class="row container_row">
-
+       <input type="hidden" name="usuario_id" id="usuario_id" value="<?php echo $_SESSION['user_id'];?>"> 
       <div class="container_menu col-sm-2">
         <?php include_once '../menu/menu_izquierdo.php'; ?>
       </div> 

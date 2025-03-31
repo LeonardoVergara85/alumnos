@@ -33,7 +33,7 @@
 
  		try {
 
- 			$sql = "SELECT * FROM usuarios_vw";
+ 			$sql = "SELECT * FROM usuarios_vw WHERE vigente = '0000-00-00'";
 
 			$this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
 

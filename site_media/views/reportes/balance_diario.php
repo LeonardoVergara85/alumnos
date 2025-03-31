@@ -64,6 +64,17 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
                 </thead>
                 <tbody id="cuerpoTablaBalance">
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th style="text-align:right">Totales:</th>
+                        <th></th>
+                        <th></th>
+                        <th><p id="totalDebe"></p></th>
+                        <th><p id="totalHaber"></p></th>
+                        <th><p id="saldo"></p></th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
               </table>
             </div>
             <div id="buscar_balance_fecha" class="container tab-pane fade"><br>
@@ -100,6 +111,17 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
                 </thead>
                 <tbody id="">
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th style="text-align:right">Totales:</th>
+                        <th></th>
+                        <th></th>
+                        <th><p id="totalDebe_"></p></th>
+                        <th><p id="totalHaber_"></p></th>
+                        <th><p id="saldo_"></p></th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
               </table>
             </div>
           </div>
@@ -174,6 +196,6 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
 
   <?php include_once '../../../public/libs/include_libs_js.html'; ?>
 
-  <script src="../../js/reportes/balance_diario4.js" type="text/javascript"></script>
+  <script src="../../js/reportes/balance_diario6.js" type="text/javascript"></script>
 
 </html>

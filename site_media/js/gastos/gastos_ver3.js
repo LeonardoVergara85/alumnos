@@ -400,7 +400,8 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
          observaciones_: {
                          required: true,
                          minlength: 2,
-                        lettersonly: true,},  
+                        //lettersonly: true
+                        },  
         },
         messages: {
             tipo_gasto_: {
@@ -413,7 +414,7 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
             observaciones_: {
                         required: 'Complete este campo',
                         lettersonly: 'Ingrese solo letras',
-                        minlength: 'ingrese más caracteres',
+                    //    minlength: 'ingrese más caracteres',
             },
 
            

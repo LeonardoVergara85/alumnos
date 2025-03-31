@@ -96,6 +96,7 @@ class AuthController extends Auth{
 							* Guardar en SESSION
 							*/
 							$this->sett_var('user_id', $rdo[0]['id']);
+							$this->sett_var('usuario_tipo_id', $rdo[0]['id_tipo_usuario']);
 							$this->sett_var('user', $rdo[0]['username']);
 							$this->sett_var('user_name', $rdo[0]['nombre']);
 							$this->sett_var('user_ape', $rdo[0]['apellido']);
