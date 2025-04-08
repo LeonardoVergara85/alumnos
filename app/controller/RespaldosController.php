@@ -34,32 +34,62 @@ Class RespaldosController extends Respaldos{
 
 	public function backupBase(){
 
-        try {
-		
-           // $conn = new Conexion();
-           
-            // $conn->db->startTrans();
- 
-            $resultado = $this->respaldo->generarRespaldo();
-            return false;
-            if ($resultado) {
-                echo 'ok';
-            } else {
-                
-            }
+          
+        ///////////
+        //$activos = new Activos();
+        $backupSQL = $this->respaldo->Respaldar();
+
+        if (strpos($backupSQL, 'ERROR:') === 0) {
+            http_response_code(500);
+            echo json_encode(["error" => $backupSQL]);
             
+            exit;
+        }
+        
+        $this->respaldo->registrarRespaldo();
+        // Generar el nombre del archivo
+        $backupFile = "backup_".date("dmY").".sql";
 
-           // $conn->db->completeTrans();
+        // Enviar respuesta al navegador
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="' . $backupFile . '"');
+        header('Pragma: no-cache');
+        header('Expires: 0');
 
-           
+        echo $backupSQL;
+        exit;
 
-       } catch (Exception $e) {
-           
-           print_r($e);
+    }
+    
+    
+    public function showUltimoRespaldo(){
 
-       }
+		try {
 
-	}
+			
+			$resp = $this->respaldo->getRespaldo();
 
+			$lista = array();
+
+			foreach ($resp as $dato) {
+
+				array_push($lista, [
+					'id' => $dato['id'],
+					'estado' => $dato['estado'],
+					'fecha' => $dato['fecha'],
+					]);
+
+			}
+
+			echo json_encode($lista);
+
+		} catch (Exception $e) {
+			
+			print_r($e);
+
+		}
+
+  }
+    // fin del controlador
 
 }

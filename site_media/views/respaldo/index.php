@@ -45,7 +45,7 @@
               <br>
               <br>
           <div class="form-row">
-            Último respaldo el 30/03/2025
+            <div id="texto"></div>
           </div>
           <br>
         </div> 

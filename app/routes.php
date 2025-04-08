@@ -341,8 +341,12 @@ class routes
 				new AlumnoCursoController('bonificar'); 
 			break;
 
-            case 'backup_db':
+           	case 'backup_db':
 				new RespaldosController('backupBase'); 
+			break;
+			
+		    case 'ultimo_respaldo':
+				new RespaldosController('showUltimoRespaldo'); 
 			break;
 			
 			default:
