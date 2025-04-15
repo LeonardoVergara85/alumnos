@@ -1,48 +1,61 @@
 <?php
-
+error_reporting(-1);
 include_once 'adodb/adodb.inc.php';
 include_once 'adodb/adodb-exceptions.inc.php';
 
+class Conexion {
 
-
-class Conexion{
+    public $host_usado;
 
     function __construct() {
         try {
-
             $this->db = NewADOConnection('mysqli');
-            // $this->db->Connect("mysql.hostinger.com.ar", "u622404615_alumnos", "Skills_2021++", "u622404615_alumnos");
-            //$this->db->Connect("localhost", "root", "", "alumnos");
-            $this->db->Connect("localhost", "root", "", "alumnos");
-            
-            if ( !isset($_SESSION) ) {
+
+            // Host por defecto
+            $hostDNS = 'localhost';
+            $hostIP = '127.0.0.1:3306';
+
+            // Intentar resolver DNS
+            $ip = gethostbyname($hostDNS);
+
+            if ($ip === $hostDNS) {
+                // Falló DNS, usar IP
+                $host = $hostIP;
+            } else {
+                // DNS funciona
+                $host = $hostDNS;
+            }
+
+            $this->host_usado = $host;
+
+            // Conexión
+            $this->db->Connect($host, "root", "", "alumnos");
+
+            if (!isset($_SESSION)) {
                 session_start();
             }
 
-            $sql = "SET NAMES 'utf8'";
-            $this->db->Execute($sql);
-		
-	    $sql_ = "SET time_zone = '-3:00'";
-            $this->db->Execute($sql_);
+            $this->db->Execute("SET NAMES 'utf8'");
+            $this->db->Execute("SET time_zone = '-3:00'");
 
-            // if ( isset($_SESSION['usuario']) ) {
-                
-            //     $docu = $_SESSION['usuario'];
-            
-            //     $stmt = $this->db->Prepare("BEGIN DBMS_SESSION.SET_IDENTIFIER(:DOCU); END;");
-            //     $this->db->InParameter($stmt, $docu, 'DOCU');
-            //     $this->db->Execute($stmt);
-
-            // }
-            
-            
+            // Log de conexión (opcional)
+            $this->logConexion($host);
 
             return $this->db;
 
-        } catch (exception $e) {
-            adodb_backtrace($e->gettrace());
+        } catch (Exception $e) {
+            var_dump('#Error al conectarse con la base de datos#');
+            adodb_backtrace($e->getTrace());
+        }
+    }
+
+    private function logConexion($host) {
+        if (!isset($_SESSION['conexion_log_escrito'])) {
+            $log = date('Y-m-d H:i:s') . " - Conexión usada: $host\n";
+            $logPath = realpath(__DIR__ . '/../logs') . '/conexion_log.txt';
+            file_put_contents($logPath, $log, FILE_APPEND);
+            $_SESSION['conexion_log_escrito'] = true;
         }
     }
 }
-	
 ?>
