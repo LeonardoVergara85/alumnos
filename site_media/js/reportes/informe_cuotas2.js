@@ -1,39 +1,108 @@
  
- var TablaCuotas = $('#table_cuotas_informe').DataTable( {
+//  var TablaCuotas = $('#table_cuotas_informe').DataTable( {
 
+//   dom: 'Bfrtip',
+//         buttons: [
+//             'excel', 'pdf', 'print'
+//         ],
+
+//  "language": {
+//         "url": "../../../public/libs/DataTables-1.10.12/extensions/table-spanish.json"
+//     },
+
+//       'columnDefs': [
+//   {
+//       "targets": 0, // your case first column
+//       "className": "text-left",
+//        "width": "30%",
+//  },{
+//       "targets": 1, // your case first column
+//       "className": "text-center",
+//        "width": "30%"
+//  },{
+//       "targets": 2, // your case first column
+//       "className": "text-center",
+//        "width": "20%"
+//  },{
+//       "targets": 3, // your case first column
+//       "className": "text-center",
+//        "width": "20%"
+//  },{
+//       "targets": 4, // your case first column
+//       "className": "text-center",
+//        "width": "20%"
+//  }
+//  ],
+//  });
+var TablaCuotas = $('#table_cuotas_informe').DataTable({
   dom: 'Bfrtip',
-        buttons: [
-            'excel', 'pdf', 'print'
-        ],
-
- "language": {
-        "url": "../../../public/libs/DataTables-1.10.12/extensions/table-spanish.json"
+  buttons: [
+    {
+      extend: 'excel',
+      className: 'btn btn-sm btn-outline-secondary',
+      text: 'Excel'
     },
+    {
+      extend: 'pdf',
+      className: 'btn btn-sm btn-outline-secondary',
+      text: 'PDF'
+    },
+    {
+      extend: 'print',
+      className: 'btn btn-sm btn-outline-secondary',
+      text: 'Print'
+    }
+  ],
+  language: {
+    url: "../../../public/libs/DataTables-1.10.12/extensions/table-spanish.json"
+  },
+  columnDefs: [
+    {
+      targets: 0,           // Nombre y Apellido
+      className: "text-left",
+      width: "25%"
+    },
+    {
+      targets: 1,           // Curso
+      className: "text-center",
+      width: "15%"
+    },
+    {
+      targets: 2,           // Cuota
+      className: "text-center",
+      width: "10%"
+    },
+    {
+      targets: 3,           // Vencimiento
+      className: "text-center",
+      width: "15%"
+    },
+    {
+      targets: 4,           // Pago
+      className: "text-center",
+      width: "12%"
+    },
+    {
+      targets: 5,           // Importe
+      className: "text-right",
+      width: "10%"
+    },
+    {
+      targets: 6,           // Estado
+      className: "text-center",
+      width: "13%",
+      // Evita que la palabra "Pagada (Mercadopago)" se parta feo
+      render: function(data, type, row) {
+        return '<span style="white-space: nowrap;">' + data + '</span>';
+      }
+    }
+  ],
+  // Para que el texto del estado no corte en medio de la palabra
+  autoWidth: false,
 
-      'columnDefs': [
-  {
-      "targets": 0, // your case first column
-      "className": "text-left",
-       "width": "30%",
- },{
-      "targets": 1, // your case first column
-      "className": "text-center",
-       "width": "30%"
- },{
-      "targets": 2, // your case first column
-      "className": "text-center",
-       "width": "20%"
- },{
-      "targets": 3, // your case first column
-      "className": "text-center",
-       "width": "20%"
- },{
-      "targets": 4, // your case first column
-      "className": "text-center",
-       "width": "20%"
- }
- ],
- });
+  // Orden inicial por Nombre
+  order: [[0, 'asc']],
+});
 
 $(document).ready(function(){
 
@@ -86,7 +155,7 @@ $(document).ready(function(){
 
               		}else{
 
-              			estado = "<font color='green'>Pagada</font>";	
+              			estado = "<font color='green'>Pagada ( "+value.formapago+" )</font>";	
 
               		}
 
@@ -94,7 +163,7 @@ $(document).ready(function(){
 	            	value.apellido+', '+value.nombre,
 	            	value.curso,
 	            	'Cuota: '+value.nro_cuota,
-                value.fecha_vencimiento,
+                    value.fecha_vencimiento,
 	            	value.fechapago,
 	            	value.importe,
 	            	estado

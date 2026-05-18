@@ -136,7 +136,7 @@ Class CuotasController extends Cuotas{
 
 			foreach ($cuotas as $cuota) {
 
-				array_push($lista, ['id' => $cuota['id'],'fecha_v' => $cuota['fecha_vencimiento_'],'descuento' => $cuota['descuento'],'interes' => $cuota['interes'],'nro' => $cuota['nro_cuota'],'importe' => number_format($cuota['importe'],2,',','.'),'fechap' => $cuota['fechapago'],'total' => number_format($cuota['total'],2,',','.')]);
+				array_push($lista, ['id' => $cuota['id'],'fecha_v' => $cuota['fecha_vencimiento_'],'descuento' => $cuota['descuento'],'interes' => $cuota['interes'],'nro' => $cuota['nro_cuota'],'importe' => number_format($cuota['importe'],2,',','.'),'fechap' => $cuota['fechapago'],'total' => number_format($cuota['total'],2,',','.'),'tipo_pago' => $cuota['tipo_pago']]);
 
 			}
 
@@ -313,10 +313,58 @@ Class CuotasController extends Cuotas{
 					'importe' => number_format($value['total'],2,',','.'),
 					'fecha_pago' => $value['fecha_pago'],
 					'fechapago' => $value['fechapago'],
+					'formapago' => $value['formapago'],
 			      ]);
 			}
 
 			echo json_encode($lista);
+
+		} catch (Exception $e) {
+			
+			print_r($e);
+
+		}
+
+	}
+
+	public function DetalleCajaChica(){
+
+		try {
+	
+			$inicial = $_POST['montoinicial'];
+			$fecha = $_POST['fecha'];
+			$caja = $this->CuotasModel->getFechaEfectivo($fecha);
+
+			$lista = array();
+			
+            $sumaDebe = $inicial;
+			$sumaHaber = 0;
+			$saldo = 0;
+			array_push($lista, ['fecha' => null,'denominacion' => 'Monto inicial','detalle' => 'Monto inicial','debe' => number_format($inicial,2,',','.'),'haber' => "-",'saldo' => null,'pagadopor' => null,'forma_pago' => null]);
+			foreach ($caja as $value) {
+
+				$debe = '-';
+				$haber = '-';
+
+				if($value['haber'] != NULL){
+					$haber = number_format($value['haber'],2,',','.');
+					$sumaHaber = $sumaHaber+$value['haber'];
+				}
+
+				if($value['debe'] != NULL){
+					$debe = number_format($value['debe'],2,',','.');
+					$sumaDebe = $sumaDebe+$value['debe'];
+				}
+
+				array_push($lista, ['fecha' => $value['fecha'],'denominacion' => $value['denominacion'],'detalle' => $value['detalle'],'debe' => $debe,'haber' => $haber,'saldo' => $value['saldo'],'pagadopor' => $value['pagadopor'],'forma_pago' => $value['forma_pago']]);
+
+			}
+
+            $saldo = $sumaDebe - $sumaHaber;
+			$sumaDebe = number_format($sumaDebe,2,',','.');
+			$sumaHaber= number_format($sumaHaber,2,',','.');
+			$saldo= number_format($saldo,2,',','.');
+			echo json_encode(['lista' =>$lista, 'totalDebe' =>$sumaDebe, 'totalHaber' =>$sumaHaber,  'saldo' =>$saldo],200);
 
 		} catch (Exception $e) {
 			

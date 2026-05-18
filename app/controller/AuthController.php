@@ -85,6 +85,7 @@ class AuthController extends Auth{
 						
 						if($verifica){
 	
+	                       $this->logConexionUsers($_POST['user']);     
 							$pass = 'skills123456';    
 							$passHash = password_hash($pass, PASSWORD_BCRYPT);
 	
@@ -106,7 +107,7 @@ class AuthController extends Auth{
 							echo 'ok';
 	
 						}else{
-							
+							$this->logConexionUsersNo($_POST['user']); 
 							session_destroy();
 							echo 'pass';
 	
@@ -115,12 +116,13 @@ class AuthController extends Auth{
 	
 					}else{
 	
-						
+						$this->logConexionUsersNo($_POST['user']); 
 						session_destroy();
 						echo 'usu';
 	
 					}
 				}else{
+				    $this->logConexionUsersNo($_POST['user']); 
 					session_destroy();
 					echo 'recaptcha';	
 				}
@@ -137,7 +139,7 @@ class AuthController extends Auth{
 
 		$this->AuthModel->_id = $_SESSION['user_id'];
 		$rdo = $this->AuthModel->DeleteApiToken();
-
+        $this->logDesconexionUsers($_SESSION['user_id']);
 		session_destroy();
 
 		$ruta = '../../../alumnos/site_media/views/logueo';
@@ -230,7 +232,23 @@ class AuthController extends Auth{
 
 	}
 
-
+   function logConexionUsers($user) {
+            $log = date('Y-m-d H:i:s') . " - Se conectó: $user\n";
+            $logPath = realpath(__DIR__ . '/../../logs') . '/conexion_users.txt';
+            file_put_contents($logPath, $log, FILE_APPEND);
+    }
+    
+     function logConexionUsersNo($user) {
+            $log = date('Y-m-d H:i:s') . " - No se pudo conectar: $user\n";
+            $logPath = realpath(__DIR__ . '/../../logs') . '/conexion_users.txt';
+            file_put_contents($logPath, $log, FILE_APPEND);
+    }
+    
+    function logDesconexionUsers($user) {
+            $log = date('Y-m-d H:i:s') . " - Se desconectó: $user\n";
+            $logPath = realpath(__DIR__ . '/../../logs') . '/conexion_users.txt';
+            file_put_contents($logPath, $log, FILE_APPEND);
+    }
 
 
 }

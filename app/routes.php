@@ -16,6 +16,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/config/Conexion.php';
  include_once 'controller/CuotasController.php';
  include_once 'controller/ActivosController.php';
  include_once 'controller/RespaldosController.php';
+ include_once 'controller/CajaChicaController.php';
 
 
 new routes();
@@ -347,6 +348,26 @@ class routes
 			
 		    case 'ultimo_respaldo':
 				new RespaldosController('showUltimoRespaldo'); 
+			break;
+			
+			case 'ver_cajas':
+				new CajaChicaController('show'); 
+			break;
+
+			case 'ver_detalle_caja':
+				new CuotasController('DetalleCajaChica'); 
+			break;
+
+			case 'apertura_caja':
+				new CajaChicaController('guardarCaja'); 
+			break;
+
+			case 'cierre_caja':
+				new CajaChicaController('cerrarCaja'); 
+			break;
+
+			case 'ver_pagos_alumno':
+				new ActivosController('verPagosAlumnos'); 
 			break;
 			
 			default:

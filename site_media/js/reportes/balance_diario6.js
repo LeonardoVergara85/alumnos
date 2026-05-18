@@ -1,150 +1,341 @@
 var f = new Date(); // fecha para mostrar en los archivos de export 
- var Tabla = $('#table_balance_diario').DataTable( {
+var f = new Date();
+var fechaExport = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+
+var Tabla = $('#table_balance_diario').DataTable({
   dom: 'Bfrtip',
-        buttons: [
-            'excel', 'pdf', 'print'
-        ],
-        buttons: [
-          {
-              
-              extend:    'pdfHtml5',
-              text:      '<i class="fa fa-file-pdf"></i>',
-              titleAttr: 'PDF',
-              message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
-              download: 'open',
-              title: 'Balance Diario - Skills',
-              footer: true
-          },
-          {
-              extend: 'excel',
-              text:'<i class="far fa-file-excel"></i>',
-              titleAttr: 'Excel',
-              message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
-              messageBottom: null,
-              title: 'Balance Diario - Skills',
-              footer: true
-          },
-          {
-            extend: 'print',
-            text:      '<i class="fa fa-print" ></i>',
-            titleAttr: 'Imprimir',
-            message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
-            messageBottom: null,
-            title: 'Balance Diario - Skills',
-            footer: true
-        }
-      ],
-
- "language": {
-        "url": "../../../public/libs/DataTables-1.10.12/extensions/table-spanish.json"
+  autoWidth: false,
+  buttons: [
+    {
+      extend: 'pdfHtml5',
+      text: '<i class="fa fa-file-pdf"></i>',
+      titleAttr: 'PDF',
+      message: 'Fecha de impresión (' + fechaExport + ')',
+      download: 'open',
+      title: 'Balance Diario - Skills',
+      footer: true
     },
+    {
+      extend: 'excel',
+      text: '<i class="far fa-file-excel"></i>',
+      titleAttr: 'Excel',
+      message: 'Fecha de impresión (' + fechaExport + ')',
+      messageBottom: null,
+      title: 'Balance Diario - Skills',
+      footer: true
+    },
+    {
+      extend: 'print',
+      text: '<i class="fa fa-print"></i>',
+      titleAttr: 'Imprimir',
+      message: 'Fecha de impresión (' + fechaExport + ')',
+      messageBottom: null,
+      title: 'Balance Diario - Skills',
+      footer: true
+    }
+  ],
+  language: {
+    url: "../../../public/libs/DataTables-1.10.12/extensions/table-spanish.json"
+  },
+  order: [[0, 'desc']], // más reciente primero
+  columnDefs: [
+    {
+      targets: 0,          // Fecha
+      className: "text-center",
+      width: "10%"
+    },
+    {
+      targets: 1,          // Denominación
+      className: "text-left",
+      width: "15%"
+    },
+    {
+      targets: 2,          // Detalle
+      className: "text-left",
+      width: "35%"         // más ancho, tiene texto largo
+    },
+    {
+      targets: 3,          // Debe
+      className: "text-right",
+      width: "10%",
+      render: function(data) {
+        if (!data || data == 0) return '<span class="text-muted">0</span>';
+        return '<span class="text-success font-weight-bold">' + data + '</span>';
+      }
+    },
+    {
+      targets: 4,          // Haber
+      className: "text-right",
+      width: "10%",
+      render: function(data) {
+        if (!data || data == 0) return '<span class="text-muted">0</span>';
+        return '<span class="text-danger font-weight-bold">' + data + '</span>';
+      }
+    },
+    {
+      targets: 5,          // Saldo
+      className: "text-right",
+      width: "10%"
+    },
+    {
+      targets: 6,          // Método
+      className: "text-center",
+      width: "10%",
+      render: function(data) {
+        var badges = {
+          'Efectivo':              'badge-success',
+          'Mercado Pago':          'badge-primary',
+          'Transferencia bancaria':'badge-info',
+          'Débito':                'badge-warning',
+          'Crédito':               'badge-secondary',
+          'Otro':                  'badge-dark'
+        };
+        var cls = badges[data] || 'badge-secondary';
+        return '<span class="badge ' + cls + '" style="white-space:nowrap">' + data + '</span>';
+      }
+    }
+  ]
+});
+//  var Tabla = $('#table_balance_diario').DataTable( {
+//   dom: 'Bfrtip',
+//         buttons: [
+//             'excel', 'pdf', 'print'
+//         ],
+//         buttons: [
+//           {
+              
+//               extend:    'pdfHtml5',
+//               text:      '<i class="fa fa-file-pdf"></i>',
+//               titleAttr: 'PDF',
+//               message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+//               download: 'open',
+//               title: 'Balance Diario - Skills',
+//               footer: true
+//           },
+//           {
+//               extend: 'excel',
+//               text:'<i class="far fa-file-excel"></i>',
+//               titleAttr: 'Excel',
+//               message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+//               messageBottom: null,
+//               title: 'Balance Diario - Skills',
+//               footer: true
+//           },
+//           {
+//             extend: 'print',
+//             text:      '<i class="fa fa-print" ></i>',
+//             titleAttr: 'Imprimir',
+//             message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+//             messageBottom: null,
+//             title: 'Balance Diario - Skills',
+//             footer: true
+//         }
+//       ],
 
-      'columnDefs': [
-  {
-      "targets": 0, // your case first column
-      "className": "text-center",
-       "width": "10%",
- },{
-      "targets": 1, // your case first column
-      "className": "text-left",
-       "width": "20%"
- },{
-      "targets": 2, // your case first column
-      "className": "text-left",
-       "width": "30%"
- },{
-      "targets": 3, // your case first column
-      "className": "text-center",
-       "width": "10%"
- },{
-      "targets": 4, // your case first column
-      "className": "text-center",
-       "width": "10%"
- },{
-      "targets": 5, // your case first column
-      "className": "text-center",
-       "width": "10%"
- },{
-      "targets": 6, // your case first column
-      "className": "text-left",
-       "width": "10%"
- },
- ],
- });
+//  "language": {
+//         "url": "../../../public/libs/DataTables-1.10.12/extensions/table-spanish.json"
+//     },
+
+//       'columnDefs': [
+//   {
+//       "targets": 0, // your case first column
+//       "className": "text-center",
+//        "width": "10%",
+//  },{
+//       "targets": 1, // your case first column
+//       "className": "text-left",
+//        "width": "20%"
+//  },{
+//       "targets": 2, // your case first column
+//       "className": "text-left",
+//        "width": "30%"
+//  },{
+//       "targets": 3, // your case first column
+//       "className": "text-center",
+//        "width": "10%"
+//  },{
+//       "targets": 4, // your case first column
+//       "className": "text-center",
+//        "width": "10%"
+//  },{
+//       "targets": 5, // your case first column
+//       "className": "text-center",
+//        "width": "10%"
+//  },{
+//       "targets": 6, // your case first column
+//       "className": "text-left",
+//        "width": "10%"
+//  },
+//  ],
+//  });
 
 
-  var TablaFecha = $('#table_gastos_fecha').DataTable( {
+//   var TablaFecha = $('#table_gastos_fecha').DataTable( {
+//   dom: 'Bfrtip',
+//         buttons: [
+//             'excel', 'pdf', 'print'
+//         ],
+//         buttons: [
+//           {
+              
+//               extend:    'pdfHtml5',
+//               text:      '<i class="fa fa-file-pdf"></i>',
+//               titleAttr: 'PDF',
+//               message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+//               download: 'open',
+//               title: 'Balance por fecha - Skills',
+//               footer: true
+//           },
+//           {
+//               extend: 'excel',
+//               text:'<i class="far fa-file-excel"></i>',
+//               titleAttr: 'Excel',
+//               message: 'Fecha de generación ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+//               messageBottom: null,
+//               title: 'Balance por fecha - Skills',
+//               footer: true
+//           },
+//           {
+//             extend: 'print',
+//             text:      '<i class="fa fa-print" ></i>',
+//             titleAttr: 'Imprimir',
+//             message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
+//             messageBottom: null,
+//             title: 'Balance por fecha - Skills',
+//             footer: true
+//         }
+//       ],
+
+//  "language": {
+//         "url": "../../../public/libs/DataTables-1.10.12/extensions/table-spanish.json"
+//     },
+
+//       'columnDefs': [
+//   {
+//       "targets": 0, // your case first column
+//       "className": "text-center",
+//        "width": "10%",
+//  },{
+//       "targets": 1, // your case first column
+//       "className": "text-left",
+//        "width": "20%"
+//  },{
+//       "targets": 2, // your case first column
+//       "className": "text-left",
+//        "width": "30%"
+//  },{
+//       "targets": 3, // your case first column
+//       "className": "text-center",
+//        "width": "10%"
+//  },{
+//       "targets": 4, // your case first column
+//       "className": "text-center",
+//        "width": "10%"
+//  },{
+//       "targets": 5, // your case first column
+//       "className": "text-center",
+//        "width": "10%"
+//  },{
+//       "targets": 6, // your case first column
+//       "className": "text-left",
+//        "width": "10%"
+//  },
+//  ],
+//  });
+var TablaFecha = $('#table_gastos_fecha').DataTable({
   dom: 'Bfrtip',
-        buttons: [
-            'excel', 'pdf', 'print'
-        ],
-        buttons: [
-          {
-              
-              extend:    'pdfHtml5',
-              text:      '<i class="fa fa-file-pdf"></i>',
-              titleAttr: 'PDF',
-              message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
-              download: 'open',
-              title: 'Balance por fecha - Skills',
-              footer: true
-          },
-          {
-              extend: 'excel',
-              text:'<i class="far fa-file-excel"></i>',
-              titleAttr: 'Excel',
-              message: 'Fecha de generación ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
-              messageBottom: null,
-              title: 'Balance por fecha - Skills',
-              footer: true
-          },
-          {
-            extend: 'print',
-            text:      '<i class="fa fa-print" ></i>',
-            titleAttr: 'Imprimir',
-            message: 'Fecha de impresión ('+f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()+')',
-            messageBottom: null,
-            title: 'Balance por fecha - Skills',
-            footer: true
-        }
-      ],
-
- "language": {
-        "url": "../../../public/libs/DataTables-1.10.12/extensions/table-spanish.json"
+  autoWidth: false,
+  buttons: [
+    {
+      extend: 'pdfHtml5',
+      text: '<i class="fa fa-file-pdf"></i>',
+      titleAttr: 'PDF',
+      message: 'Fecha de impresión (' + fechaExport + ')',
+      download: 'open',
+      title: 'Balance por fecha - Skills',
+      footer: true
     },
-
-      'columnDefs': [
-  {
-      "targets": 0, // your case first column
-      "className": "text-center",
-       "width": "10%",
- },{
-      "targets": 1, // your case first column
-      "className": "text-left",
-       "width": "20%"
- },{
-      "targets": 2, // your case first column
-      "className": "text-left",
-       "width": "30%"
- },{
-      "targets": 3, // your case first column
-      "className": "text-center",
-       "width": "10%"
- },{
-      "targets": 4, // your case first column
-      "className": "text-center",
-       "width": "10%"
- },{
-      "targets": 5, // your case first column
-      "className": "text-center",
-       "width": "10%"
- },{
-      "targets": 6, // your case first column
-      "className": "text-left",
-       "width": "10%"
- },
- ],
- });
+    {
+      extend: 'excel',
+      text: '<i class="far fa-file-excel"></i>',
+      titleAttr: 'Excel',
+      message: 'Fecha de generación (' + fechaExport + ')',
+      messageBottom: null,
+      title: 'Balance por fecha - Skills',
+      footer: true
+    },
+    {
+      extend: 'print',
+      text: '<i class="fa fa-print"></i>',
+      titleAttr: 'Imprimir',
+      message: 'Fecha de impresión (' + fechaExport + ')',
+      messageBottom: null,
+      title: 'Balance por fecha - Skills',
+      footer: true
+    }
+  ],
+  language: {
+    url: "../../../public/libs/DataTables-1.10.12/extensions/table-spanish.json"
+  },
+  order: [[0, 'desc']],
+  columnDefs: [
+    {
+      targets: 0,
+      className: "text-center",
+      width: "10%"
+    },
+    {
+      targets: 1,
+      className: "text-left",
+      width: "15%"
+    },
+    {
+      targets: 2,
+      className: "text-left",
+      width: "35%"
+    },
+    {
+      targets: 3,
+      className: "text-right",
+      width: "10%",
+      render: function(data) {
+        if (!data || data == 0) return '<span class="text-muted">0</span>';
+        return '<span class="text-success font-weight-bold">' + data + '</span>';
+      }
+    },
+    {
+      targets: 4,
+      className: "text-right",
+      width: "10%",
+      render: function(data) {
+        if (!data || data == 0) return '<span class="text-muted">0</span>';
+        return '<span class="text-danger font-weight-bold">' + data + '</span>';
+      }
+    },
+    {
+      targets: 5,
+      className: "text-right",
+      width: "10%"
+    },
+    {
+      targets: 6,
+      className: "text-center",
+      width: "10%",
+      render: function(data) {
+        var badges = {
+          'Efectivo':               'badge-success',
+          'Mercado Pago':           'badge-primary',
+          'Transferencia bancaria': 'badge-info',
+          'Débito':                 'badge-warning',
+          'Crédito':                'badge-secondary',
+          'Otro':                   'badge-dark'
+        };
+        var cls = badges[data] || 'badge-secondary';
+        return '<span class="badge ' + cls + '" style="white-space:nowrap">' + data + '</span>';
+      }
+    }
+  ]
+});
 
 $(document).ready(function(){
 

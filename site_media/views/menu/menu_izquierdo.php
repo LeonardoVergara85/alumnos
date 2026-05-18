@@ -16,7 +16,7 @@
                          <?php 
                     } ?>
               
-              <li><a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i>Activos </a>
+              <li><a href="#"><i class="fas fa-money-bill-wave"></i>Activos </a>
                 <ul class="submenu">
                   <li><a href="../activos">Registrar Activo </a></li>
                 </ul>
@@ -75,7 +75,11 @@
                 </ul>
               </li>
               <?php
-                if($usuario === "3"){
+                if($usuario === "1"){
+                    ?><li><a href="../caja"><i class="fas fa-hand-holding-usd"></i>Caja chica </a></li><?php 
+                } ?>
+              <?php
+                if($usuario === "1"){
                     ?><li><a href="../usuarios"><i class="fa fa-user"></i>Usuarios </a></li><?php 
                 } ?>
             </ul>

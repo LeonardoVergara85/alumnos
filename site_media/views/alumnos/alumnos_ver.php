@@ -209,52 +209,75 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
     </div>
   </div>  
 
-             <!-- The Modal -->
-  <div class="modal fade" id="modalCursosAlu" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title" id="titulo-modal"></h4>
-          <br>
-          <h5 class="modal-title" id="her"></h5>
-          
-        </div>
-        <!-- Modal body -->
-        <div class="modal-body">
-           <form id="">
-              <div class="form-row">
-                <div class="col-md-12 mb-2">
-                  <div id="accordion">
-                    <div class="card" id="card_body">
-                    </div>
-                  </div>
-                 <!--  <table id="table_cursos_asociados" class="table table-striped table-hover compact" cellspacing="0" width="100%">
-                    <thead>
-                      <th style="width: 60%;">Curso</th>
-                      <th style="width: 20%;">fecha</th>
-                      <th style="width: 10%;">meses</th>
-                      <th style="width: 10%;"></th>
-                    </thead>
-                    <tbody id="cuerpoTablaAsociar">
-                    </tbody>
-                  </table> -->
-                </div>
-              </div>
-            </form>
-          </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btnclose2" data-dismiss="modal">Cerrar</button>
-        </div>
-        
-      </div>
-    </div>
-  </div> 
+  <!-- The Modal -->
+<div class="modal fade" id="modalCursosAlu" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg" role="document" style="max-width: 70vw;">
+    <div class="modal-content">
 
-  v
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div>
+          <h4 class="modal-title" id="titulo-modal"></h4>
+          <h5 class="modal-title text-muted" id="her"></h5>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="modal-body" style="padding-top: 10;">
+        <ul class="nav nav-tabs" id="tabsModal" style="margin-bottom: 1rem;">
+          <li class="nav-item">
+            <a class="nav-link active" id="tab-cursos" data-toggle="tab" href="#panel-cursos">
+              <i class="fas fa-book"></i> Cursos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="tab-pagos" data-toggle="tab" href="#panel-pagos">
+              <i class="fas fa-money-bill-wave"></i> Pagos realizados
+            </a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+
+          <!-- Panel Cursos -->
+          <div class="tab-pane fade show active" id="panel-cursos">
+            <div id="accordion">
+              <div class="card" id="card_body"></div>
+            </div>
+          </div>
+
+          <!-- Panel Pagos -->
+          <div class="tab-pane fade" id="panel-pagos">
+            <table id="tabla_pagos_realizados" class="table table-striped table-hover compact" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th class="text-center">Fecha</th>
+                  <th class="text-center">Descripción</th>
+                  <th class="text-center">Importe</th>
+                  <th class="text-center">Tipo de pago</th>
+                </tr>
+              </thead>
+              <tbody id="cuerpo_pagos_realizados">
+                <tr>
+                  <td colspan="6" class="text-center text-muted">Cargando pagos...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btnclose2" data-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  
   <!-- The Modal -->
   <div class="modal fade" id="modalCuotas" >
     <div class="modal-dialog modal-lg" style="width: 1300px;margin-left: -300px;" role="document">

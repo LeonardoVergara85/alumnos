@@ -76,7 +76,7 @@ Class RespaldosController extends Respaldos{
 				array_push($lista, [
 					'id' => $dato['id'],
 					'estado' => $dato['estado'],
-					'fecha' => $dato['fecha'],
+					'fecha' => $dato['fecha_formateada'],
 					]);
 
 			}

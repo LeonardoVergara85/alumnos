@@ -74,7 +74,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="MyModalActivos" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-  <div class="modal-dialog bd-example-modal-lg" role="document">
+  <div class="modal-dialog bd-example-modal-lg" role="document" style="max-width: 50vw;">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="ModalLongTitle">Nuevo Activo</h5>
@@ -84,6 +84,24 @@
       </div>
       <div class="modal-body">
       <form id="formulario_activos">
+        <!-- Checkbox para mostrar/ocultar la tabla -->
+            <div class="form-group form-check mb-2">
+                <input type="checkbox" class="form-check-input" id="chk_asociar_alumno" name="chk_asociar_alumno">
+                <label class="form-check-label" for="chk_asociar_alumno"><strong>Asociar un alumno</strong></label>
+            </div>
+             <!-- Tabla envuelta en un div para mostrar/ocultar -->
+              <div id="div_tabla_alumnos" style="display:none;">
+                  <table id="table_cursos_asociar" class="table" style="width:100%">
+                      <thead>
+                          <tr>
+                              <th>Seleccionar</th>
+                              <th>Documento</th>
+                              <th>Nombre</th>
+                          </tr>
+                      </thead>
+                      <tbody></tbody>
+                  </table>
+              </div>
             <div class="form-row">
               <div class="col-md-12 mb-2">
                 <!-- <label for="validationGradoanio">Descripción</label>
@@ -97,7 +115,7 @@
             <div class="form-row">
             <div class="col-md-5 mb-2">
                 <label>Importe</label>
-                <input class="form-control imp" type="text" name="importe" id="importe" maxlength="10">
+                <input class="form-control imp" type="text" name="importe" id="importe" maxlength="12">
               </div>
          
               <div class="col-md-7 mb-2">
@@ -124,6 +142,38 @@
   </div>
 </div>
 
+
+           <!-- The Modal Alumnos-->
+  <div class="modal fade" id="modalAsociar" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Asociar Alumnos</h4>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+           <form id="formulario_asociar">
+              <div class="form-row">
+                <div class="col-md-12 mb-2">
+                  
+               </div>
+            </div>
+            <button class="btn btn-primary" type="button" name="asociarAlumno" id="asociarAlumno">Guardar</button>
+          </form>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btnclose" data-dismiss="modal">Cerrar</button>
+        </div>
+        
+      </div>
+    </div>
+  </div> 
+  
   </body>
 
   <?php include_once '../../../public/libs/include_libs_js.html'; ?>

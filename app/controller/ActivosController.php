@@ -44,6 +44,7 @@ Class ActivosController extends Activos{
 				$this->ActivosModel->_importe = $_POST['importe'];
 				$this->ActivosModel->_forma_pago = $_POST['formapago'];
 				$this->ActivosModel->_id_usuario = $_POST['usu'];
+				$this->ActivosModel->_id_alumno = $_POST['alumno'] === "" ? null : $_POST['alumno'];
 	
 				$idPer = $this->ActivosModel->guardar($conn);
 
@@ -73,7 +74,7 @@ Class ActivosController extends Activos{
 				$this->ActivosModel->_importe = $_POST['importe'];
 				$this->ActivosModel->_forma_pago = $_POST['formapago'];
 				$this->ActivosModel->_id_usuario = $_POST['usu'];
-
+				$this->ActivosModel->_id_alumno = $_POST['alumno'] === "" ? null : $_POST['alumno'];
 				$idPer = $this->ActivosModel->modificar($conn);
 
 			 $conn->db->completeTrans();
@@ -105,7 +106,9 @@ Class ActivosController extends Activos{
 					'descripcion' => $activo['descripcion'],
 					'importe' => number_format($activo['importe'],2,',','.'),
 					'fecha' => $activo['fecha_activo'],
-					'formapago' => $activo['pago']
+					'formapago' => $activo['pago'],
+					'nombreAlu' => $activo['nombre_alumno'],
+					'apellidoAlu' => $activo['apellido_alumno']
 				]);
 
 			}
@@ -138,7 +141,8 @@ Class ActivosController extends Activos{
 					'importe' => number_format($activo['importe'],2,',','.'),
 					'fecha' => $activo['fecha_activo'],
 					'formapago' => $activo['pago'],
-					'forma_pago' => $activo['forma_pago']
+					'forma_pago' => $activo['forma_pago'],
+					'alumno_id' => $activo['alumno_id']
 				]);
 
 			}
@@ -154,6 +158,39 @@ Class ActivosController extends Activos{
 	}
 	
 
+public function verPagosAlumnos(){
+
+		try {
+
+			$this->ActivosModel->_id_alumno = $_POST['idAlumno'];
+			
+			$activos = $this->ActivosModel->getActivosAlumno();
+
+			$lista = array();
+
+			foreach ($activos as $activo) {
+
+				array_push($lista, [
+					'id' => $activo['id'],
+					'descripcion' => $activo['descripcion'],
+					'importe' => number_format($activo['importe'],2,',','.'),
+					'fecha' => $activo['fecha_activo'],
+					'formapago' => $activo['pago'],
+					'forma_pago' => $activo['forma_pago'],
+					'alumno_id' => $activo['alumno_id']
+				]);
+
+			}
+
+			echo json_encode($lista);
+
+		} catch (Exception $e) {
+			
+			print_r($e);
+
+		}
+
+	}
 	
 
 }

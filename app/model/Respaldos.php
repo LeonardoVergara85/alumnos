@@ -132,7 +132,7 @@ public function Respaldar() {
     	
     	try {
 
-			$sql = "SELECT id, estado, date_format(fecha,'%d/%m/%Y %H:%m hs.') AS fecha FROM `respaldos` ORDER BY fecha DESC LIMIT 1";
+			$sql = "SELECT id, estado, date_format(fecha, '%d/%m/%Y %H:%i hs.') AS fecha_formateada FROM `respaldos` ORDER BY fecha DESC LIMIT 1;";
 
 		   $this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
 

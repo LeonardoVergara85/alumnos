@@ -358,18 +358,18 @@
  			
  			if($tipoconsulta == 0){
 
- 				$sql = "SELECT * FROM cuotas_vw
-					WHERE fecha_vencimiento BETWEEN CAST(? AS DATE) AND CAST(? AS DATE)";
+ 				$sql = "SELECT c.*, tp.descripcion as formapago FROM cuotas_vw c JOIN tipo_pago tp ON tp.id = c.id_tipo_pago
+					WHERE c.fecha_vencimiento BETWEEN CAST(? AS DATE) AND CAST(? AS DATE)";
 
  			}else if($tipoconsulta == 1){
 
- 				$sql = "SELECT * FROM cuotas_vw
-					WHERE fecha_vencimiento BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) AND fecha_pago = '0000-00-00'";
+ 				$sql = "SELECT c.*, tp.descripcion as formapago FROM cuotas_vw c JOIN tipo_pago tp ON tp.id = c.id_tipo_pago
+					WHERE c.fecha_vencimiento BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) AND fecha_pago = '0000-00-00'";
 
  			}else if($tipoconsulta == 2){
 
- 				$sql = "SELECT * FROM cuotas_vw
-					WHERE fecha_vencimiento BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) AND fecha_pago <> '0000-00-00'";
+ 				$sql = "SELECT c.*, tp.descripcion as formapago FROM cuotas_vw c JOIN tipo_pago tp ON tp.id = c.id_tipo_pago
+					WHERE c.fecha_vencimiento BETWEEN CAST(? AS DATE) AND CAST(? AS DATE) AND fecha_pago <> '0000-00-00'";
 
  			}
 
@@ -455,6 +455,30 @@
 		}
 
 	}
+
+	public function getFechaEfectivo($fecha){
+
+ 		try {	
+
+
+ 			$sql = "SELECT b.fecha, b.fech, b.denominacion, b.detalle, b.debe, b.haber, b.saldo, b.pagadopor, b.forma_pago 
+					FROM balance_diario_vw b 
+					WHERE fech = ? AND (pagadopor = 'Efectivo' OR forma_pago = 'Efectivo') ORDER BY debe DESC";
+
+			$this->DB->SetFetchMode(ADODB_FETCH_ASSOC);
+ 			
+			$filas = $this->DB->Execute($sql,array($fecha));
+
+			return $filas;
+
+
+ 		} catch (Exception $e) {
+ 			
+ 			print_r('MODEL: ' . $e);
+
+ 		}
+
+ 	}	
 	
 
 

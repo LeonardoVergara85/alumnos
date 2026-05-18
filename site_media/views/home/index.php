@@ -1,8 +1,8 @@
 <?php  
 // $authC->ChequearAuth(); 
- //session_start();
- //var_dump($_SESSION);
-//$usuario = $_SESSION['usuario_tipo_id'];
+ session_start();
+// var_dump($_SESSION);
+$usuario = $_SESSION['usuario_tipo_id'];
 ?>
 
 <!doctype html>
@@ -50,6 +50,16 @@
 
             // Zulema Alud
             //  $pass = 'Zul34lud';     
+            //  $passHash = password_hash($pass, PASSWORD_BCRYPT);
+            //  echo 'hash '.$passHash;
+            
+            // Ale
+            //  $pass = 'Al3d4yub';     
+            //  $passHash = password_hash($pass, PASSWORD_BCRYPT);
+            //  echo 'hash '.$passHash;
+            
+            // secretaria
+            //  $pass = 'Ana0426';     
             //  $passHash = password_hash($pass, PASSWORD_BCRYPT);
             //  echo 'hash '.$passHash;
         ?>  
