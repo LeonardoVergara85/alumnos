@@ -149,9 +149,12 @@ $(document).ready(function(){
             var aux = montoInicial.split('$');
             montoInicial = aux[1];
             
-            var montoInicial = montoInicial.replace('.','');
-            var montoInicial = montoInicial.replace(',','.');
-
+            // var montoInicial = montoInicial.replace('.','');
+            // var montoInicial = montoInicial.replace(',','.');
+            // eliminar TODOS los puntos
+            montoInicial = montoInicial.replace(/\./g, '');
+            // reemplazar coma decimal por punto
+            montoInicial = montoInicial.replace(',', '.');
             $.ajax({
               type: "POST",
               url: "../../../app/routes.php",
@@ -223,8 +226,11 @@ $(document).ready(function(){
             var aux = montoFinal.split('$');
             montoFinal = aux[1];
             
-            var montoFinal = montoFinal.replace('.','');
-            var montoFinal = montoFinal.replace(',','.');
+            // var montoFinal = montoFinal.replace('.','');
+            // var montoFinal = montoFinal.replace(',','.');
+            montoFinal = montoFinal.replace(/\./g, '');
+            // reemplazar coma decimal por punto
+            montoFinal = montoFinal.replace(',', '.');
 
             $.ajax({
               type: "POST",

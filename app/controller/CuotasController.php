@@ -332,6 +332,10 @@ Class CuotasController extends Cuotas{
 		try {
 	
 			$inicial = $_POST['montoinicial'];
+			$partes = explode('.', $inicial);         // ["1001", "010", "00"]
+            $decimal = array_pop($partes);            // "00"
+            $entero = implode('', $partes);           // "1001010"
+            $inicial = floatval($entero . '.' . $decimal); // 1001010.00 ✅
 			$fecha = $_POST['fecha'];
 			$caja = $this->CuotasModel->getFechaEfectivo($fecha);
 
@@ -364,7 +368,7 @@ Class CuotasController extends Cuotas{
 			$sumaDebe = number_format($sumaDebe,2,',','.');
 			$sumaHaber= number_format($sumaHaber,2,',','.');
 			$saldo= number_format($saldo,2,',','.');
-			echo json_encode(['lista' =>$lista, 'totalDebe' =>$sumaDebe, 'totalHaber' =>$sumaHaber,  'saldo' =>$saldo],200);
+			echo json_encode(['lista' =>$lista, 'totalDebe' =>$sumaDebe, 'totalHaber' =>$sumaHaber,  'saldo' =>$saldo, 'inicial' =>$inicial],200);
 
 		} catch (Exception $e) {
 			

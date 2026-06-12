@@ -143,7 +143,7 @@
              <div class="form-row">
             <div class="col-md-5 mb-2">
                 <label>Monto final</label>
-                <input class="form-control imp" type="text" name="monto_final" id="monto_final" maxlength="12" disabled>
+                <input class="form-control imp" type="text" name="monto_final" id="monto_final" maxlength="14" disabled>
               </div>
             </div>
             </div>
