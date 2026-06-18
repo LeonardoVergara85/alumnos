@@ -776,7 +776,7 @@ $(document).ready(function() {
 
           $.each( cuota, function( key, value ) {
 
-            window.open('recibo_pdf.php?nrorecibo='+value.id+'&nom='+value.nombre+'&ape='+value.apellido+'&curso='+value.curso+'&cuota='+value.nro+'&meses='+value.meses+'&imp='+value.importe+'&fechap='+value.fecha_p+'&fechav='+value.fecha_v+'&tipop='+value.tipo_pago+'','_blank','width=600,height=400');
+            window.open('recibo_pdf.php?nrorecibo='+value.id+'&di='+value.descint+'&nom='+value.nombre+'&ape='+value.apellido+'&curso='+value.curso+'&cuota='+value.nro+'&meses='+value.meses+'&imp='+value.importe+'&fechap='+value.fecha_p+'&fechav='+value.fecha_v+'&tipop='+value.tipo_pago+'','_blank','width=600,height=400');
           
           });
 
@@ -819,75 +819,106 @@ $(document).ready(function() {
 
   });    
 
-  // $(document).on("click", ".nombre_curso", function () {
+$(document).on('click', '.edit_cuota', function () {
+  var id = this.id.replace('editcuota', '');
+  var $row = $(this).closest('tr');
 
-  //   // alert(this.id);
+  // Guardo los valores actuales por si cancela
+  $('#desc' + id).data('original', $('#desc' + id).val());
+  $('#int' + id).data('original', $('#int' + id).val());
+  $('#tipopago' + id).data('original', $('#tipopago' + id).val());
+  $('#obs' + id).data('original', $('#obs' + id).val());
+  // Habilito los campos
+  $('#desc' + id + ', #int' + id + ', #tipopago' + id + ', #obs' + id).prop('disabled', false);
+  $('#filaobs' + id).show();
+  // Cambio qué botones se ven
+  $row.find('.print_cuota').hide();
+  $row.find('.edit_cuota').hide();
+  $row.find('.cancelar_edit').show();
+  $row.find('.guardar_edit').show();
+});
 
-  //  // console.log($("#btn-cur").prop("aria-expanded",false));
-  //  var id_alu_cur = this.id;
-  //   let tipoUsuario = $('#usuario_id_tipo').val();
-  //   $('#cuerpoTablaCuotas'+id_alu_cur).empty();
+$(document).on('click', '.cancelar_edit', function () {
+  var id = this.id.replace('cancelaredit', '');
+  var $row = $(this).closest('tr');
 
-  //  var x = document.getElementById("btn-cur").getAttribute("aria-expanded"); 
-  // if (x == "true") 
-  // {
-  //   $('#cuerpoTablaCuotas'+id_alu_cur).empty();
-  // } 
-  // else {
+  // Restauro los valores originales
+  $('#desc' + id).val($('#desc' + id).data('original'));
+  $('#int' + id).val($('#int' + id).data('original'));
+  $('#tipopago' + id).val($('#tipopago' + id).data('original'));
+  $('#obs' + id).val($('#obs' + id).data('original'));
+  // Deshabilito de nuevo
+  $('#desc' + id + ', #int' + id + ', #tipopago' + id + ', #obs' + id).prop('disabled', true);
+  $('#filaobs' + id).hide();
+  $row.find('.cancelar_edit').hide();
+  $row.find('.guardar_edit').hide();
+  $row.find('.print_cuota').show();
+  $row.find('.edit_cuota').show();
+});
 
-  //   $.ajax({
-  //     type: "POST",
-  //     url: "../../../app/routes.php",
-  //     dataType: 'json',
-  //     data: {
-  //       peticion : 'ver_cuotas',
-  //       idac : id_alu_cur
-  //     },
-  //     success: function (resp) {
+$(document).on('click', '.guardar_edit', function () {
+  var id = this.id.replace('guardaredit', '');
+  var $row = $(this).closest('tr');
 
-  //       var cuotas = resp;
+  $.ajax({
+    type: "POST",
+    url: "../../../app/routes.php",
+    dataType: 'text',
+    data: {
+      peticion: 'editar_cuota',
+      idcuota: id,
+      descuento: $('#desc' + id).val(),
+      interes: $('#int' + id).val(),
+      tipopago: $('#tipopago' + id).val(),
+      observaciones: $('#obs' + id).val()
+    },
+    success: function (resp) {
+       var respuesta = resp.split('-');
+          if(respuesta[0] == 'ok'){
+                        toastr.success('Se ha modificado con éxito.');
+                         setTimeout(function() { 
+                            $(".btn-primary").attr('disabled',false);
+                            $('#desc'+id).attr('disabled', 'disabled');
+                            $('#int'+id).attr('disabled', 'disabled');
+                            $('#total'+id).attr('disabled','disabled');
+                            $('#total'+id).val(respuesta[1]);
+                            $('#tipopago'+id).attr('disabled', 'disabled');
+                            $('#confirmar'+id).hide();
+                            $('#cerrar-'+id).hide();
+                            $('#print'+id).show();
+                            // $('#filaobs'+id).val(respuesta[2]);
+                            // $('#filaobs' + id).hide();
+                            $('#filaobs'+id).val(respuesta[2]);
+                            $('#filaobs' + id).hide();
+                            // Actualizar tooltip de observaciones
+                            var $nroTd = $row.find('td:first-child font');
+                            var nuevaObs = respuesta[2] ? respuesta[2].trim() : '';
 
-  //               $.each( cuotas, function( key, value ) {
+                            $nroTd.find('.tooltip-obs').remove(); // quitar ícono anterior si había
+                              if (nuevaObs !== '') {
+                                var escapedObs = $('<div>').text(nuevaObs).html();
+                                var nuevoIcono = "<span class='tooltip-obs'>" +
+                                                  "<i class='fas fa-comment-dots'></i>" +
+                                                  "<span class='tooltip-text'>" + escapedObs + "</span>" +
+                                                "</span>";
+                                $nroTd.append(nuevoIcono);
+                              }
+                              $row.find('.cancelar_edit').hide();
+                              $row.find('.guardar_edit').hide();
+                              $row.find('.print_cuota').show();
+                              $row.find('.edit_cuota').show();
+                        }, 1500);
+                    }else{
+                        toastr.error('Ha ocurrido un error!!!');
+                        return false;
+                    }
 
-  //         cerrar = "<a href='#' class='badge badge-danger cerrar' id='cerrar-"+value.id+"' style='display:none'>cancelar <i class='fas fa-window-close'></i></a>";
-  //         // cerrar = "<span class='badge badge-pill badge-danger' id='cerrar"+value.id+"' style='display:none'><i class='fas fa-window-close'></i></span>";
-  //         // cerrar = "<button type='button' class='btn btn-danger btn-sm' id='cerrar"+value.id+"' style='display:none'><i class='fas fa-window-close'></i></button>";
-  //         boton_pint = "<button type='button' class='btn btn-warning btn-sm print_cuota' id='"+value.id+"'><i class='fas fa-print'></i></button>";
-  //         boton_pint2 = "<button type='button' class='btn btn-warning btn-sm print_cuota_' id='print"+value.id+"' style='display:none'><i class='fas fa-print'></i></button>";
-  //         boton_pagar_conf = "<button type='button' class='confirmapago btn btn-success btn-sm' id='confirmar"+value.id+"' value='"+value.id+"' style='display: none;'>Confirmar</button>";
-  //         if(tipoUsuario === "1"){
-  //               boton_pagar = "<button type='button' class='btn btn-primary btn-sm pagar' id='"+value.id+"'><i class='fas fa-dollar-sign'></i> Pagar</button>";
-  //         }else{
-  //             boton_pagar = '';
-  //         }
-          
-  //         //boton_bonificar = "<button type='button' class='btn btn-info btn-sm bonificar' id='"+value.id+"'><i class='fas fa-dollar-sign'></i> Bonificar</button>";
-  //         if(value.fechap == '00/00/0000'){
-
-  //           $('#cuerpoTablaCuotas'+id_alu_cur).append("<tr><td><font size='2'>"+value.nro+"<font></td><td><font size='2'>"+value.fecha_v+"</font></td><td ><font size='2' id='imp"+value.id+"'>"+value.importe+"</font></td><td><input type='text' class='form-control descuento' id='desc"+value.id+"' value='"+value.descuento+"' placeholder='%' style='width: 43px;font-size:13px;' disabled=''></td><td><input type='text' id='int"+value.id+"' class='form-control interes' value='"+value.interes+"' placeholder='%' style='width: 43px;font-size:13px;' disabled=''></td><td><input class='form-control' type='text' id='total"+value.id+"' value='"+value.total+"' style='width: 110px;font-size:13px;' disabled=''/></td><td><select id='tipopago"+value.id+"' class='form-control' style='width:160px;' disabled><option value='0'>*</option><option value='1'>Efectivo</option><option value='2'>Débito</option><option value='6'>Crédito</option><option value='5'>MercadoPago</option><option value='3'>Transferencia</option><option value='4'>Otro</option></select></td><td><font size='2' id='fp"+value.id+"'>"+value.fechap+"</font></td><td>"+boton_pagar+' '+boton_pagar_conf+''+boton_pint2+''+cerrar+"</td></tr>");
-             
-
-  //         }else{
-
-  //           $('#cuerpoTablaCuotas'+id_alu_cur).append("<tr><td><font size='2'>"+value.nro+"<font></td><td><font size='2'>"+value.fecha_v+"</font></td><td ><font size='2' id='imp"+value.id+"'>"+value.importe+"</font></td><td><input type='text' class='form-control descuento' id='desc"+value.id+"' value='"+value.descuento+"' placeholder='%' style='width: 43px;font-size:13px;' disabled=''></td><td><input type='text' id='int"+value.id+"' class='form-control interes' value='"+value.interes+"' placeholder='%' style='width: 43px;font-size:13px;' disabled=''></td><td><input class='form-control' type='text' id='total"+value.id+"' value='"+value.total+"' style='width: 110px;font-size:13px;' disabled=''/></td><td class='text-center'><font size='2'>"+value.tipo_pago+"</font></td><td><font size='2' id='fp"+value.id+"'>"+value.fechap+"</font></td><td>"+boton_pint+"</td></tr>");
-
-  //         }
-
-     
-  //         });
-
-  //     }
-  //   }); 
-  // }
-    
-    
-    
-    
-    
-
-
-  // });  
-  // REEMPLAZÁ el $(document).on("click", ".nombre_curso", ...) entero por esto:
+    },
+    // error: function () {
+    //   alert('Error al guardar los cambios de la cuota.');
+    // }
+  });
+});
 
 $(document).on('show.bs.collapse', '#accordion .collapse', function () {
   // El id del panel que se abre es el id del collapse, 
@@ -912,24 +943,52 @@ $(document).on('show.bs.collapse', '#accordion .collapse', function () {
     success: function (resp) {
       $tbody.empty();
       $.each(resp, function (key, value) {
+        var tipoPagoMap = { 'Efectivo': '1', 'Débito': '2', 'Transferencia bancaria': '3', 'Otro': '4', 'Mercado Pago': '5', 'Crédito': '6' };
+        var tipopagoActual = tipoPagoMap[value.tipo_pago] || '0';
+        var selectTipoPago =
+            "<select id='tipopago" + value.id + "' class='form-control' style='width:160px;' disabled>" +
+            "<option value='0'" + (tipopagoActual === '0' ? ' selected' : '') + ">*</option>" +
+            "<option value='1'" + (tipopagoActual === '1' ? ' selected' : '') + ">Efectivo</option>" +
+            "<option value='2'" + (tipopagoActual === '2' ? ' selected' : '') + ">Débito</option>" +
+            "<option value='6'" + (tipopagoActual === '6' ? ' selected' : '') + ">Crédito</option>" +
+            "<option value='5'" + (tipopagoActual === '5' ? ' selected' : '') + ">Mercado Pago</option>" +
+            "<option value='3'" + (tipopagoActual === '3' ? ' selected' : '') + ">Transferencia bancaria</option>" +
+            "<option value='4'" + (tipopagoActual === '4' ? ' selected' : '') + ">Otro</option>" +
+            "</select>";
         var cerrar = "<a href='#' class='badge badge-danger cerrar' id='cerrar-" + value.id + "' style='display:none'>cancelar <i class='fas fa-window-close'></i></a>";
-        var boton_pint = "<button type='button' class='btn btn-warning btn-sm print_cuota' id='" + value.id + "'><i class='fas fa-print'></i></button>";
         var boton_pint2 = "<button type='button' class='btn btn-warning btn-sm print_cuota_' id='print" + value.id + "' style='display:none'><i class='fas fa-print'></i></button>";
         var boton_pagar_conf = "<button type='button' class='confirmapago btn btn-success btn-sm' id='confirmar" + value.id + "' value='" + value.id + "' style='display:none'>Confirmar</button>";
+        var boton_pint = "<button type='button' class='btn btn-warning btn-sm print_cuota' id='" + value.id + "'><i class='fas fa-print'></i></button>";
+        if(value.edita === 'S'){
+          var boton_edit = "<button type='button' class='btn btn-info btn-sm edit_cuota' id='editcuota" + value.id + "'><i class='fas fa-edit'></i></button>";
+        }else{
+          var boton_edit = "<button type='button' class='btn btn-secondary btn-sm edit_cuota' id='editcuota' style='background-color:#e9ecef;border-color:#e9ecef; color:gray' disabled><i class='fas fa-edit'></i></button>";
+        }
+        var boton_cancelar_edit = "<button type='button' class='btn btn-secondary btn-sm cancelar_edit' id='cancelaredit" + value.id + "' style='display:none'><i class='fas fa-times'></i></button>";
+        var boton_guardar_edit = "<button type='button' class='btn btn-success btn-sm guardar_edit' id='guardaredit" + value.id + "' style='display:none'><i class='fas fa-save'></i></button>";
         var boton_pagar = (tipoUsuario === "1")
           ? "<button type='button' class='btn btn-primary btn-sm pagar' id='" + value.id + "'><i class='fas fa-dollar-sign'></i> Pagar</button>"
           : '';
-
+         var acciones = "<div class='acciones-cuota' style='display:flex; align-items:center; gap:6px;'>" +
+                        boton_pint + boton_edit + boton_cancelar_edit + boton_guardar_edit +
+                        "</div>";
+        var obsIcon = (value.observaciones && value.observaciones.trim() !== '')
+                      ? "<span class='tooltip-obs'>" +
+                          "<i class='fas fa-comment-dots'></i>" +
+                          "<span class='tooltip-text'>" + $('<div>').text(value.observaciones).html() + "</span>" +
+                        "</span>"
+                      : '';                
         if (value.fechap == '00/00/0000') {
           $tbody.append(
             "<tr>" +
-            "<td><font size='2'>" + value.nro + "</font></td>" +
+            "<td><font size='2'>" + value.nro + " " +obsIcon + "</font></td>" +
             "<td><font size='2'>" + value.fecha_v + "</font></td>" +
             "<td><font size='2' id='imp" + value.id + "'>" + value.importe + "</font></td>" +
             "<td><input type='text' class='form-control descuento' id='desc" + value.id + "' value='" + value.descuento + "' placeholder='%' style='width:43px;font-size:13px;' disabled></td>" +
-            "<td><input type='text' id='int" + value.id + "' class='form-control interes' value='" + value.interes + "' placeholder='%' style='width:43px;font-size:13px;' disabled></td>" +
+            "<td><input type='text' id='int" + value.id 
+            + "' class='form-control interes' value='" + value.interes + "' placeholder='%' style='width:43px;font-size:13px;' disabled></td>" +
             "<td><input class='form-control' type='text' id='total" + value.id + "' value='" + value.total + "' style='width:110px;font-size:13px;' disabled></td>" +
-            "<td><select id='tipopago" + value.id + "' class='form-control' style='width:160px;' disabled><option value='0'>*</option><option value='1'>Efectivo</option><option value='2'>Débito</option><option value='6'>Crédito</option><option value='5'>MercadoPago</option><option value='3'>Transferencia</option><option value='4'>Otro</option></select></td>" +
+            "<td><select id='tipopago" + value.id + "' class='form-control' style='width:160px;' disabled><option value='0'>*</option><option value='1'>Efectivo</option><option value='2'>Débito</option><option value='6'>Crédito</option><option value='5'>Mercado Pago</option><option value='3'>Transferencia bancaria</option><option value='4'>Otro</option></select></td>" +
             "<td><font size='2' id='fp" + value.id + "'>" + value.fechap + "</font></td>" +
             "<td>" + boton_pagar + ' ' + boton_pagar_conf + ' ' + boton_pint2 + ' ' + cerrar + "</td>" +
             "</tr>"
@@ -937,15 +996,24 @@ $(document).on('show.bs.collapse', '#accordion .collapse', function () {
         } else {
           $tbody.append(
             "<tr>" +
-            "<td><font size='2'>" + value.nro + "</font></td>" +
+            "<td><font size='2'>" + value.nro+ " " +obsIcon + "</font></td>" +
             "<td><font size='2'>" + value.fecha_v + "</font></td>" +
             "<td><font size='2' id='imp" + value.id + "'>" + value.importe + "</font></td>" +
             "<td><input type='text' class='form-control descuento' id='desc" + value.id + "' value='" + value.descuento + "' placeholder='%' style='width:43px;font-size:13px;' disabled></td>" +
             "<td><input type='text' id='int" + value.id + "' class='form-control interes' value='" + value.interes + "' placeholder='%' style='width:43px;font-size:13px;' disabled></td>" +
             "<td><input class='form-control' type='text' id='total" + value.id + "' value='" + value.total + "' style='width:110px;font-size:13px;' disabled></td>" +
-            "<td class='text-center'><font size='2'>" + value.tipo_pago + "</font></td>" +
+            //"<td class='text-center'><font size='2'>" + value.tipo_pago + "</font></td>" +
+            "<td>" + selectTipoPago + "</td>" +
             "<td><font size='2' id='fp" + value.id + "'>" + value.fechap + "</font></td>" +
-            "<td>" + boton_pint + "</td>" +
+            "<td>" + acciones + "</td>" +
+            "</tr>" +
+            "<tr class='fila-observaciones' id='filaobs" + value.id + "' style='display:none'>" +
+            "<td colspan='9'>" +
+              "<div style='display:flex; align-items:center; gap:8px; padding:4px 8px;'>" +
+                "<label for='obs" + value.id + "' style='margin:0; font-size:13px; white-space:nowrap;'>Observaciones:</label>" +
+                "<input type='text' id='obs" + value.id + "' class='form-control observaciones' maxlength='150' value='" + (value.observaciones || '') + "' placeholder='Observaciones (máx. 150 caracteres)' style='font-size:13px;' disabled>" +
+              "</div>" +
+            "</td>" +
             "</tr>"
           );
         }
@@ -1230,15 +1298,15 @@ function verCursos(idalu) {
 
         var tablaCuotas = '<table id="tabla_cuotas' + value.id + '" class="table table-striped table-hover compact" cellspacing="0" width="100%">' +
           '<thead><tr>' +
-          '<th class="text-center" style="width:5%">#</th>' +
+          '<th class="text-center" style="width:6%">#</th>' +
           '<th class="text-center" style="width:10%">Vto.</th>' +
           '<th class="text-center" style="width:15%">Importe</th>' +
-          '<th class="text-center" style="width:10%">% dto.</th>' +
-          '<th class="text-center" style="width:10%">% Int.s</th>' +
+          '<th class="text-center" style="width:5%">% dto.</th>' +
+          '<th class="text-center" style="width:5%">% Int.s</th>' +
           '<th class="text-center" style="width:20%">Total</th>' +
-          '<th class="text-center" style="width:35%">Tipo de pago</th>' +
+          '<th class="text-center" style="width:25%">Tipo de pago</th>' +
           '<th class="text-center" style="width:10%">Pago</th>' +
-          '<th style="width:10%"></th>' +
+          '<th style="width:5%"></th>' +
           '</tr></thead>' +
           '<tbody id="cuerpoTablaCuotas' + value.id + '"></tbody>' +
           '</table>';

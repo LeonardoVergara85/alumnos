@@ -174,8 +174,10 @@ $(document).ready(function(){
                     pagadopor = 'Caja Chica';
                   }else if(value.PAGADO_POR == 2){
                     pagadopor = 'Graciela';
-                  }else{
+                  }else if(value.PAGADO_POR == 3){
                     pagadopor = 'Maria Emma';
+                  }else{
+                    pagadopor = 'Débito automático';
                   }
 
               		var boton = "<button class='btn btn-info btn-sm botonesdetailgastofecha' id='"+value.ID+"' title='detalle del gasto'><i class='fa fa-info-circle' aria-hidden='true'></i></button>"; 
@@ -268,8 +270,10 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
                     pagadopor = 'Caja Chica';
                   }else if(value.PAGADO_POR == 2){
                     pagadopor = 'Graciela';
-                  }else{
+                  }else if(value.PAGADO_POR == 3){
                     pagadopor = 'Maria Emma';
+                  }else{
+                    pagadopor = 'Débito automático';
                   }
 
               // var boton = "<button class='btn btn-info btn-sm botonesdetailgastofecha' id='"+value.ID+"' title='detalle del gasto'><i class='fa fa-info-circle' aria-hidden='true'></i></button>"; 
@@ -523,8 +527,10 @@ function verGastosHoy(){
               pagadopor = 'Caja Chica';
             }else if(value.PAGADO_POR == 2){
               pagadopor = 'Graciela';
-            }else{
+            }else if(value.PAGADO_POR == 3){
               pagadopor = 'Maria Emma';
+            }else{
+              pagadopor = 'Débito automático';
             }
 
             var boton = "<button class='btn btn-info btn-sm botonesdetailgasto' id='"+value.ID+"' title='detalle del gasto'><i class='fa fa-info-circle' aria-hidden='true'></i></button>"; 

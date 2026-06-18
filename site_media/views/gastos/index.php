@@ -63,6 +63,7 @@
                   <option value="1">Caja chica</option>
                   <option value="2">Graciela</option>
                   <option value="3">Maria Emma</option>
+                  <option value="4">Débito automático</option>
                 </select>
               </div>
             </div>

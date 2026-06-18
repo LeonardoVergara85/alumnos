@@ -77,6 +77,39 @@
 
 	 }
 	 
+	 public function editarCuota($conn){
+
+ 		try {
+
+ 			  $id = $this->_id;
+		 	  $desc = $this->_descuento;
+		 	  $int = $this->_interes;
+			  $idpago = $this->_tipo_pago;
+			  $obs = $this->_observaciones;
+			  
+		 	  //$obs = $this->_observaciones;
+
+ 			$sql = "UPDATE `cuota` SET `descuento` = ?, `interes` = ?, `id_tipo_pago` = ?, `observaciones` = ? WHERE `cuota`.`id` = ?";
+
+        	$conn->db->Execute($sql,array($desc,$int,$idpago,$obs,$id));
+
+			$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
+
+        	$sql2 = "SELECT total,observaciones FROM cuotas_vw WHERE id = ?";
+
+        	$fila = $conn->db->Execute($sql2,array($id));
+
+        	return $fila->fields;
+
+
+ 		   } catch (Exception $e) {
+ 			
+ 			print_r('MODEL: ' . $e);
+
+ 		}
+
+	 }
+	 
 	 public function guardarConfig($conn){
 
 		try {

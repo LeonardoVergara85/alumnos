@@ -321,6 +321,12 @@ class routes
 
 			break;
 
+			case 'editar_cuota':
+
+				new CuotasController('editar'); 
+
+			break;
+
 			case 'guardar_activo':
 				new ActivosController('store'); 
 			break;	

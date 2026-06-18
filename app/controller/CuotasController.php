@@ -85,7 +85,7 @@ Class CuotasController extends Cuotas{
 
 			 $conn->db->completeTrans();
 
-			echo 'ok-'.$now[0].'-'.$now[1];
+			echo 'ok-'.number_format($now[0],2,',','.').'-'.$now[1];
 
 		} catch (Exception $e) {
 			
@@ -136,7 +136,7 @@ Class CuotasController extends Cuotas{
 
 			foreach ($cuotas as $cuota) {
 
-				array_push($lista, ['id' => $cuota['id'],'fecha_v' => $cuota['fecha_vencimiento_'],'descuento' => $cuota['descuento'],'interes' => $cuota['interes'],'nro' => $cuota['nro_cuota'],'importe' => number_format($cuota['importe'],2,',','.'),'fechap' => $cuota['fechapago'],'total' => number_format($cuota['total'],2,',','.'),'tipo_pago' => $cuota['tipo_pago']]);
+				array_push($lista, ['id' => $cuota['id'],'fecha_v' => $cuota['fecha_vencimiento_'],'descuento' => $cuota['descuento'],'interes' => $cuota['interes'],'nro' => $cuota['nro_cuota'],'importe' => number_format($cuota['importe'],2,',','.'),'fechap' => $cuota['fechapago'],'total' => number_format($cuota['total'],2,',','.'),'tipo_pago' => $cuota['tipo_pago'],'edita' => $cuota['edita'],'observaciones' => $cuota['observaciones']]);
 
 			}
 
@@ -161,8 +161,27 @@ Class CuotasController extends Cuotas{
 			$lista = array();
 
 			foreach ($cuotas as $cuota) {
+				
+				$descint = "";
+				if($cuota['descuento'] !== "0"){
+					$descint = " desc ".$cuota['descuento']."%";
+				}else if($cuota['interes'] !== "0"){
+					$descint = " int ".$cuota['interes']."%";
+				}
 
-				array_push($lista, ['id' => $cuota['id'],'fecha_v' => $cuota['fecha_vencimiento_'],'nro' => $cuota['nro_cuota'],'importe' => $cuota['total'],'fecha_p' => $cuota['fechapago'],'meses' => $cuota['meses_curso'],'curso' => $cuota['curso'],'nombre' => $cuota['nombre'],'apellido' => $cuota['apellido'],'tipo_pago' => $cuota['tipo_pago']]);
+				array_push($lista, [
+					'id' => $cuota['id'],
+					'fecha_v' => $cuota['fecha_vencimiento_'],
+					'nro' => $cuota['nro_cuota'],
+					'importe' => number_format($cuota['total'],2,',','.'),
+					'descint' => $descint,
+					'fecha_p' => $cuota['fechapago'],
+					'meses' => $cuota['meses_curso'],
+					'curso' => $cuota['curso'],
+					'nombre' => $cuota['nombre'],
+					'apellido' => $cuota['apellido'],
+					'tipo_pago' => $cuota['tipo_pago']
+					]);
 
 			}
 
@@ -369,6 +388,35 @@ Class CuotasController extends Cuotas{
 			$sumaHaber= number_format($sumaHaber,2,',','.');
 			$saldo= number_format($saldo,2,',','.');
 			echo json_encode(['lista' =>$lista, 'totalDebe' =>$sumaDebe, 'totalHaber' =>$sumaHaber,  'saldo' =>$saldo, 'inicial' =>$inicial],200);
+
+		} catch (Exception $e) {
+			
+			print_r($e);
+
+		}
+
+	}
+
+	public function editar(){
+
+		try {
+		
+			 $conn = new Conexion();
+			
+			  $conn->db->startTrans();
+	
+				$this->CuotasModel->_id = $_POST['idcuota'];
+				$this->CuotasModel->_descuento = $_POST['descuento'];
+				$this->CuotasModel->_interes = $_POST['interes'];
+				$this->CuotasModel->_tipo_pago = $_POST['tipopago'];
+				$this->CuotasModel->_observaciones = $_POST['observaciones'];
+
+				$now = $this->CuotasModel->editarCuota($conn);
+
+
+			 $conn->db->completeTrans();
+
+			echo 'ok-'.number_format($now[0],2,',','.').'-'.$now[1];
 
 		} catch (Exception $e) {
 			

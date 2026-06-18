@@ -13,3 +13,5 @@
 2026-05-18 21:42:13 - Conexión usada: localhost
 2026-06-09 00:03:07 - Conexión usada: localhost
 2026-06-12 22:46:50 - Conexión usada: localhost
+2026-06-17 19:14:08 - Conexión usada: localhost
+2026-06-18 23:38:05 - Conexión usada: localhost

@@ -11,6 +11,7 @@ $importe = $_GET['imp'];
 $vencimiento = $_GET['fechav'];
 $pago = $_GET['fechap'];
 $pagotipo = $_GET['tipop'];
+$descint = $_GET['di'];
 
 class PDF extends FPDF {
 
@@ -116,12 +117,12 @@ $a->Ln(5);
 $a->SetFont('Arial','B',10);
 $a->Cell(15,5,utf8_decode(' Importe:'),0,0,'L');
 $a->SetFont('Arial','I',10);
-$a->Cell(75,5,utf8_decode('$ '.$importe.' ('.$pagotipo.')'),0,0,'L');
+$a->Cell(75,5,utf8_decode('$ '.$importe.' '.$descint.' ('.$pagotipo.')'),0,0,'L');
 $a->Cell(10,5,utf8_decode(''),0,0,'L');
 $a->SetFont('Arial','B',10);
 $a->Cell(15,5,utf8_decode(' Importe:'),0,0,'L');
 $a->SetFont('Arial','I',10);
-$a->Cell(75,5,utf8_decode('$ '.$importe.' ('.$pagotipo.')'),0,0,'L');
+$a->Cell(75,5,utf8_decode('$ '.$importe.' '.$descint.' ('.$pagotipo.')'),0,0,'L');
 $a->Ln(5);
 $a->SetFont('Arial','B',10);
 $a->Cell(35,5,utf8_decode(' Fecha vencimiento:'),0,0,'L');
