@@ -18,14 +18,28 @@ $(document).ready(function(){
             var pagadopor = $('#pagadopor').val();
             var formap = $('#formapago').val();
             var usuario = $('#usuario_id').val();
-            var aux = importe.split('$');
-            importe = aux[1];
+           // var aux = importe.split('$');
+          //  importe = aux[1];
 
             
-            var importe = importe.replace('.','');
-            var importe = importe.replace(',','.');
-          
-
+         //   var importe = importe.replace('.','');
+         //   var importe = importe.replace(',','.');
+           //importe = importe.replace(/\./g, '');
+           //importe = importe.replace(',', '.');
+            var aux = importe.split('$');
+            importe = aux[1];
+            
+            // Eliminar espacios y caracteres no deseados primero
+            importe = importe.trim();
+            
+            // Quitar separadores de miles (puntos)
+            importe = importe.replace(/\./g, '');
+            
+            // Convertir separador decimal (coma → punto)
+            importe = importe.replace(',', '.');
+            
+            // Validación final: dejar solo dígitos y punto decimal
+            importe = importe.replace(/[^\d.]/g, '');
             $('#guardargasto').attr('disabled','disabled');
 
             $.ajax({

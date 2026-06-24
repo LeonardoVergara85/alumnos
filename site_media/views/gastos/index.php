@@ -44,7 +44,7 @@
               </div>
               <div class="col-md-4 mb-2">
                 <label>Importe</label>
-                <input class="form-control" type="text" name="importe" id="importe" maxlength="12">
+                <input class="form-control" type="text" name="importe" id="importe" maxlength="13">
               </div>
             </div>
             <div class="form-row">

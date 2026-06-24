@@ -78,7 +78,7 @@
             <div class="form-row">
             <div class="col-md-5 mb-2">
                 <label>Monto inicial</label>
-                <input class="form-control imp" type="text" name="monto" id="monto" maxlength="12">
+                <input class="form-control imp" type="text" name="monto" id="monto" maxlength="13">
               </div>
             </div>
             <div class="form-row">

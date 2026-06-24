@@ -86,6 +86,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
                     <th>Vencimiento</th>
                     <th>Pago</th>
                     <th>Importe</th>
+                    <th>Observaciones</th>
                     <th>Estado</th>
                   </tr>
                 </thead>
@@ -182,6 +183,6 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/alumnos/app/controller/UsuariosControll
 
   <?php include_once '../../../public/libs/include_libs_js.html'; ?>
 
-  <script src="../../js/reportes/informe_cuotas2.js" type="text/javascript"></script>
+  <script src="../../js/reportes/informe_cuotas3.js" type="text/javascript"></script>
 
 </html>
