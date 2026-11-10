@@ -1,14 +1,20 @@
 <?php
 
-include_once 'adodb/adodb.inc.php';
-include_once 'adodb/adodb-exceptions.inc.php';
+include_once __DIR__ . '/adodb/adodb.inc.php';
+include_once __DIR__ . '/adodb/adodb-exceptions.inc.php';
 
 
 
 class Conexion{
 
+    public $db;
+
     function __construct() {
         try {
+
+            if (function_exists('mysqli_report')) {
+                mysqli_report(MYSQLI_REPORT_OFF);
+            }
 
             $this->db = NewADOConnection('mysqli');
             // $this->db->Connect("mysql.hostinger.com.ar", "u622404615_alumnos", "Skills_2021++", "u622404615_alumnos");

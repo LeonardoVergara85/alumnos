@@ -13,7 +13,7 @@ $fecha = date('d-m-Y');
 $nombre = "backup" . $fecha . ".sql"; //Este es el nombre del archivo a generar
 /* Determina si la tabla será vaciada (si existe) cuando  restauremos la tabla. */
 $drop = true;
-$tablas = false; //tablas de la bd
+$tablas = array(); //tablas de la bd
 // Tipo de compresion.
 // Puede ser "gz", "bz2", o false (sin comprimir)
 
@@ -36,7 +36,7 @@ if (empty($tablas)) {
     $consulta = "SHOW TABLES FROM $bd;";
     $respuesta = $con->db->Execute($consulta);
             // or die("No se pudo ejecutar la consulta: " . mysql_error());
-    while ($fila = mysqli_fetch_array($respuesta, MYSQLI_NUM)) {
+    while ($fila = $respuesta->FetchRow()) {
         $tablas[] = $fila[0];
     }
 }
@@ -44,7 +44,8 @@ if (empty($tablas)) {
 $info['dumpversion'] = "1.1b";
 $info['fecha'] = date("d-m-Y");
 $info['hora'] = date("h:m:s A");
-$info['mysqlver'] = mysqli_get_server_info($con->db);
+$serverInfo = $con->db->ServerInfo();
+$info['mysqlver'] = $serverInfo['version'];
 $info['phpver'] = phpversion();
 ob_start();
 print_r($tablas);
@@ -81,24 +82,27 @@ foreach ($tablas as $tabla) {
     /* Se halla el query que será capaz de recrear la estructura de la tabla. */
     $create_table_query = "";
     $consulta = "SHOW CREATE TABLE $tabla;";
-    $respuesta = mysqli_query($con->db, $consulta)
-            or die("No se pudo ejecutar la consulta: " . mysql_error());
-    while ($fila = mysqli_fetch_array($respuesta, MYSQLI_NUM)) {
+    $con->db->SetFetchMode(ADODB_FETCH_NUM);
+    $respuesta = $con->db->Execute($consulta)
+            or die("No se pudo ejecutar la consulta: " . $con->db->ErrorMsg());
+    while ($fila = $respuesta->FetchRow()) {
         $create_table_query = $fila[1] . ";";
     }
 
     /* Se halla el query que será capaz de insertar los datos. */
     $insert_into_query = "";
     $consulta = "SELECT * FROM $tabla;";
-    $respuesta = mysqli_query($con->db, $consulta)
-            or die("No se pudo ejecutar la consulta: " . mysql_error());
-    while ($fila = mysqli_fetch_array($respuesta, MYSQLI_ASSOC)) {
+    $con->db->SetFetchMode(ADODB_FETCH_ASSOC);
+    $respuesta = $con->db->Execute($consulta)
+            or die("No se pudo ejecutar la consulta: " . $con->db->ErrorMsg());
+    while ($fila = $respuesta->FetchRow()) {
         $columnas = array_keys($fila);
+        $values = array();
         foreach ($columnas as $columna) {
             if (gettype($fila[$columna]) == "NULL") {
                 $values[] = "NULL";
             } else {
-                $values[] = "'" . mysqli_real_escape_string($con->db, $fila[$columna]) . "'";
+                $values[] = $con->db->qstr($fila[$columna], false);
             }
         }
         $insert_into_query .= "INSERT INTO `$tabla` VALUES (" . implode(", ", $values) . ");\n";

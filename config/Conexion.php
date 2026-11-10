@@ -1,14 +1,20 @@
 <?php
-error_reporting(-1);
-include_once 'adodb/adodb.inc.php';
-include_once 'adodb/adodb-exceptions.inc.php';
+error_reporting(E_ALL & ~E_DEPRECATED);
+ini_set('display_errors', '0');
+include_once __DIR__ . '/adodb/adodb.inc.php';
+include_once __DIR__ . '/adodb/adodb-exceptions.inc.php';
 
 class Conexion {
 
     public $host_usado;
+    public $db;
 
     function __construct() {
         try {
+            if (function_exists('mysqli_report')) {
+                mysqli_report(MYSQLI_REPORT_OFF);
+            }
+
             $this->db = NewADOConnection('mysqli');
 
             // Host por defecto
